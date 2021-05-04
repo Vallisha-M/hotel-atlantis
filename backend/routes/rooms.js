@@ -1,10 +1,10 @@
 const router = require('express').Router();
 let Rooms = require('../models/rooms.model');
 
-router.route('/show').get((req, res) => {
-  Rooms.find()
-    .then(rooms => res.json(rooms))
-    .catch(err => res.status(400).json('Error: ' + err));
+router.route('/').get((req, res) => {
+    Rooms.find()
+      .then(rooms => res.json(rooms))
+      .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req, res) => {
@@ -21,8 +21,8 @@ router.route('/add').post((req, res) => {
     });
 
     newRoom.save()
-      .then(() => res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\confirm.html'))
-      .catch(err => res.status(400).json('Error: '+err));
+    .then(() => res.json('Room Booked!'))
+    .catch(err => res.status(400).json('Error: '+err));
 });
 
 module.exports = router;
