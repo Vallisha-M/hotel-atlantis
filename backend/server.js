@@ -20,9 +20,29 @@ connection.once('open', () => { console.log("MongoDB database connection establi
 
 const roomsRouter = require('./routes/rooms');
 const usersRouter = require('./routes/users');
+const bake_preRouter = require('./routes/bake_pre');
+const bakeRouter = require('./routes/bake');
+const eventRouter = require('./routes/event');
+const formalRouter = require('./routes/formal');
+const ginger_preRouter = require('./routes/ginger_pre');
+const gingerRouter = require('./routes/ginger');
+const indian_preRouter = require('./routes/indian_pre');
+const indianRouter = require('./routes/indian');
+const informalRouter = require('/routes/informal');
 
 app.use('/rooms' , roomsRouter);
 app.use('/users' , usersRouter);
+app.use('/bake_pre' , bake_preRouter);
+app.use('/bake' , bakeRouter);
+app.use('/event' , eventRouter);
+app.use('/formal' , formalRouter);
+app.use('/ginger_pre' , ginger_preRouter);
+app.use('/ginger' , gingerRouter);
+app.use('/indian_pre' , indian_preRouter);
+app.use('/indian' , indianRouter);
+app.use('/informal' , informalRouter);
+
+// Update path accordingly
 
 app.use('/css' , express.static('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\css'));
 app.use('/Images' , express.static('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\Images'));
