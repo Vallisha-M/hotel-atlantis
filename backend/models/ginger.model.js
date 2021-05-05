@@ -18,8 +18,8 @@ const GingerSchema = new Schema(
     time: {
       type: String,
       required: true,
-      minlength: 11,
-      maxlength: 11,
+      minlength: 9,
+      maxlength: 9,
     },
   },
   {

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<style>
+    * {
+            scroll-behavior: smooth;
+    }
+</style>
+<html>
+    <head>
+        <title>Confirmation | Hotel Atlantis</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <link rel="stylesheet" href="css/scrolling.css">
+        <link rel="stylesheet" href="css/welcome.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="icon" href="Images/favicon.ico" type="image/icon type">
+        <style>   
+            .button{
+                background-color: #ffc800;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                border-radius: 4px;
+            }
+            form  { display: table;}
+            label { display: table-cell; color:black;}
+            input { display: table-cell;}
+            .center {
+                margin-top: 10px;
+                margin-left: 600px;
+            }
+            #subBtn:hover {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="navbar">
+            <a href="welcome.html", class = "img"><img src="Images/logo1.png" alt="Home", title="Home", style="width:118px; height:52px; float:left;"></a>
+            <a href="rooms.html" class = "button1" style="width : 140px;"><span>Book a Room</span></a>
+            <a href="contact.html" class = "button1" style="width : 110px;"><span>Contact Us</span></a>
+            <a href="dining_page.html" class = "button2" style="width : 70px;"><span>Dining</span></a>
+            <a href="events.html" class = "button2" style="width : 70px;"><span>Events</span></a>
+            <a href="index.html" class = "button1" style="width : 130px;"><span>Private Events</span></a>
+            <a href="gallery.html" class = "button2" style="width : 100px;"><span>Gallery</span></a> 
+        </div>
+        <script>
+            var prevScrollpos = window.pageYOffset;
+            window.onscroll = function() {
+            var currentScrollPos = window.pageYOffset;
+            if (prevScrollpos > currentScrollPos) {
+                document.getElementById("navbar").style.top = "0";
+            } else {
+                document.getElementById("navbar").style.top = "-50px";
+            }
+            prevScrollpos = currentScrollPos;
+            }
+        </script>
+        <div align="center" style="font-family: oxygen; margin-left: 480px; max-width: 600px; padding-top:60px;">
+            <h1>Rooms are available as per your choice</h1>
+            <br>
+            <h2>Confirm your details</h2>
+            <br>
+            <hr>
+            <p style="background-color: #DCDCDC; padding:10px;">Name: Vishal Khot</p>
+            <hr>
+            <p style="padding:10px;">Email: vishalkh01@gmail.com</p>
+            <hr>
+            <p style="background-color: #DCDCDC; padding:10px;">Mobile: 6382628233</p>
+            <hr>
+            <p style="padding:10px;">Check-in date: <span id="Check_in"></span></p>
+            <hr>
+            <p style="background-color: #DCDCDC; padding:10px;">Check-out date: <span id="Check_out"></span></p>
+            <hr>
+            <p style="padding:10px;">Amount payable ($) : <span id="amount"></span></p>
+            <hr>
+            <script>
+                var checkin=new Date(localStorage.getItem("x1"));
+                var checkout=new Date(localStorage.getItem("y1"));
+                var amount=localStorage.getItem("amt1");
+                document.getElementById("Check_in").innerHTML=checkin.getDate()+"/"+(checkin.getMonth()+1)+"/"+checkin.getFullYear();
+                document.getElementById("Check_out").innerHTML=checkout.getDate()+"/"+(checkout.getMonth()+1)+"/"+checkout.getFullYear();
+                document.getElementById("amount").innerHTML=amount;
+                localStorage.clear();
+            </script>
+        </div>
+        <br>
+        <div class="center">
+            <form name="Payment" action="confirmation_rooms.html" onsubmit="return valid()" method="post">
+                <p style="display: table-row;">
+                    <label>Card Number:</label><input type="text" name="cardnumber" onchange="valid()" required>&nbsp;<span id="cardno"></span>
+                    <br><br>
+                </p>
+                <p style="display: table-row;">
+                    <label>Card type:</label>
+                    Debit <input type="radio" name="card" value="debit" required>
+                    Credit <input type="radio" name="card" value="credit" required>
+                    <br><br>
+                </p>
+                <p style="display: table-row;">
+                    <label>CVV:</label><input type="number" name="cvv" required>
+                    <br><br>
+                </p>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input type="submit" value="Confirm Payment" id= "subBtn" class="button">
+            </form>
+            <br>
+        </div>
+        <script>
+            function valid(){
+                var x=document.forms["Payment"]["cardnumber"].value;
+                if(x.length<16 || x.length>16){
+                    document.getElementById("cardno").innerHTML="Enter a valid number";
+                    alert("Enter a valid Card Number");
+                    return false;
+                }
+                else{
+                    for(var i=0;i<16;i++){
+                        if(!(x[i]>='0' && x[i]<='9'))
+                        {
+                            alert("Enter a valid Card Number");
+                            return false;
+                        }
+                    }
+                    document.getElementById("cardno").innerHTML="Valid";
+                    return true;
+                }
+            }
+        </script>
+        <footer class="footer-distributed">
+
+            <div class="footer-left">
+                <img src="img/logo1.png">
+                          <p class="footer-links">
+                <a href="welcome.html">Home</a>
+                |
+                <a href="contact.html">Contact</a>
+                |
+                <a href="welcome.html#hotelAtlantis">About Us</a>
+              </p>
+          
+              <p class="footer-company-name">ATLANTIS  GROUP OF HOTELS Pvt. Ltd.</p>
+          <br/>
+          
+          
+          
+            </div>
+          
+          
+          <div class="footer-right">
+          <br/>
+              
+          <p id="follow">CONTACT US</p>
+          
+          
+                <div class="c-icon"><i class="fa fa-phone"></i>
+                <p>+91 22-27782183</p>
+          <br/>
+              
+              
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:support@eduonix.com">support@hotel_atlantis.com</a></p></div>
+          
+              
+          
+          
+          
+          <p id="follow">FOLLOW US ON SOCIAL MEDIA</p>
+          
+          
+          
+              <div class="footer-icons">
+                <a href="https://m.facebook.com/hotelatlantis/"><i class="fa fa-facebook"></i></a>
+                <a href="https://mobile.twitter.com/ATLANTIS"><i class="fa fa-twitter"></i></a>
+                <a href="https://instagram.com/thehotelatlantis?igshid=17xyyfahe234d"><i class="fa fa-instagram"></i></a>
+                <a href="https://youtube.com/c/AtlantisthePalmTV"><i class="fa fa-youtube"></i></a>
+              </div>
+            </div>
+          <div class="mapside">
+          
+          
+          <div class = "mapDiv"  style="right:-50px;">
+          &nbsp;&nbsp;<iframe width="350" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-122.25184679031373%2C37.861691632077644%2C-122.2436285018921%2C37.8667906114285&amp;layer=mapnik&amp;marker=37.86424116585334%2C-122.2477376461029" style="float:right;border: 1px solid #ffc800;box-shadow: -1px 6px 44px -2px rgba(0,0,0,0.75);"></iframe>
+          </div>
+          
+          <a href = "https://www.openstreetmap.org/way/109193723#map=17/37.86428/-122.24677"><button class="mapButton">Expand Map</button> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          
+          <div class = "mapText">
+          We serve at Berkeley, California&nbsp;<br/>
+          Hotels at Toronto, Vancouver and<br/> Munich comning soon...&nbsp;<br/>
+          </div>
+          </footer>
+    </body>
+</html>
