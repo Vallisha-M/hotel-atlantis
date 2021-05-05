@@ -2,6 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const roomSchema = new Schema({
+
+    uniqueid : {
+        type : String,
+        unique : false,
+        required : true
+    },
+
     checkindate : {
         type : Date,
         unique : false,
@@ -22,6 +29,12 @@ const roomSchema = new Schema({
 
     numberofpeople : {
         type : Number,
+        unique : false,
+        required : true
+    },
+
+    bookedflag : {
+        type : Boolean,
         unique : false,
         required : true
     },

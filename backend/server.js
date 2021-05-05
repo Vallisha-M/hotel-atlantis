@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const path = require('path');
 
 require('dotenv').config();
 
@@ -28,10 +30,10 @@ const ginger_preRouter = require('./routes/ginger_pre');
 const gingerRouter = require('./routes/ginger');
 const indian_preRouter = require('./routes/indian_pre');
 const indianRouter = require('./routes/indian');
-const informalRouter = require('/routes/informal');
+const informalRouter = require('./routes/informal');
 
 app.use('/rooms' , roomsRouter);
-app.use('/users' , usersRouter);
+app.use('/users' , usersRouter.router);
 app.use('/bake_pre' , bake_preRouter);
 app.use('/bake' , bakeRouter);
 app.use('/event' , eventRouter);
@@ -42,76 +44,75 @@ app.use('/indian_pre' , indian_preRouter);
 app.use('/indian' , indianRouter);
 app.use('/informal' , informalRouter);
 
-// Update path accordingly
 
-app.use('/css' , express.static('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\css'));
-app.use('/Images' , express.static('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\Images'));
-app.use('/img' , express.static('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\img'));
-app.use('/java' , express.static('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\java'));
-app.use('/js' , express.static('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\js'));
+app.use('/css' , express.static(path.join(__dirname,'..\\..\\css')));
+app.use('/Images' , express.static(path.join(__dirname,'..\\..\\Images')));
+app.use('/img' , express.static(path.join(__dirname,'..\\..\\img')));
+app.use('/java' , express.static(path.join(__dirname,'..\\..\\java')));
+app.use('/js' , express.static(path.join(__dirname,'..\\..\\js')));
 
 app.get('/welcome' , function(req,res){
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\welcome.html');
+    res.sendFile('welcome.html' , { root : "../../" });;
 });
 
 app.get('/rooms' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\rooms.html');
+    res.sendFile('rooms.html' , { root : "../../" });
 });
 
 app.get('/confirm' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\confirm.html');
+    res.sendFile('confirm.html' , { root : "../../" });
 });
 
 app.get('/contact' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\contact.html');
+    res.sendFile('contact.html' , { root : "../../" });
 });
 
 app.get('/dining_page' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\dining_page.html');
+    res.sendFile('dining_page.html' , { root : "../../" });
 });
 
 app.get('/dining_confirm' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\dining_confirm.html');
+    res.sendFile('dining_confirm.html' , { root : "../../" });
 });
 
 app.get('/events' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\events.html');
+    res.sendFile('events.html' , { root : "../../" });
 });
 
 app.get('/gallery' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\gallery.html');
+    res.sendFile('gallery.html' , { root : "../../" });
 });
 
 app.get('/index' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\index.html');
+    res.sendFile('index.html' , { root : "../../" });
 });
 
 app.get('/informal' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\informal.html');
+    res.sendFile('informal.html' , { root : "../../" });
 });
 
 app.get('/login' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\login.html');
+    res.sendFile('login.html' , { root : "../../" });
 });
 
 app.get('/meetings' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\meetings.html');
+    res.sendFile('meetings.html' , { root : "../../" });
 });
 
 app.get('/pre_order' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\pre_order.html');
+    res.sendFile('pre_order.html' , { root : "../../" });
 });
 
 app.get('/pre_order2' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\pre_order2.html');
+    res.sendFile('pre_order2.html' , { root : "../../" });
 });
 
 app.get('/pre_order3' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\pre_order3.html');
+    res.sendFile('pre_prder3.html' , { root : "../../" });
 });
 
 app.get('/signup' , function(req,res) {
-    res.sendFile('C:\\Personal\\Semester-4\\ProjectWork2\\HotelAtlantis\\signup.html');
+    res.sendFile('signup.html' , { root : "../../" });
 });
 
 app.listen(port , (req,res) => {
