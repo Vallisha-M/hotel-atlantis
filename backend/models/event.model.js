@@ -3,6 +3,11 @@ const Schema = mongoose.Schema
 
 const eventSchema = new Schema(
   {
+    uniqueid : {
+      type : String,
+      required : true,
+      unique : false
+    },
     type: {
       type: String,
       required: true,

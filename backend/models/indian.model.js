@@ -3,6 +3,11 @@ const Schema = mongoose.Schema
 
 const IndianSchema = new Schema(
   {
+    uniqueid : {
+      type : String,
+      required : true,
+      unique : false
+    },
     checkin: {
       type: Date,
       required: true,
