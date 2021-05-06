@@ -19,7 +19,8 @@ router.route('/show/:id').get(async(req,res) => {
 // UPDATE
 router.patch('/update/:id' , async(req,res) => {
     try{
-      const room = await(Rooms.findById(req.params.id))
+      const room = await(Rooms.findById(req.params.id));
+      room.uniqueid = room.uniqueid;
       room.checkindate = Date.parse(req.body.checkindate) || room.checkindate;
       room.checkoutdate = Date.parse(req.body.checkoutdate) || room.checkoutdate;
       room.roomtype = req.body.roomtype || room.roomtype;
@@ -36,7 +37,7 @@ router.patch('/update/:id' , async(req,res) => {
 //DELETE
 router.delete('/delete/:id' , async(req,res) => {
     await(Rooms.deleteOne({"_id" : req.params.id}))
-      .then(() => res.json("Room unbooked!"))
+      .then(() => res.json("Room booking cancelled"))
       .catch(err => res.status(400).json('Error ' + err));
 });
 

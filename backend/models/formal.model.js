@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const formalSchema = new Schema( {
+    uniqueid : {
+        type : String,
+        required : true,
+        unique : false
+    },
     describe : {
         type: String,
         required:true,

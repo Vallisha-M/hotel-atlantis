@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const informalSchema = new Schema( {
+    uniqueid : {
+        type : String,
+        required : true,
+        unique : false
+    },
     venue : {
         type: String,
         required:true,
