@@ -1,10 +1,11 @@
 const router = require('express').Router();
 let User = require('../models/user.model');
 const { json } = require('body-parser');
+const cookieParser = require('cookie-parser');
 const { route } = require('./rooms');
 
-router.route('/show').get((req, res) => {
-  User.find()
+router.route('/show').get(async(req, res) => {
+  await(User.find())
     .then(users => res.json(users))
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -24,12 +25,11 @@ router.route('/add').post(async(req, res) => {
 
   await(newUser.save())
     .then(() => {
-      res.json("User added");
-      module.exports.uniqueid = newUser.id;
+      res.cookie('uniqueid',newUser.id,{maxAge : 9000000,httpOnly : true});
+      res.json('User added');
     })
     .catch(err => {
       res.status(400).json('Error: ' + err);
-      module.exports.uniqueid = "";
     });
 });
 
@@ -55,4 +55,4 @@ router.patch('/update/:id' , async(req,res) => {
   }
 });
 
-module.exports.router = router;
+module.exports = router;

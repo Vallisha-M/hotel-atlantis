@@ -43,7 +43,7 @@ router.delete('/delete/:id' , async(req,res) => {
 
 // POST
 router.route('/add').post((req, res) => {
-    const uniqueid = require('./users').uniqueid;
+    const uniqueid = req.cookies['uniqueid'];
     const checkindate = Date.parse(req.body.checkindate);
     const checkoutdate = Date.parse(req.body.checkoutdate);
     const roomtype = req.body.roomtype;

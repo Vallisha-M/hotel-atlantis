@@ -9,6 +9,7 @@ router.route('/').get((req, res) => {
 })
 
 router.route('/add').post((req, res) => {
+  const uniqueid = req.cookies['uniqueid'];
   const checkin = Date.parse(req.body.checkin)
   const seats = req.body.seats
   const time = req.body.time

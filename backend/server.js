@@ -12,6 +12,7 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
@@ -33,7 +34,7 @@ const indianRouter = require('./routes/indian');
 const informalRouter = require('./routes/informal');
 
 app.use('/rooms' , roomsRouter);
-app.use('/users' , usersRouter.router);
+app.use('/users' , usersRouter);
 app.use('/bake_pre' , bake_preRouter);
 app.use('/bake' , bakeRouter);
 app.use('/event' , eventRouter);
@@ -108,7 +109,7 @@ app.get('/pre_order2' , function(req,res) {
 });
 
 app.get('/pre_order3' , function(req,res) {
-    res.sendFile('pre_prder3.html' , { root : "../../" });
+    res.sendFile('pre_order3.html' , { root : "../../" });
 });
 
 app.get('/signup' , function(req,res) {

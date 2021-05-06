@@ -9,7 +9,7 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  const uniqueid = require('./users').uniqueid;
+  const uniqueid = req.cookies['uniqueid'];
   const venue = req.body.venue;
   const adjective = req.body.adjective;
   const describe = req.body.describe;

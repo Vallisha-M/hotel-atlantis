@@ -9,7 +9,7 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  const uniqueid = require('./users').uniqueid;
+  const uniqueid = req.cookies['uniqueid'];
   const describe = req.body.describe;
   const guests = req.body.guests;  
   const date = Date.parse(req.body.date);
