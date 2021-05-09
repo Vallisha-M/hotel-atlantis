@@ -156,25 +156,32 @@ a:hover.slidesjs-stop {
 #slides a:active {
   color: black;
 }
-
+#mainContent {
+  background-color: #f5f5f5;
+}
 .navbar {
   overflow: hidden;
 }
-.hotelAtlantis {
+#welcomeID {
   background-color: #f5f5f5;
-  margin-left: 5px;
+}
+.hotelAtlantis {
+  top: 600px;
+  background-color: #f5f5f5;
+
   font-size: 70px;
   font-family: 'Oxygen', sans-serif;
+  text-align: left;
 }
 .hotelAtlantis1 {
   background-color: #f5f5f5;
-  margin-left: 5px;
+
   font-size: 40px;
   font-family: 'Oxygen', sans-serif;
 }
 #aboutUs {
   background-color: #f5f5f5;
-  margin-left: 5px;
+
   font-size: 20px;
   font-family: 'Oxygen', sans-serif;
 }

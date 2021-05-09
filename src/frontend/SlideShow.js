@@ -1,7 +1,13 @@
 import React from 'react'
 import './css/style.css'
-import { Helmet } from 'react-helmet'
-import $ from 'jquery'
+import slide1 from './img/slide1.jpg'
+import slide2 from './img/slide2.jpg'
+import slide3 from './img/slide3.jpg'
+import slide4 from './img/slide4.jpg'
+import slide5 from './img/slide5.jpg'
+
+import layoverText from './css/img/bgSlide2.png'
+import scrolldown from './css/img/scrollDown.png'
 export default function SlideShow() {
   return (
     <section>
@@ -23,35 +29,35 @@ export default function SlideShow() {
                   <div
                     style={{
                       backgroundPosition: 'center',
-                      backgroundImage: 'url(./img/slide1.jpg)',
+                      backgroundImage: `url(${slide1})`,
                     }}
                   />
                   <div
                     style={{
                       backgroundPosition: 'center',
-                      backgroundImage: 'url(./img/slide2.jpg)',
+                      backgroundImage: `url(${slide2})`,
                     }}
                   />
                   <div
                     style={{
                       backgroundPosition: 'center',
-                      backgroundImage: 'url(./img/slide3.jpg)',
+                      backgroundImage: `url(${slide3})`,
                     }}
                   />
                   <div
                     style={{
                       backgroundPosition: 'center',
-                      backgroundImage: 'url(./img/slide4.jpg)',
+                      backgroundImage: `url(${slide4})`,
                     }}
                   />
                   <div
                     style={{
                       backgroundPosition: 'center',
-                      backgroundImage: 'url(./img/slide5.jpg)',
+                      backgroundImage: `url(${slide5})`,
                     }}
                   />
                   <img
-                    src='./css/img/bgSlide2.png'
+                    src={layoverText}
                     style={{
                       position: 'relative',
                       zIndex: 10,
@@ -61,7 +67,7 @@ export default function SlideShow() {
                   />
                   <a href='#hotelAtlantis'>
                     <img
-                      src='./css/img/scrollDown.png'
+                      src={scrolldown}
                       style={{
                         position: 'absolute',
                         left: '45%',

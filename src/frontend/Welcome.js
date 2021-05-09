@@ -1,4 +1,3 @@
-import react from 'react'
 import './css/style.css'
 import './css/welcome.css'
 import './css/footer.css'
@@ -9,7 +8,7 @@ import SlideShow from './SlideShow'
 
 function Welcome() {
   return (
-    <div>
+    <div id='welcomeID'>
       <Helmet>
         <script src='js/scrolling.js'></script>
         <title>Hotel Atlantis | Welcome</title>
@@ -48,35 +47,41 @@ function Welcome() {
       </Helmet>
       <Navbar></Navbar>
       <SlideShow />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      <hr style={{ height: '60px' }} />
+      <div id='mainContent'>
+        <div id='hotelAtlantis' className='hotelAtlantis'>
+          &nbsp;
+          <div style={{ height: '10px', backgroundColor: '#f5f5f5' }} />
+          HOTEL ATLANTIS
+        </div>
+        <hr style={{ width: '45%' }} />
+        <div style={{ height: '10px', backgroundColor: '#f5f5f5' }} />
+        <div id='aboutUs'>
+          Glorious views of the crystal-clear waters of the Adriatic Sea come as
+          standard in all of our five-star hotels and luxury villas. Alongside
+          stunning seaside locations, effortlessly elegant interiors and
+          impeccable service – including the assistance of our knowledgeable
+          concierges – you can look forward to a stylish selection of
+          destination bars and restaurants, luxury spas, boutiques, and even a
+          PADI dive centre.
+          <div style={{ height: '10px', backgroundColor: '#f5f5f5' }} />
+          <div style={{ height: '10px', backgroundColor: '#f5f5f5' }} />
+          <div style={{ height: '10px', backgroundColor: '#f5f5f5' }} />
+          Our suites of contemporary conference centres are both impressive and
+          flexible. Plush interior design, swathes of natural sunlight and
+          picture – perfect panoramas of the sea make them just as popular a
+          choice for weddings and other tailor-made events as for business. Book
+          your holiday or event with us – and check our special offers – to
+          experience the very best the Adriatic coast has to offer
+          <br />
+          <br />
+          <br />
+          Sublime seafront locations overlooking the Adriatic; a variety of
+          state-of-the-art luxury venues; experienced event-planning and
+          technical support teams – everything you need to host a superb,
+          standout event in beautiful Dubrovnik is here, ready for you.
+        </div>
+      </div>
       <Footer />
     </div>
   )
