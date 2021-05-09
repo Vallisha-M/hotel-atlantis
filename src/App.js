@@ -3,9 +3,10 @@ import './App.css'
 //import Navbar from './frontend/Navbar'
 import { Helmet } from 'react-helmet'
 import Welcome from './frontend/Welcome'
+import scrolling from './frontend/js/scrolling.js'
 function App() {
   return (
-    <div className='App'>
+    <div className='App' onScroll={scrolling}>
       <Helmet>
         <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
 
