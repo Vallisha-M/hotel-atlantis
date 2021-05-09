@@ -1,8 +1,8 @@
 import logo from './logo.svg'
 import './App.css'
-import Navbar from './frontend/Navbar'
+//import Navbar from './frontend/Navbar'
 import { Helmet } from 'react-helmet'
-
+import Welcome from './frontend/Welcome'
 function App() {
   return (
     <div className='App'>
@@ -20,7 +20,7 @@ function App() {
           type='text/css'
         ></link>
       </Helmet>
-      <Navbar></Navbar>
+      <Welcome />
     </div>
   )
 }

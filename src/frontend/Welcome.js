@@ -1,7 +1,9 @@
 import react from 'react'
-import '/css/style.css'
-import '/css/welcome.css'
-import 'css/footer.css'
+import './css/style.css'
+import './css/welcome.css'
+import './css/footer.css'
+import Navbar from './Navbar'
+import Footer from './Footer'
 import { Helmet } from 'react-helmet'
 function Welcome() {
   return (
@@ -39,24 +41,11 @@ function Welcome() {
           type='text/css'
         ></link>
 
-        <script>
-          $(function(){' '}
-          {$('#slides').slidesjs({
-            width: 600,
-            height: 388,
-            play: {
-              active: true,
-              auto: true,
-              interval: 7000,
-              swap: true,
-            },
-          })}
-          );
-        </script>
         <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
-        <script src='js/scrolling.js'></script>
+        <script src='./js/scrolling.js'></script>
       </Helmet>
       <Navbar></Navbar>
+      <Footer />
     </div>
   )
 }
