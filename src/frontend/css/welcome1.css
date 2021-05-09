@@ -102,7 +102,7 @@ body {
 }
 
 .button2 span:after {
-  color: #ffff;
+  color: #ffc800;
   font-size: 15px;
   content: '\00bb';
   position: absolute;
@@ -114,7 +114,7 @@ body {
 
 .button2:hover span {
   padding-right: 25px;
-  border-bottom: 2px solid #ffff;
+  border-bottom: 2px solid #ffc800;
   -webkit-transition: 0.3s linear;
 }
 

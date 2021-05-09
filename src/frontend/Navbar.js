@@ -6,9 +6,6 @@ import { Helmet } from 'react-helmet'
 function Navbar() {
   return (
     <div className='navbar' id='navbar'>
-      <Helmet>
-        <script src='./js/scrolling.js'></script>
-      </Helmet>
       <hr style={{ width: '100%', height: '2px' }} />
       <a href className='img'>
         <img
