@@ -2,9 +2,14 @@ import react from 'react'
 import './css/style.css'
 import logo from './css/img/logo1.png'
 import './css/welcome1.css'
+import { Helmet } from 'react-helmet'
 function Navbar() {
   return (
-    <div className='navbar'>
+    <div className='navbar' id='navbar'>
+      <Helmet>
+        <script src='./js/scrolling.js'></script>
+      </Helmet>
+      <hr style={{ width: '100%', height: '2px' }} />
       <a href className='img'>
         <img
           src={logo}
@@ -31,6 +36,7 @@ function Navbar() {
       <a href className='button2' style={{ width: '100px' }}>
         <span>Gallery</span>
       </a>
+      <hr style={{ width: '100%', height: '2px' }} />
     </div>
   )
 }

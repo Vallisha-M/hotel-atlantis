@@ -5,6 +5,7 @@ import './css/footer.css'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import { Helmet } from 'react-helmet'
+import SlideShow from './SlideShow'
 function Welcome() {
   return (
     <div>
@@ -45,6 +46,7 @@ function Welcome() {
         <script src='./js/scrolling.js'></script>
       </Helmet>
       <Navbar></Navbar>
+      <SlideShow />
       <Footer />
     </div>
   )
