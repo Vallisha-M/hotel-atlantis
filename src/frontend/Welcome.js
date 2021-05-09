@@ -6,10 +6,10 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import { Helmet } from 'react-helmet'
 import SlideShow from './SlideShow'
-import scrolling from './js/scrolling.js'
+
 function Welcome() {
   return (
-    <div onScroll={scrolling}>
+    <div>
       <Helmet>
         <script src='js/scrolling.js'></script>
         <title>Hotel Atlantis | Welcome</title>
