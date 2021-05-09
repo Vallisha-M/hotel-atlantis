@@ -38,3 +38,4 @@ Ankh.NoLoad
 .vscode/tasks.json
 node_modules/
 frontend/ProjectReport.pdf
+frontend/html/*
