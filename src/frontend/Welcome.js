@@ -1,8 +1,7 @@
 import './css/style.css'
 import './css/welcome.css'
 import './css/footer.css'
-import Navbar from './Navbar'
-import Footer from './Footer'
+
 import { Helmet } from 'react-helmet'
 import SlideShow from './SlideShow'
 
@@ -45,7 +44,7 @@ function Welcome() {
         <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
         <script src='./js/scrolling.js'></script>
       </Helmet>
-      <Navbar></Navbar>
+
       <SlideShow />
       <hr style={{ height: '60px' }} />
       <div id='mainContent'>
@@ -82,7 +81,6 @@ function Welcome() {
           standout event in beautiful Dubrovnik is here, ready for you.
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

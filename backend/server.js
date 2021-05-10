@@ -40,7 +40,7 @@ const suite = require('./routes/informal')
 app.use('/users', usersRouter)
 app.use('/formal', formalRouter)
 app.use('/informal', informalRouter)
-
+app.use('/event', event)
 app.use('/bake', bake)
 app.use('/indian', indian)
 app.use('/ginger', ginger)

@@ -1,9 +1,12 @@
 import logo from './logo.svg'
 import './App.css'
-//import Navbar from './frontend/Navbar'
+import Navbar from './frontend/Navbar'
+import Footer from './frontend/Footer'
+
 import { Helmet } from 'react-helmet'
 import Welcome from './frontend/Welcome'
 import scrolling from './frontend/js/scrolling.js'
+import Event from './frontend/Event'
 function App() {
   return (
     <div className='App' onScroll={scrolling}>
@@ -21,7 +24,10 @@ function App() {
           type='text/css'
         ></link>
       </Helmet>
+      <Navbar></Navbar>
       <Welcome />
+      <Event />
+      <Footer />
     </div>
   )
 }
