@@ -2,11 +2,9 @@ const router = require('express').Router()
 let Event = require('../models/event.model')
 
 router.route('/').get((req, res) => {
-  console.log('here')
   Event.find()
     .then((event) => {
       res.json(event)
-      console.log('hey')
     })
     .catch((err) => res.status(400).json('Error: ' + err))
 })
