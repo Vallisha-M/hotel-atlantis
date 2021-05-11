@@ -18,15 +18,13 @@ const eventSchema = new Schema(
       minlength: 1,
     },
     date: {
-      type: Date,
+      type: String,
       unique: false,
       required: true,
     },
     time: {
       type: String,
       required: true,
-      minlength: 11,
-      maxlength: 11,
     },
   },
   {

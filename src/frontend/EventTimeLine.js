@@ -3,8 +3,7 @@ import './css/events.css'
 export default function EventTimeLine(props) {
   const displayEvents = (props) => {
     const { events } = props
-    if (events.length > 0) {
-      //const date = new Date(event.date)
+    if (events.length > 1) {
       return events.map((event, index) => {
         return (
           <tr>

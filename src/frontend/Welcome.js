@@ -1,6 +1,5 @@
 import './css/style.css'
 import './css/welcome.css'
-import './css/footer.css'
 
 import { Helmet } from 'react-helmet'
 import SlideShow from './SlideShow'
@@ -46,6 +45,7 @@ function Welcome() {
       </Helmet>
 
       <SlideShow />
+
       <hr style={{ height: '60px' }} />
       <div id='mainContent'>
         <div id='hotelAtlantis' className='hotelAtlantis'>

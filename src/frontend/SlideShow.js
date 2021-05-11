@@ -1,5 +1,6 @@
 import React from 'react'
 import './css/style.css'
+
 import slide1 from './img/slide1.jpg'
 import slide2 from './img/slide2.jpg'
 import slide3 from './img/slide3.jpg'
@@ -8,6 +9,7 @@ import slide5 from './img/slide5.jpg'
 
 import layoverText from './css/img/bgSlide2.png'
 import scrolldown from './css/img/scrollDown.png'
+
 export default function SlideShow() {
   return (
     <section>
