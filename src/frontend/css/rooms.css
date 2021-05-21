@@ -48,3 +48,21 @@
     padding-top: 20px;
     grid-template-columns: auto auto auto;
 }
+
+.center {
+    display: block;
+    }
+.bg {
+    margin-left: 500px;
+    margin-right: 410px;
+    margin-bottom: 70px;
+    background-color: white;
+    padding-top: 5px;
+    border: 4px;
+    border-style: outset;
+    border-color: #ffc800;
+    box-shadow: 4px;
+}
+form  { display: table;}
+label { display: table-cell; color:black;}
+input { display: table-cell;}
