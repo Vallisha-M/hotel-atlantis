@@ -54,7 +54,6 @@ router.route("/add").post((req, res) => {
 		checkoutdate: checkoutdate,
 		roomtype: roomtype,
 		numberofpeople: numberofpeople,
-		bookedflag: false,
 	});
 
 	newRoom

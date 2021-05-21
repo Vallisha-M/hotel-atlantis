@@ -32,12 +32,6 @@ const roomSchema = new Schema(
 			unique: false,
 			required: true,
 		},
-
-		bookedflag: {
-			type: Boolean,
-			unique: false,
-			required: true,
-		},
 	},
 	{
 		timestamps: true,
