@@ -13,7 +13,22 @@ const Rooms_Payment = () => {
 	var numberofpeople = localStorage.getItem("numberofpeople");
 	var roomtype = localStorage.getItem("roomtype");
 
-	const handleSubmit = () => {};
+	const handleSubmit = () => {
+		const room = {
+			checkindate: cid,
+			checkoutdate: cod,
+			roomtype: roomtype,
+			numberofpeople: numberofpeople,
+		};
+		axios
+			.post("http://localhost:5000/rooms/add/", room)
+			.then(() => {
+				console.log("Room added");
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
 
 	return (
 		<div>
@@ -63,9 +78,10 @@ const Rooms_Payment = () => {
 					<p style={{ display: "table-row" }}>
 						<label>Card Number:</label>
 						<input
-							type="text"
+							type="number"
 							name="cardnumber"
-							onChange="valid()"
+							min="1000000000000000"
+							max="9999999999999999"
 							required
 						/>
 						&nbsp;
@@ -94,7 +110,13 @@ const Rooms_Payment = () => {
 					</p>
 					<p style={{ display: "table-row" }}>
 						<label>CVV:</label>
-						<input type="number" name="cvv" required />
+						<input
+							type="number"
+							name="cvv"
+							required
+							min="000"
+							max="999"
+						/>
 						<br />
 						<br />
 					</p>
