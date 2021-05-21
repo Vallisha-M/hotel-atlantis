@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RoomDetails from "./RoomDetails";
+import AlertDialogSlide from "./AlertDialogSlide";
 
 const Rooms_Booking = () => {
 	const [price, setPrice] = useState("");
@@ -12,26 +13,19 @@ const Rooms_Booking = () => {
 	const [checkoutdate, setCheckoutdate] = useState("");
 	const [roomtype, setRoomtype] = useState("default");
 	const [numberofpeople, setNumberofpeople] = useState("");
+	const [url_var, setUrl_Var] = useState("");
 
 	useEffect(() => {
 		showPrice();
 	});
 
-	const handleSubmit = (e) => {
-		const room = {
-			checkindate: checkindate,
-			checkoutdate: checkoutdate,
-			roomtype: roomtype,
-			numberofpeople: numberofpeople,
-		};
-		axios
-			.post("http://localhost:5000/rooms/add/", room)
-			.then(() => {
-				console.log("Room added");
-			})
-			.catch((error) => {
-				console.log(error);
-			});
+	const handleSubmit = () => {
+		localStorage.setItem("cid", checkindate);
+		localStorage.setItem("cod", checkoutdate);
+		localStorage.setItem("numberofpeople", numberofpeople);
+		localStorage.setItem("roomtype", roomtype);
+		localStorage.setItem("amt", price);
+		console.log("http://localhost:3000/rooms/" + url_var);
 	};
 
 	function showPrice() {
@@ -46,9 +40,11 @@ const Rooms_Booking = () => {
 			if (z === "standard_room") amt = 100 * diff;
 			else if (z === "deluxe_room") amt = 200 * diff;
 			else if (z === "suite") amt = 350 * diff;
+			setUrl_Var("confirm");
 			setPrice(amt);
 		} else {
 			setPrice("");
+			setUrl_Var("error");
 		}
 	}
 
@@ -65,8 +61,8 @@ const Rooms_Booking = () => {
 				>
 					<form
 						name="booking"
-						onSubmit={(e) => handleSubmit(e)}
-						action="http://localhost:3000/rooms/confirm"
+						onSubmit={handleSubmit}
+						action={"http://localhost:3000/rooms/" + url_var}
 					>
 						<p style={{ display: "table-row" }}>
 							<label>Check-in: </label>

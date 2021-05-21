@@ -1,23 +1,25 @@
 import "./css/rooms.css";
+import "./css/scrolling.css";
+import "./css/welcome.css";
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
-const Rooms_Payment = (props) => {
-	const { room } = props;
-	console.log(room);
-	var cid, cod;
+const Rooms_Payment = () => {
+	var cid = localStorage.getItem("cid");
+	var cod = localStorage.getItem("cod");
+	var amt = localStorage.getItem("amt");
+	var numberofpeople = localStorage.getItem("numberofpeople");
+	var roomtype = localStorage.getItem("roomtype");
 
-	if (typeof room[0] == "undefined") {
-		cid = "";
-		cod = "";
-	} else {
-		cid = room[0].checkindate.substring(0, 10);
-		cod = room[0].checkoutdate.substring(0, 10);
-	}
+	const handleSubmit = () => {};
 
 	return (
 		<div>
+			<Helmet>
+				<link rel="stylesheet" href="css/rooms.css" />
+			</Helmet>
 			<div
 				align="center"
 				style={{
@@ -51,24 +53,19 @@ const Rooms_Payment = (props) => {
 				</p>
 				<hr />
 				<p style={{ padding: "10px" }}>
-					Amount payable ($) : <span id="amount">{}</span>
+					Amount payable ($) : <span id="amount">{amt}</span>
 				</p>
 				<hr />
 			</div>
 			<br />
-			<div className="center">
-				<form
-					name="Payment"
-					action="confirmation_rooms.html"
-					onsubmit="return valid()"
-					method="post"
-				>
+			<div className="center" align="center">
+				<form name="Payment" action="" onSubmit={handleSubmit}>
 					<p style={{ display: "table-row" }}>
 						<label>Card Number:</label>
 						<input
 							type="text"
 							name="cardnumber"
-							onchange="valid()"
+							onChange="valid()"
 							required
 						/>
 						&nbsp;
@@ -105,7 +102,7 @@ const Rooms_Payment = (props) => {
 					<input
 						type="submit"
 						defaultValue="Confirm Payment"
-						id="subBtn"
+						id="submitBtn"
 						className="button"
 					/>
 				</form>

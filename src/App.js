@@ -9,7 +9,8 @@ import Contact from "./frontend/Contact";
 import Footer from "./frontend/Footer";
 import SlideShow from "./frontend/SlideShow";
 import Rooms from "./frontend/Rooms";
-import RoomDetails from "./frontend/RoomDetails";
+import Rooms_Payment from "./frontend/Rooms_Payment";
+import AlertDialogSlide from "./frontend/AlertDialogSlide";
 
 function App() {
 	return (
@@ -42,7 +43,11 @@ function App() {
 						<Rooms />
 					</Route>
 					<Route exact path="/rooms/confirm">
-						<RoomDetails />
+						<Rooms_Payment />
+					</Route>
+					<Route exact path="/rooms/error">
+						<Rooms />
+						<AlertDialogSlide />
 					</Route>
 				</Switch>
 				<Footer />
