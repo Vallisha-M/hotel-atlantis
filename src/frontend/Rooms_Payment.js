@@ -13,6 +13,26 @@ const Rooms_Payment = () => {
 	var numberofpeople = localStorage.getItem("numberofpeople");
 	var roomtype = localStorage.getItem("roomtype");
 
+	const [user, setUser] = useState("");
+	var name, email;
+
+	useEffect(() => {
+		getUserDetails();
+	}, []);
+
+	const getUserDetails = async () => {
+		await axios({
+			method: "get",
+			url: "http://localhost:5000/users/show",
+		})
+			.then((response) => {
+				setUser(response.data);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+
 	const handleSubmit = () => {
 		const room = {
 			checkindate: cid,
@@ -30,10 +50,19 @@ const Rooms_Payment = () => {
 			});
 	};
 
+	if (typeof user[0] == "undefined") {
+		name = "";
+		email = "";
+	} else {
+		name = user[0].firstName + " " + user[0].lastName;
+		email = user[0].email;
+	}
+
 	return (
 		<div>
 			<Helmet>
 				<link rel="stylesheet" href="css/rooms.css" />
+				<link rel="stylesheet" href="css/welcome.css" />
 			</Helmet>
 			<div
 				align="center"
@@ -50,24 +79,20 @@ const Rooms_Payment = () => {
 				<br />
 				<hr />
 				<p style={{ backgroundColor: "#DCDCDC", padding: "10px" }}>
-					Name: Vishal Khot
+					Name: {name}
 				</p>
 				<hr />
-				<p style={{ padding: "10px" }}>Email: vishalkh01@gmail.com</p>
+				<p style={{ padding: "10px" }}>Email: {email}</p>
 				<hr />
 				<p style={{ backgroundColor: "#DCDCDC", padding: "10px" }}>
-					Mobile: 6382628233
-				</p>
-				<hr />
-				<p style={{ padding: "10px" }}>
 					Check-in date: <span id="Check_in">{cid}</span>
 				</p>
 				<hr />
-				<p style={{ backgroundColor: "#DCDCDC", padding: "10px" }}>
+				<p style={{ padding: "10px" }}>
 					Check-out date: <span id="Check_out">{cod}</span>
 				</p>
 				<hr />
-				<p style={{ padding: "10px" }}>
+				<p style={{ backgroundColor: "#DCDCDC", padding: "10px" }}>
 					Amount payable ($) : <span id="amount">{amt}</span>
 				</p>
 				<hr />
@@ -123,7 +148,7 @@ const Rooms_Payment = () => {
 					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
 					<input
 						type="submit"
-						defaultValue="Confirm Payment"
+						value="Confirm Payment"
 						id="submitBtn"
 						className="button"
 					/>

@@ -7,7 +7,6 @@ import Rooms_Payment from "./Rooms_Payment";
 
 import { Helmet } from "react-helmet";
 import React from "react";
-import RoomDetails from "./RoomDetails";
 
 const Rooms = () => {
 	return (

@@ -1,10 +1,8 @@
 import "./css/rooms.css";
-import "./js/roomsbooking";
 
 import { Helmet } from "react-helmet";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import RoomDetails from "./RoomDetails";
 import AlertDialogSlide from "./AlertDialogSlide";
 
 const Rooms_Booking = () => {
@@ -138,7 +136,8 @@ const Rooms_Booking = () => {
 							<input
 								id="submitBtn"
 								type="submit"
-								defaultValue="Check Availabilty"
+								value="Check Availabilty"
+								name="Check Availabilty"
 								style={{
 									backgroundColor: "#ffc800",
 									border: "none",
