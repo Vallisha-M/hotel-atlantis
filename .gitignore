@@ -39,3 +39,4 @@ Ankh.NoLoad
 node_modules/
 frontend/ProjectReport.pdf
 frontend/html/*
+.env
