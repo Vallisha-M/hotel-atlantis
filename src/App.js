@@ -7,6 +7,8 @@ import Welcome from './frontend/Welcome'
 import scrolling from './frontend/js/scrolling.js'
 import Event from './frontend/Event'
 import Contact from './frontend/Contact'
+import NotFound from './frontend/NotFound'
+
 function App() {
   return (
     <Router>
@@ -36,7 +38,9 @@ function App() {
           <Route exact path='/contact'>
             <Contact />
           </Route>
+          <Route path='*' component={NotFound} status={404} />
         </Switch>
+
         <Footer />
       </div>
     </Router>
