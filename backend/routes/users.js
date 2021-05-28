@@ -42,7 +42,7 @@ router.route('/signup').post(async (req, res) => {
       .then(() => res.json('User added!'))
       .catch((err) => res.status(400).json('Error: ' + err))
   } catch {
-    res.status(500).send
+    res.statusStatus(500)
   }
 })
 
