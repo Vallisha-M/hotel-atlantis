@@ -7,7 +7,7 @@ router.route('/').get((req, res) => {
     .then((users) => res.json(users))
     .catch((err) => res.status(400).json('Error: ' + err))
 })
-router.route('/login').get((req, res) => {
+router.route('/login').post((req, res) => {
   const email = req.body.email
   User.find({ email: email }, { password: 1, _id: 0 })
     .then(async (passwordRaw) => {
