@@ -11,7 +11,11 @@ app.use(cors())
 app.use(express.json())
 
 const uri = process.env.ATLAS_URI
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true })
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+})
 
 const connection = mongoose.connection
 connection.once('open', () => {
@@ -37,7 +41,6 @@ const standard = require('./routes/informal')
 const deluxe = require('./routes/informal')
 const suite = require('./routes/informal')
 
-app.use('/users', usersRouter)
 app.use('/formal', formalRouter)
 app.use('/informal', informalRouter)
 app.use('/event', event)

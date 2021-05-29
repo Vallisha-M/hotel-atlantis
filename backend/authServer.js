@@ -1,15 +1,32 @@
 require('dotenv').config()
-const router = require('express').Router()
+const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-let User = require('../models/user.model')
+let User = require('./models/user.model')
+const mongoose = require('mongoose')
 
-router.route('/').get((req, res) => {
+const app = express()
+
+app.use(express.json())
+const port = process.env.PORT || 4000
+const uri = process.env.ATLAS_URI
+let refreshTokens = []
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+})
+
+const connection = mongoose.connection
+connection.once('open', () => {
+  console.log('MongoDB database connection established successfully')
+})
+app.get('/', (req, res) => {
   User.find()
     .then((users) => res.json(users))
     .catch((err) => res.status(400).json('Error: ' + err))
 })
-router.route('/login').post((req, res) => {
+app.post('/login', (req, res) => {
   const email = req.body.email
   User.find({ email: email }, { password: 1, _id: 0 })
     .then(async (passwordRaw) => {
@@ -25,7 +42,7 @@ router.route('/login').post((req, res) => {
     })
     .catch((err) => res.status(400).json('User not found'))
 })
-router.route('/signup').post(async (req, res) => {
+app.post('/signup', async (req, res) => {
   const email = req.body.email
   const firstName = req.body.firstName
   const lastName = req.body.lastName
@@ -48,4 +65,6 @@ router.route('/signup').post(async (req, res) => {
   }
 })
 
-module.exports = router
+app.listen(port, () => {
+  console.log(`Authorization Server is running on port: ${port}`)
+})
