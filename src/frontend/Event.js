@@ -2,9 +2,9 @@ import React from 'react'
 import EventList from './EventList'
 import './css/events.css'
 export default function Event() {
-  // localStorage.removeItem('refreshToken')
-  // localStorage.setItem('loggedIn', false)
-  // localStorage.setItem('loginChanged', true)
+  localStorage.removeItem('refreshToken')
+  localStorage.setItem('loggedIn', false)
+  localStorage.setItem('loginChanged', true)
   return (
     <div>
       <div class='parallax1-event'>

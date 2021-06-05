@@ -6,7 +6,6 @@ import './css/welcome1.css'
 function Navbar() {
   const [state, setState] = useState({ link: '/login', name: 'Login' })
   const [loginChanged, setLoginChanged] = useState(() => {
-    //alert(localStorage.getItem('loginChanged'))
     if (localStorage.getItem('loginChanged') == null) return Boolean(false)
     return Boolean(localStorage.getItem('loginChanged'))
   })
@@ -36,7 +35,7 @@ function Navbar() {
 
   const link = state.link
   const name = state.name
-  if (localStorage.getItem('loginChanged') == false) trueLoginChanged()
+
   if (refreshToken != null && refreshToken.length > 10) {
     if (loginChanged == true) {
       localStorage.setItem('loginChanged', false)

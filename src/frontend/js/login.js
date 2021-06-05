@@ -1,8 +1,5 @@
 import $ from 'jquery'
-import { useState } from 'react'
 export default function validateForm() {
-  const [url_var, setUrl_Var] = useState('')
-
   var errors = 0
   var height = 285
   var flag = true

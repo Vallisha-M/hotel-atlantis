@@ -58,6 +58,7 @@ app.post('/token', (req, res) => {
 })
 app.post('/login', (req, res) => {
   const email = req.body.email
+
   User.find({ email: email }, { password: 1, _id: 0 })
     .then(async (passwordRaw) => {
       const hashedPassword = passwordRaw[0].password
@@ -79,15 +80,29 @@ app.post('/login', (req, res) => {
           newRefreshToken
             .save()
             .then(() =>
-              res.json({ accessToken: accessToken, refreshToken: refreshToken })
+              res.json({
+                accessToken: accessToken,
+                refreshToken: refreshToken,
+                isAllowed: true,
+              })
             )
-            .catch((err) => res.status(400).json('Error: ' + err))
-        } else res.status(403).send('Not Allowed')
+            .catch((err) => {
+              console.log('error')
+              res.status(400).json('Error: ' + err)
+            })
+        } else {
+          console.log('not')
+          res.json({ isAllowed: false })
+        }
       } catch {
+        console.log(500)
         res.sendStatus(500)
       }
     })
-    .catch((err) => res.status(400).json('User not found'))
+    .catch((err) => {
+      console.log('err')
+      res.json({ isAllowed: false })
+    })
 })
 
 app.post('/signup', async (req, res) => {
