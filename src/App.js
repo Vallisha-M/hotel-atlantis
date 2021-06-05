@@ -8,7 +8,7 @@ import scrolling from './frontend/js/scrolling.js'
 import Event from './frontend/Event'
 import Contact from './frontend/Contact'
 import NotFound from './frontend/NotFound'
-import Login from './frontend/Login'
+
 function App() {
   return (
     <Router>
@@ -38,7 +38,7 @@ function App() {
           <Route exact path='/contact'>
             <Contact />
           </Route>
-          <Route exact path='/login' component={Login} />
+
           <Route path='*' component={NotFound} status={404} />
         </Switch>
 

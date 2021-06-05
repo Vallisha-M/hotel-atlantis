@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+const cors = require('cors')
 const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -11,7 +11,7 @@ const app = express()
 app.use(express.json())
 const port = process.env.PORT || 4000
 const uri = process.env.ATLAS_URI
-
+app.use(cors({ origin: 'http://localhost:3000' }))
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -21,6 +21,16 @@ mongoose.connect(uri, {
 const connection = mongoose.connection
 connection.once('open', () => {
   console.log('MongoDB database connection established successfully')
+})
+app.post('/verify/refresh/', (req, res) => {
+  if (req.body.token) {
+    Refresh.find({ token: req.body.token }, { _id: 0 })
+      .then((tokens) => {
+        if (tokens.length > 0) res.json({ logged: true })
+        else res.json({ logged: false })
+      })
+      .catch(() => res.sendStatus(500))
+  } else res.json({ logged: false })
 })
 app.get('/', (req, res) => {
   User.find()
@@ -37,7 +47,7 @@ app.post('/token', (req, res) => {
         process.env.REFRESH_TOKEN_SECRET,
         (err, user) => {
           if (err) return res.sendStatus(403)
-          const accessToken = generateAccessToken({ name: user.name })
+          const accessToken = generateAccessToken({ email: user.email })
           res.json({ accessToken: accessToken })
         }
       )
@@ -53,7 +63,10 @@ app.post('/login', (req, res) => {
       const hashedPassword = passwordRaw[0].password
       const requestedPassword = req.body.password
       try {
-        isAllowed = await bcrypt.compare(requestedPassword, hashedPassword)
+        const isAllowed = await bcrypt.compare(
+          requestedPassword,
+          hashedPassword
+        )
         if (isAllowed) {
           const user = { email: email }
 
