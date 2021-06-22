@@ -10,7 +10,7 @@ router.route("/show").get(async (req, res) => {
 		.catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/add").post(async (req, res) => {
+router.route("/signup").post(async (req, res) => {
 	const email = req.body.email;
 	const firstName = req.body.firstName;
 	const lastName = req.body.lastName;
@@ -26,10 +26,7 @@ router.route("/add").post(async (req, res) => {
 	await newUser
 		.save()
 		.then(() => {
-			res.cookie("uniqueid", newUser.id, {
-				maxAge: 9000000,
-				httpOnly: true,
-			});
+			res.send({ uniqueid: newUser.id });
 			res.json("User added");
 		})
 		.catch((err) => {

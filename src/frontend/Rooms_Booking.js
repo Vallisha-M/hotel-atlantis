@@ -2,6 +2,7 @@ import "./css/rooms.css";
 
 import { Helmet } from "react-helmet";
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import AlertDialogSlide from "./AlertDialogSlide";
 
@@ -9,22 +10,53 @@ const Rooms_Booking = () => {
 	const [price, setPrice] = useState("");
 	const [checkindate, setCheckindate] = useState("");
 	const [checkoutdate, setCheckoutdate] = useState("");
-	const [roomtype, setRoomtype] = useState("default");
+	const [roomtype, setRoomtype] = useState("standard_room");
 	const [numberofpeople, setNumberofpeople] = useState("");
-	const [url_var, setUrl_Var] = useState("");
+	var rooms,
+		url_var = "";
+	let history = useHistory();
 
 	useEffect(() => {
 		showPrice();
 	});
 
-	const handleSubmit = () => {
-		localStorage.setItem("cid", checkindate);
-		localStorage.setItem("cod", checkoutdate);
-		localStorage.setItem("numberofpeople", numberofpeople);
-		localStorage.setItem("roomtype", roomtype);
-		localStorage.setItem("amt", price);
-		console.log("http://localhost:3000/rooms/" + url_var);
-	};
+	async function checkAvailability() {
+		const params = {
+			checkindate: checkindate,
+			checkoutdate: checkoutdate,
+			roomtype: roomtype,
+		};
+
+		await axios
+			.get("http://localhost:5000/rooms/show", { params })
+			.then((response) => {
+				rooms = response.data;
+				console.log(rooms);
+				return true;
+			})
+			.catch((error) => {
+				console.log(error);
+				return false;
+			});
+	}
+
+	async function handleSubmit(e) {
+		e.preventDefault();
+		await checkAvailability().then(() => {
+			console.log(rooms);
+			var cnt = rooms.length;
+			if (url_var == "confirm") {
+				if (cnt >= 3) url_var = "unavailable";
+			}
+
+			localStorage.setItem("cid", checkindate);
+			localStorage.setItem("cod", checkoutdate);
+			localStorage.setItem("numberofpeople", numberofpeople);
+			localStorage.setItem("roomtype", roomtype);
+			localStorage.setItem("amt", price);
+			history.push("/rooms/" + url_var);
+		});
+	}
 
 	function showPrice() {
 		var diff = 0,
@@ -38,11 +70,11 @@ const Rooms_Booking = () => {
 			if (z === "standard_room") amt = 100 * diff;
 			else if (z === "deluxe_room") amt = 200 * diff;
 			else if (z === "suite") amt = 350 * diff;
-			setUrl_Var("confirm");
+			url_var = "confirm";
 			setPrice(amt);
 		} else {
 			setPrice("");
-			setUrl_Var("error");
+			url_var = "error";
 		}
 	}
 
@@ -57,11 +89,7 @@ const Rooms_Booking = () => {
 						fontSize: "20px",
 					}}
 				>
-					<form
-						name="booking"
-						onSubmit={handleSubmit}
-						action={"http://localhost:3000/rooms/" + url_var}
-					>
+					<form name="booking" onSubmit={handleSubmit}>
 						<p style={{ display: "table-row" }}>
 							<label>Check-in: </label>
 							<input
@@ -97,7 +125,7 @@ const Rooms_Booking = () => {
 								value={roomtype}
 								onChange={(e) => setRoomtype(e.target.value)}
 							>
-								<option value="standard_room">
+								<option value="standard_room" selected>
 									Standard Room
 								</option>
 								<option value="deluxe_room">Deluxe Room</option>
@@ -134,10 +162,10 @@ const Rooms_Booking = () => {
 						</p>
 						<div style={{ marginLeft: "140px", marginTop: "20px" }}>
 							<input
-								id="submitBtn"
 								type="submit"
 								value="Check Availabilty"
 								name="Check Availabilty"
+								onClick={handleSubmit}
 								style={{
 									backgroundColor: "#ffc800",
 									border: "none",
@@ -148,6 +176,8 @@ const Rooms_Booking = () => {
 									display: "inline-block",
 									fontSize: "16px",
 									borderRadius: "7px",
+									width: "200px",
+									height: "50px",
 								}}
 							/>
 						</div>

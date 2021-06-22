@@ -21,44 +21,44 @@ const Navbar = () => {
 						/>
 					</a>
 					<a
-						href="rooms"
+						href="/rooms"
 						className="button1"
-						style={{ width: "140px" }}
+						style={{ width: "160px" }}
 					>
 						<span>Book a Room</span>
 					</a>
 					<a
-						href="contact"
+						href="/contact"
 						className="button1"
-						style={{ width: "110px" }}
+						style={{ width: "130px" }}
 					>
 						<span>Contact Us</span>
 					</a>
 					<a
-						href="dining_page"
+						href="/dining_page"
 						className="button2"
-						style={{ width: "70px" }}
+						style={{ width: "90px" }}
 					>
 						<span>Dining</span>
 					</a>
 					<a
-						href="events"
+						href="/events"
 						className="button2"
-						style={{ width: "70px" }}
+						style={{ width: "90px" }}
 					>
 						<span>Events</span>
 					</a>
 					<a
-						href="index"
+						href="/index"
 						className="button1"
-						style={{ width: "130px" }}
+						style={{ width: "150px" }}
 					>
 						<span>Private Events</span>
 					</a>
 					<a
-						href="gallery"
+						href="/gallery"
 						className="button2"
-						style={{ width: "100px" }}
+						style={{ width: "120px" }}
 					>
 						<span>Gallery</span>
 					</a>

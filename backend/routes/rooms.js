@@ -3,8 +3,18 @@ let Rooms = require("../models/rooms.model");
 
 // GET
 router.route("/show").get(async (req, res) => {
-	await Rooms.find()
-		.then((rooms) => res.json(rooms))
+	var checkindate = req.query.checkindate;
+	var checkoutdate = req.query.checkoutdate;
+	var roomtype = req.query.roomtype;
+	await Rooms.find({
+		roomtype: roomtype,
+		checkindate: { $lte: checkindate },
+		checkoutdate: { $gte: checkoutdate },
+	})
+		.then((rooms) => {
+			res.json(rooms);
+			//console.log(rooms);
+		})
 		.catch((err) => res.status(400).json("Error: " + err));
 });
 

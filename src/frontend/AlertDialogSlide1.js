@@ -37,7 +37,9 @@ export default function AlertDialogSlide() {
 				</DialogTitle>
 				<DialogContent>
 					<DialogContentText id="alert-dialog-slide-description">
-						Check-in date or/and Check-out date not valid.
+						Rooms are not available for the selected check-in and
+						check-out dates. Please choose a different set of dates
+						or room type.
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>

@@ -51,9 +51,9 @@ const Rooms = () => {
 					<div style={{ width: "450px", height: "350px" }}>
 						<p style={{ float: "left" }}></p>
 						<p />
-						<h1 align="center" style={{ paddingRight: "40px" }}>
+						<h2 align="center" style={{ paddingRight: "40px" }}>
 							Standard Rooms
-						</h1>
+						</h2>
 						<p />
 						<div className="flip-card">
 							<div
@@ -100,9 +100,9 @@ const Rooms = () => {
 					<div style={{ paddingTop: "1px", paddingLeft: "28px" }}>
 						<p style={{ float: "center" }}></p>
 						<p />
-						<h1 align="center" style={{ paddingRight: "10px" }}>
+						<h2 align="center" style={{ paddingRight: "10px" }}>
 							Deluxe Rooms
-						</h1>
+						</h2>
 						<p />
 						<div className="flip-card" style={{ float: "center" }}>
 							<div className="flip-card-inner">
@@ -146,9 +146,9 @@ const Rooms = () => {
 					<div>
 						<p style={{ float: "right", paddingRight: "20px" }}></p>
 						<p />
-						<h1 align="center" style={{ paddingLeft: "20px" }}>
+						<h2 align="center" style={{ paddingLeft: "20px" }}>
 							Suites
-						</h1>
+						</h2>
 						<p />
 						<div className="flip-card" style={{ float: "right" }}>
 							<div className="flip-card-inner">

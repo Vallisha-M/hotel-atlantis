@@ -11,6 +11,11 @@ import SlideShow from "./frontend/SlideShow";
 import Rooms from "./frontend/Rooms";
 import Rooms_Payment from "./frontend/Rooms_Payment";
 import AlertDialogSlide from "./frontend/AlertDialogSlide";
+import AlertDialogSlide1 from "./frontend/AlertDialogSlide1";
+import NotFound from "./frontend/NotFound";
+import Login from "./frontend/Login";
+import Gallery from "./frontend/Gallery";
+import { filterSelection } from "./frontend/js/gallery_filter";
 
 function App() {
 	return (
@@ -49,6 +54,13 @@ function App() {
 						<Rooms />
 						<AlertDialogSlide />
 					</Route>
+					<Route exact path="/rooms/unavailable">
+						<Rooms />
+						<AlertDialogSlide1 />
+					</Route>
+					<Route exact path="/login" component={Login} />
+					<Route exact path="/gallery" component={Gallery} />
+					<Route path="*" component={NotFound} status={404} />
 				</Switch>
 				<Footer />
 			</div>
