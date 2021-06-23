@@ -56,19 +56,18 @@ app.post('/token', (req, res) => {
       return res.sendStatus(400)
     })
 })
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   const email = req.body.email
-
-  User.find({ email: email }, { password: 1, _id: 0 })
+  console.log('email : ' + email)
+  console.log('password : ' + req.body.password)
+  await User.find({ email: email }, { password: 1, _id: 0 })
     .then(async (passwordRaw) => {
+      console.log('passwordRaw : ' + passwordRaw)
       const hashedPassword = passwordRaw[0].password
       const requestedPassword = req.body.password
       try {
-        const isAllowed = await bcrypt.compare(
-          requestedPassword,
-          hashedPassword
-        )
-        if (isAllowed) {
+        if (await bcrypt.compare(requestedPassword, hashedPassword)) {
+          console.log('in if')
           const user = { email: email }
 
           const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
@@ -79,28 +78,29 @@ app.post('/login', (req, res) => {
           const newRefreshToken = new Refresh({ token: refreshToken })
           newRefreshToken
             .save()
-            .then(() =>
+            .then(() => {
+              console.log('allowed')
               res.json({
                 accessToken: accessToken,
                 refreshToken: refreshToken,
                 isAllowed: true,
               })
-            )
+            })
             .catch((err) => {
               console.log('error')
               res.status(400).json('Error: ' + err)
             })
         } else {
-          console.log('not')
+          console.log('not allowed / in else')
           res.json({ isAllowed: false })
         }
-      } catch {
-        console.log(500)
+      } catch (err) {
+        console.log(err)
         res.sendStatus(500)
       }
     })
     .catch((err) => {
-      console.log('err')
+      console.log('not found ' + err)
       res.json({ isAllowed: false })
     })
 })
