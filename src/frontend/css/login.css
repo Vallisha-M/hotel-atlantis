@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap');
-#lbody {
+#body {
   padding-left: 3px;
   padding-top: 3px;
   padding-bottom: 3px;
@@ -12,7 +12,7 @@
   top: 55px;
   position: relative;
 }
-.lmain {
+.main {
   text-align: center;
   width: 400px;
   height: 285px;
@@ -20,7 +20,7 @@
   border: 2px solid #ffc800;
   border-radius: 6px;
 }
-.loverlay {
+.overlay {
   padding-left: 500px;
   position: relative;
   font-size: 25px;

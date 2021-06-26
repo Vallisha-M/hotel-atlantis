@@ -127,6 +127,7 @@ app.post('/signup', async (req, res) => {
 
     await newUser
       .save()
+<<<<<<< HEAD
       .then(async () => {
         var id = crypto.randomBytes(20).toString('hex')
         const newDeleteUser = new DeleteUser({ email: email, delKey: id })
@@ -160,8 +161,11 @@ app.post('/signup', async (req, res) => {
             res.sendStatus(500)
           })
       })
+=======
+      .then(() => res.json('User added!'))
+>>>>>>> parent of 43d3982b... login and signup working!
       .catch((err) => {
-        res.json({ ...err.keyPattern, done: 0 })
+        res.json(err.keyPattern)
       })
   } catch {
     res.sendStatus(500)

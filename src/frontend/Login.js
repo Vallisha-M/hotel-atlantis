@@ -1,7 +1,7 @@
 import './css/login.css'
 
 import { Helmet } from 'react-helmet'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import $ from 'jquery'
@@ -103,7 +103,7 @@ const Login = () => {
       }
       alert(url_var)
       if (url_var == '/') {
-        history.push('/signup/')
+        history.push(url_var)
       }
     })
   }
@@ -135,8 +135,8 @@ const Login = () => {
         />
       </Helmet>
 
-      <body id='lbody'>
-        <div className='loverlay'>
+      <body id='body'>
+        <div className='overlay'>
           &nbsp;&nbsp;
           <br />
           <br />
@@ -144,7 +144,7 @@ const Login = () => {
           <br />
           <br />
           <br />
-          <div className='lmain'>
+          <div className='main'>
             <div style={{ fontSize: '30px', paddingTop: '8px' }}>Login</div>
             <br />
             <form
@@ -183,7 +183,7 @@ const Login = () => {
                 <input type='submit' defaultValue='Login' />
 
                 <div id='signup'>
-                  Don't have an account?&nbsp;<a href='/signup'>Sign Up</a>
+                  Don't have an account?&nbsp;<a href='signup.html'>Sign Up</a>
                 </div>
               </div>
             </form>
