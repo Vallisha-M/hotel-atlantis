@@ -11,6 +11,10 @@ import NotFound from './frontend/NotFound'
 import Login from './frontend/Login'
 import Signup from './frontend/Signup'
 import ProceedLogin from './frontend/ProceedLogin'
+import Informal from './frontend/Informal'
+import Formal from './frontend/Formal'
+import EventAdded from './frontend/EventAdded'
+import Private from './frontend/Private'
 function App() {
   return (
     <Router>
@@ -49,7 +53,18 @@ function App() {
           <Route exact path='/signup/login'>
             <ProceedLogin></ProceedLogin>
           </Route>
-
+          <Route exact path='/private/informal'>
+            <Informal />
+          </Route>
+          <Route exact path='/private/formal'>
+            <Formal />
+          </Route>
+          <Route exact path='/private/confirm'>
+            <EventAdded />
+          </Route>
+          <Route exact path='/private'>
+            <Private />
+          </Route>
           <Route path='*' component={NotFound} status={404} />
         </Switch>
 

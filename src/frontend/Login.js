@@ -99,8 +99,9 @@ const Login = () => {
         localStorage.setItem('loggedIn', res.isAllowed)
         e.preventDefault()
       }
-      alert(url_var)
+
       if (url_var == '/') {
+        localStorage.setItem('email', email)
         history.push(url_var)
       }
     })

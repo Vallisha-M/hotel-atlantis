@@ -12,14 +12,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
 })
 
-export default function ProceedLogin() {
+export default function EventAdded() {
   const [open, setOpen] = React.useState(true)
 
   let history = useHistory()
 
   const handleClose = () => {
     setOpen(false)
-    history.push('/login')
+    history.push('/')
   }
 
   return (
@@ -35,12 +35,12 @@ export default function ProceedLogin() {
         <DialogTitle id='alert-dialog-slide-title'>{'Success!'}</DialogTitle>
         <DialogContent>
           <DialogContentText id='alert-dialog-slide-description'>
-            Sign-up successful, Proceed to login
+            Event Added!
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color='primary'>
-            Login
+            OK
           </Button>
         </DialogActions>
       </Dialog>
