@@ -4,8 +4,12 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 let User = require('./models/user.model')
+let DeleteUser = require('./models/delete_user.model')
 const mongoose = require('mongoose')
 let Refresh = require('./models/refresh_token.model')
+const crypto = require('crypto')
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 const app = express()
 
 app.use(express.json())
@@ -121,9 +125,41 @@ app.post('/signup', async (req, res) => {
       phone: phone,
     })
 
-    newUser
+    await newUser
       .save()
-      .then(() => res.json({ done: 1 }))
+      .then(async () => {
+        var id = crypto.randomBytes(20).toString('hex')
+        const newDeleteUser = new DeleteUser({ email: email, delKey: id })
+        await newDeleteUser
+          .save()
+          .then(async () => {
+            const msg = {
+              to: email,
+              from: 'hotelatlantisproject@gmail.com',
+              subject: 'Accounnt Created - Hotel Atlantis',
+              text: 'Welcome Aboard',
+              html:
+                "Click <a href = 'localhost:4000/user/delete/" +
+                id +
+                '/' +
+                email +
+                'here</a> to delete account(irreversible action)',
+            }
+            await sgMail
+              .send(msg)
+              .then(() => {
+                console.log('Email sent')
+                res.json({ done: 1 })
+              })
+              .catch((error) => {
+                console.error(error)
+                res.sendStatus(500)
+              })
+          })
+          .catch(() => {
+            res.sendStatus(500)
+          })
+      })
       .catch((err) => {
         res.json({ ...err.keyPattern, done: 0 })
       })

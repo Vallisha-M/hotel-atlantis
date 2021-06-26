@@ -25,6 +25,7 @@ const Signup = () => {
 
       .post('http://localhost:4000/signup', params)
       .then((response) => {
+        alert('then')
         res = response.data
         console.log(res)
       })
@@ -72,7 +73,6 @@ const Signup = () => {
     return a && n && c
   }
   async function handleSubmit(e) {
-    alert('hey')
     e.preventDefault()
     var errors = 0
     var height = 530
