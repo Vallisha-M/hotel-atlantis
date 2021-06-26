@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap');
-#body {
+#lbody {
   padding-left: 3px;
   padding-top: 3px;
   padding-bottom: 3px;
@@ -12,7 +12,7 @@
   top: 55px;
   position: relative;
 }
-.main {
+.lmain {
   text-align: center;
   width: 400px;
   height: 285px;
@@ -20,15 +20,15 @@
   border: 2px solid #ffc800;
   border-radius: 6px;
 }
-.overlay {
+.loverlay {
   padding-left: 500px;
   position: relative;
   font-size: 25px;
   font-family: 'Oxygen', sans-serif;
   text-align: center;
 }
-#fail1,
-#fail2 {
+#lfail1,
+#lfail2 {
   padding-top: 5px;
   font-size: 16px;
   color: red;

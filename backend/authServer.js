@@ -8,8 +8,7 @@ let DeleteUser = require('./models/delete_user.model')
 const mongoose = require('mongoose')
 let Refresh = require('./models/refresh_token.model')
 const crypto = require('crypto')
-const sgMail = require('@sendgrid/mail')
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
 const app = express()
 
 app.use(express.json())
@@ -127,45 +126,20 @@ app.post('/signup', async (req, res) => {
 
     await newUser
       .save()
-<<<<<<< HEAD
       .then(async () => {
         var id = crypto.randomBytes(20).toString('hex')
         const newDeleteUser = new DeleteUser({ email: email, delKey: id })
         await newDeleteUser
           .save()
-          .then(async () => {
-            const msg = {
-              to: email,
-              from: 'hotelatlantisproject@gmail.com',
-              subject: 'Accounnt Created - Hotel Atlantis',
-              text: 'Welcome Aboard',
-              html:
-                "Click <a href = 'localhost:4000/user/delete/" +
-                id +
-                '/' +
-                email +
-                'here</a> to delete account(irreversible action)',
-            }
-            await sgMail
-              .send(msg)
-              .then(() => {
-                console.log('Email sent')
-                res.json({ done: 1 })
-              })
-              .catch((error) => {
-                console.error(error)
-                res.sendStatus(500)
-              })
+          .then(() => {
+            res.json({ done: 1 })
           })
           .catch(() => {
             res.sendStatus(500)
           })
       })
-=======
-      .then(() => res.json('User added!'))
->>>>>>> parent of 43d3982b... login and signup working!
       .catch((err) => {
-        res.json(err.keyPattern)
+        res.json({ ...err.keyPattern, done: 0 })
       })
   } catch {
     res.sendStatus(500)

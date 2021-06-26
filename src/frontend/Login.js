@@ -48,15 +48,14 @@ const Login = () => {
       if (result != null) spaceFlag = true ? result.indexOf(' ') > -1 : false
       {
         if (spaceFlag || result == null) {
-          alert('1')
-          $('.main').css('height', 310)
+          $('.lmain').css('height', 310)
           url_var = '/unvailablelogin'
           $('#email').css('border-color', 'red')
           $('#email').css('background-color', 'rgba(255,0,0,0.3)')
           document.getElementById('fail1').innerHTML = 'Invalid email'
           e.preventDefault()
         } else {
-          $('.main').css('height', 285)
+          $('.lmain').css('height', 285)
           $('#email').css('border-color', '#ffc800')
           $('#email').css('background-color', 'white')
           document.getElementById('fail1').innerHTML = null
@@ -68,9 +67,8 @@ const Login = () => {
             res.isAllowed == null) &&
           url_var == '/'
         ) {
-          alert('2')
           url_var = '/unvailablelogin'
-          $('.main').css('height', 310)
+          $('.lmain').css('height', 310)
           document.getElementById('fail2').innerHTML =
             'Password or email is wrong'
           $('#password').css('border-color', 'red')
@@ -79,7 +77,7 @@ const Login = () => {
           $('#email').css('background-color', 'rgba(255,0,0,0.3)')
           e.preventDefault()
         } else {
-          $('.main').css('height', 285)
+          $('.lmain').css('height', 285)
 
           $('#email').css('border-color', '#ffc800')
           $('#email').css('background-color', 'white')
@@ -135,8 +133,8 @@ const Login = () => {
         />
       </Helmet>
 
-      <body id='body'>
-        <div className='overlay'>
+      <body id='lbody'>
+        <div className='loverlay'>
           &nbsp;&nbsp;
           <br />
           <br />
@@ -144,7 +142,7 @@ const Login = () => {
           <br />
           <br />
           <br />
-          <div className='main'>
+          <div className='lmain'>
             <div style={{ fontSize: '30px', paddingTop: '8px' }}>Login</div>
             <br />
             <form
@@ -183,7 +181,7 @@ const Login = () => {
                 <input type='submit' defaultValue='Login' />
 
                 <div id='signup'>
-                  Don't have an account?&nbsp;<a href='signup.html'>Sign Up</a>
+                  Don't have an account?&nbsp;<a href='signup'>Sign Up</a>
                 </div>
               </div>
             </form>
