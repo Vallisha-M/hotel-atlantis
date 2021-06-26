@@ -9,6 +9,7 @@ import Event from './frontend/Event'
 import Contact from './frontend/Contact'
 import NotFound from './frontend/NotFound'
 import Login from './frontend/Login'
+//import AlertLogin from './frontend/AlertLogin'
 function App() {
   return (
     <Router>
@@ -41,6 +42,9 @@ function App() {
           <Route exact path='/login'>
             <Login />
           </Route>
+          {/* <Route exact path='/unvailablelogin'>
+            <AlertLogin />
+          </Route> */}
 
           <Route path='*' component={NotFound} status={404} />
         </Switch>

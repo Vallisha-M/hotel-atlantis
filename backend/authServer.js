@@ -110,6 +110,7 @@ app.post('/signup', async (req, res) => {
   const firstName = req.body.firstName
   const lastName = req.body.lastName
   const password = req.body.password
+  const phone = req.body.phone
   try {
     const hashedPassword = await bcrypt.hash(password, 10)
     const newUser = new User({
@@ -117,6 +118,7 @@ app.post('/signup', async (req, res) => {
       firstName: firstName,
       lastName: lastName,
       password: hashedPassword,
+      phone: phone,
     })
 
     newUser
