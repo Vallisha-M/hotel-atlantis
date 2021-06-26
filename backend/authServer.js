@@ -124,7 +124,9 @@ app.post('/signup', async (req, res) => {
     newUser
       .save()
       .then(() => res.json('User added!'))
-      .catch((err) => res.status(400).json('Error: ' + err))
+      .catch((err) => {
+        res.json(err.keyPattern)
+      })
   } catch {
     res.sendStatus(500)
   }
