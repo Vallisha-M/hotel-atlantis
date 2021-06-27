@@ -1,0 +1,9 @@
+post http://localhost:5000/users/add
+Content-Type: application/json
+
+{
+    "email" : "vishalkhot@gmail.com",
+    "firstName" : "Vishal",
+    "lastName" : "Khot",
+    "password" : "password"
+}
