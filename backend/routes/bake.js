@@ -8,17 +8,24 @@ router.route('/').get((req, res) => {
 })
 
 router.route('/add').post((req, res) => {
+<<<<<<< HEAD
   const uniqueid = req.cookies['uniqueid'];
+=======
+>>>>>>> e8b0b781f8b090341cce6576ca20f0c4ce16bf8a
   const checkin = Date.parse(req.body.checkin)
   const seats = req.body.seats
   const time = req.body.time
   const newBake = new Bake({
+<<<<<<< HEAD
     uniqueid : uniqueid,
+=======
+>>>>>>> e8b0b781f8b090341cce6576ca20f0c4ce16bf8a
     checkin: checkin,
     seats: seats,
     time: time,
   })
 
+<<<<<<< HEAD
   router.delete('/delete/:id' , async(req,res) => {
     await(Bake.deleteOne({"_id" : req.params.id}))
       .then(() => res.json("Reservation cancelled"))
@@ -43,6 +50,10 @@ router.route('/add').post((req, res) => {
   });
 
   newBake.save()
+=======
+  newBake
+    .save()
+>>>>>>> e8b0b781f8b090341cce6576ca20f0c4ce16bf8a
     .then(() => res.json('Bake Love reserved!'))
     .catch((err) => res.status(400).json('Error : ' + err))
 })

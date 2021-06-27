@@ -3,11 +3,14 @@ const Schema = mongoose.Schema
 
 const GingerSchema = new Schema(
   {
+<<<<<<< HEAD
     uniqueid : {
       type : String,
       required : true,
       unique : false
     },
+=======
+>>>>>>> e8b0b781f8b090341cce6576ca20f0c4ce16bf8a
     checkin: {
       type: Date,
       required: true,
@@ -23,8 +26,13 @@ const GingerSchema = new Schema(
     time: {
       type: String,
       required: true,
+<<<<<<< HEAD
       minlength: 11,
       maxlength: 11,
+=======
+      minlength: 9,
+      maxlength: 9,
+>>>>>>> e8b0b781f8b090341cce6576ca20f0c4ce16bf8a
     },
   },
   {
