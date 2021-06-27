@@ -37,7 +37,7 @@ const informalSchema = new Schema(
     },
 
     date: {
-      type: Date,
+      type: String,
       unique: false,
       required: true,
     },

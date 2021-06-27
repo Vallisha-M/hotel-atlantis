@@ -101,7 +101,7 @@ const Formal = () => {
       <br />
       <br />
       <div>
-        <div style={{ overflowY: 'hidden' }}>
+        <div style={{ overflowY: 'hidden', textAlign: 'center' }}>
           <h3>
             Answer these questions to help us understand your requirements
           </h3>

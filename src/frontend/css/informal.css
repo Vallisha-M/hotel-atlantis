@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap');
 
 #form {
+  text-align: center;
   background-color: #f5f5f5;
   padding-right: 10px;
   padding-left: 10px;

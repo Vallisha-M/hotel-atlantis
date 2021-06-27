@@ -13,13 +13,9 @@ router.route('/add').post(async (req, res) => {
   const adjective = req.body.adjective
   const describe = req.body.describe
   const guests = req.body.guests
-  const date = Date.parse(req.body.date)
-  await Informal.find({ venue: venue }, { _id: 0 }).then((ress) => {
-    for (var i = 0; i < ress.length; i = i + 1) {
-      var gotDate = ress[i].date.toString().slice(0, 10)
-      var reqDate = date.toString().slice(0, 10)
-      if (gotDate == reqDate) return res.json({ done: 0, duplicate: 1 })
-    }
+  const date = req.body.date
+  await Informal.find({ venue: venue, date: date }, { _id: 0 }).then((ress) => {
+    if (ress.length > 0) return res.json({ done: 0, duplicate: 1 })
   })
   const newInformal = new Informal({
     email: email,

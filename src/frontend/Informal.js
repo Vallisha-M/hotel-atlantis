@@ -22,7 +22,7 @@ const Informal = () => {
       email: email,
       venue: venue,
       describe: describe,
-      date: date,
+      date: date.toString().slice(0, 10),
       guests: guests,
       adjective: eventType,
     }
@@ -110,7 +110,7 @@ const Informal = () => {
       <br />
       <br />
       <div>
-        <div style={{ overflowY: 'hidden' }}>
+        <div style={{ overflowY: 'hidden', textAlign: 'center' }}>
           <h3>
             Answer these questions to help us understand your requirements
           </h3>
