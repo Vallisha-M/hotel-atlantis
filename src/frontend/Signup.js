@@ -246,7 +246,8 @@ const Signup = () => {
         var aheight = 530 + errors * 15
         aheight = aheight.toString() + 'px'
         $('.mains').css('height', aheight)
-        if (errors == 0) history.push('/signup/login')
+        if (errors == 0 && res.done != null && res.done == 1)
+          history.push('/signup/login')
       })
   }
 

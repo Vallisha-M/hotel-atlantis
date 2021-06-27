@@ -1,13 +1,13 @@
-const router = require('express').Router()
-let Informal = require('../models/informal.model')
+const router = require("express").Router()
+let Informal = require("../models/informal.model")
 
-router.route('/').get((req, res) => {
+router.route("/").get((req, res) => {
   Informal.find()
     .then((informal) => res.json(informal))
-    .catch((err) => res.status(400).json('Error: ' + err))
+    .catch((err) => res.status(400).json("Error: " + err))
 })
 
-router.route('/add').post(async (req, res) => {
+router.route("/add").post(async (req, res) => {
   const email = req.body.email
   const venue = req.body.venue
   const adjective = req.body.adjective
@@ -39,13 +39,14 @@ router.route('/add').post(async (req, res) => {
   }
 })
 
-router.delete('/delete/', async (req, res) => {
-  await Informal.deleteOne({ _id: req.query.id })
-    .then(() => res.json('Informal event cancelled'))
-    .catch((err) => res.status(400).json('Error ' + err))
+router.post("/delete/", async (req, res) => {
+  console.log("here")
+  await Informal.remove({ email: req.body.email }, false)
+    .then(() => res.json({ done: 1 }))
+    .catch((err) => res.json({ done: 0 }))
 })
 
-router.patch('/update/', async (req, res) => {
+router.patch("/update/", async (req, res) => {
   try {
     const informal = Informal.findById({ _id: req.query.id })
     informal.uniqueid = informal.uniqueid
@@ -57,10 +58,10 @@ router.patch('/update/', async (req, res) => {
     informal.date = req.body.date || informal.date
     await informal
       .save()
-      .then(() => res.json('Event details updated'))
-      .catch((err) => res.status(400).json('Error: ' + err))
+      .then(() => res.json("Event details updated"))
+      .catch((err) => res.status(400).json("Error: " + err))
   } catch (err) {
-    res.status(400).json('Error: ' + err)
+    res.status(400).json("Error: " + err)
   }
 })
 module.exports = router

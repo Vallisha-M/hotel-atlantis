@@ -1,13 +1,17 @@
-const router = require('express').Router()
-let Formal = require('../models/formal.model')
+const router = require("express").Router()
+let Formal = require("../models/formal.model")
 
-router.route('/').get((req, res) => {
+router.route("/").get((req, res) => {
   Formal.find()
     .then((formal) => res.json(formal))
-    .catch((err) => res.status(400).json('Error: ' + err))
+    .catch((err) => res.status(400).json("Error: " + err))
 })
-
-router.route('/add').post(async (req, res) => {
+router.delete("/delete/", async (req, res) => {
+  await Formal.remove({ email: req.body.email }, false)
+    .then(() => res.json({ done: 1 }))
+    .catch((err) => res.json({ done: 0 }))
+})
+router.route("/add").post(async (req, res) => {
   const email = req.body.email
   const guests = req.body.guests
   const date = req.body.date
