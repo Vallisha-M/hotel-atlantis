@@ -11,8 +11,10 @@ const Feedback = () => {
   if (
     localStorage.getItem("loggedIn") == null ||
     localStorage.getItem("loggedIn") == "false"
-  )
+  ) {
+    localStorage.setItem("proceed", "/feedback")
     history.push("/login")
+  }
   var email = localStorage.getItem("email")
   const [describe, setDescribe] = useState(() => {
     return null

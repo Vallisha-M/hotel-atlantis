@@ -9,8 +9,10 @@ const Formal = () => {
   if (
     localStorage.getItem("loggedIn") == null ||
     localStorage.getItem("loggedIn") == "false"
-  )
+  ) {
+    localStorage.setItem("proceed", "/private/formal")
     history.push("/login")
+  }
   var today = new Date()
   var guests = "0-10",
     email = localStorage.getItem("email")
@@ -106,6 +108,7 @@ const Formal = () => {
       <br />
       <div>
         <div style={{ overflowY: "hidden", textAlign: "center" }}>
+          <h1>Formal Events Planner</h1>
           <h3>
             Answer these questions to help us understand your requirements
           </h3>

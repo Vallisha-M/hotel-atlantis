@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap");
 
 body {
   background-color: #f5f5f5;
@@ -17,7 +17,7 @@ body {
 .pparallax1 {
   padding-left: 8px;
   top: 50px;
-  background-image: url('img/img01.jpg');
+  background-image: url("img/img01.jpg");
   height: 100%;
   background-attachment: fixed;
   background-position: center;
@@ -30,7 +30,7 @@ body {
   padding-left: 70px;
   position: relative;
   font-size: 80px;
-  font-family: 'Oxygen', sans-serif;
+  font-family: "Oxygen", sans-serif;
   text-align: center;
 }
 .pjustText {
@@ -49,7 +49,7 @@ body {
   border-top: 3px solid #ffc800;
   border-bottom: 3px solid #ffc800;
   box-shadow: -1px -40px 24px 0px rgba(0, 0, 0, 0.75);
-  font-family: 'Oxygen', sans-serif;
+  font-family: "Oxygen", sans-serif;
   font-size: 25px;
 }
 .pa {
@@ -65,8 +65,8 @@ body {
   padding-left: 6px;
   color: white;
   font-size: 30px;
-  font-family: 'Oxygen', sans-serif;
-  background-image: url('img/img03.jpg');
+  font-family: "Oxygen", sans-serif;
+  background-image: url("img/img03.jpg");
   height: 100%;
   background-attachment: fixed;
   background-position: center;
@@ -80,10 +80,10 @@ body {
   background-color: rgba(255, 255, 0.5);
   padding-left: 8px;
   padding-left: 6px;
-  color: #ffc800;
+  color: rgb(125, 11, 231);
   font-size: 30px;
-  font-family: 'Oxygen', sans-serif;
-  background-image: url('img/img05.jpg');
+  font-family: "Oxygen", sans-serif;
+  background-image: url("img/img05.jpg");
   height: 100%;
   background-attachment: fixed;
   background-position: center;
@@ -123,7 +123,7 @@ body {
 }
 .pkeepScrolling {
   border: 3px solid #ffc800;
-  font-family: 'Oxygen', sans-serif;
+  font-family: "Oxygen", sans-serif;
   font-size: 20px;
   vertical-align: middle;
   text-align: center;
