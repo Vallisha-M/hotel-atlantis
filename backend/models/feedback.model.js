@@ -17,7 +17,7 @@ const feedbackSchema = new Schema(
     },
     star: {
       type: String,
-      unique: true,
+      unique: false,
       required: true,
     },
   },
