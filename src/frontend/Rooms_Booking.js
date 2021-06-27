@@ -31,7 +31,6 @@ const Rooms_Booking = () => {
 			.get("http://localhost:5000/rooms/show", { params })
 			.then((response) => {
 				rooms = response.data;
-				console.log(rooms);
 				return true;
 			})
 			.catch((error) => {
@@ -43,12 +42,10 @@ const Rooms_Booking = () => {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		await checkAvailability().then(() => {
-			console.log(rooms);
 			var cnt = rooms.length;
 			if (url_var == "confirm") {
 				if (cnt >= 3) url_var = "unavailable";
 			}
-
 			localStorage.setItem("cid", checkindate);
 			localStorage.setItem("cod", checkoutdate);
 			localStorage.setItem("numberofpeople", numberofpeople);

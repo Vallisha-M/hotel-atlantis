@@ -1,6 +1,5 @@
 import "./css/rooms.css";
 import "./css/scrolling.css";
-import "./css/welcome.css";
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -73,9 +72,9 @@ const Rooms_Payment = () => {
 					paddingTop: "60px",
 				}}
 			>
-				<h1>Rooms are available as per your choice</h1>
+				<h2>Rooms are available as per your choice</h2>
 				<br />
-				<h2>Confirm your details</h2>
+				<h3>Confirm your details</h3>
 				<br />
 				<hr />
 				<p style={{ backgroundColor: "#DCDCDC", padding: "10px" }}>
@@ -97,6 +96,7 @@ const Rooms_Payment = () => {
 				</p>
 				<hr />
 			</div>
+			<br />
 			<br />
 			<div className="center" align="center">
 				<form name="Payment" action="" onSubmit={handleSubmit}>
@@ -145,12 +145,17 @@ const Rooms_Payment = () => {
 						<br />
 						<br />
 					</p>
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{" "}
+					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input
 						type="submit"
 						value="Confirm Payment"
 						id="submitBtn"
 						className="button"
+						style={{
+							width: "200px",
+							height: "30px",
+						}}
 					/>
 				</form>
 				<br />
