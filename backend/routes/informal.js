@@ -11,28 +11,32 @@ router.route('/add').post(async (req, res) => {
   const email = req.body.email
   const venue = req.body.venue
   const adjective = req.body.adjective
-  const describe = req.body.describe
   const guests = req.body.guests
   const date = req.body.date
+  var flag = true
   await Informal.find({ venue: venue, date: date }, { _id: 0 }).then((ress) => {
-    if (ress.length > 0) return res.json({ done: 0, duplicate: 1 })
+    if (ress.length > 0) {
+      flag = false
+      return res.json({ done: 0, duplicate: 1 })
+    }
   })
-  const newInformal = new Informal({
-    email: email,
-    venue: venue,
-    adjective: adjective,
-    describe: describe,
-    guests: guests,
-    date: date,
-  })
-
-  await newInformal
-    .save()
-    .then(() => res.json({ done: 1 }))
-    .catch((err) => {
-      console.log(err)
-      res.json({ done: 0, error: 1 })
+  if (flag) {
+    const newInformal = new Informal({
+      email: email,
+      venue: venue,
+      adjective: adjective,
+      guests: guests,
+      date: date,
     })
+
+    await newInformal
+      .save()
+      .then(() => res.json({ done: 1 }))
+      .catch((err) => {
+        console.log(err)
+        res.json({ done: 0, error: 1 })
+      })
+  }
 })
 
 router.delete('/delete/', async (req, res) => {

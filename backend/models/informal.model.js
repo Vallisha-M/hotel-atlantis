@@ -22,13 +22,7 @@ const informalSchema = new Schema(
       unique: false,
       trim: true,
     },
-    describe: {
-      type: String,
-      required: true,
-      unique: false,
-      trim: true,
-      minlength: 1,
-    },
+
     guests: {
       type: String,
       required: true,

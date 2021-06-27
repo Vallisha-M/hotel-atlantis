@@ -14,6 +14,7 @@ const app = express()
 app.use(express.json())
 const port = process.env.PORT || 4000
 const uri = process.env.ATLAS_URI
+const emailPass = process.env.EMAIL_PASS
 app.use(cors({ origin: 'http://localhost:3000' }))
 mongoose.connect(uri, {
   useNewUrlParser: true,

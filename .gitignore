@@ -40,3 +40,5 @@ node_modules/
 frontend/ProjectReport.pdf
 frontend/html/*
 .envsendgrid.env
+backend/routes/.env
+backend/.env

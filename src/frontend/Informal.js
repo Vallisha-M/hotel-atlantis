@@ -7,7 +7,6 @@ import axios from 'axios'
 const Informal = () => {
   var today = new Date()
   var venue = 'beach',
-    describe = 'I want it be great!',
     date,
     eventType = 'wedding',
     guests = '0-10',
@@ -21,7 +20,6 @@ const Informal = () => {
     const params = {
       email: email,
       venue: venue,
-      describe: describe,
       date: date.toString().slice(0, 10),
       guests: guests,
       adjective: eventType,
@@ -44,11 +42,7 @@ const Informal = () => {
     e.preventDefault()
     var flag = true
     res = { is: 'a' }
-    if (describe == undefined) {
-      alert('Describe your event')
-      flag = false
-      return
-    }
+
     if (date == undefined) {
       alert('Select a Date')
       flag = false
@@ -180,25 +174,6 @@ const Informal = () => {
           <br />
           <br />
           <br />
-          <div className='question'>
-            <label htmlFor='describe'>
-              <h3>3. Describe your event;&nbsp;</h3>
-            </label>
-            <br />
-            <br />
-            <input
-              type='text'
-              size={95}
-              name='describe'
-              style={{ height: '100px' }}
-              value={'I want it be great!'}
-              onChange={(e) => {
-                describe = e.target.value
-              }}
-            />
-            <br />
-            <br />
-          </div>
           <br />
           <br />
           <br />
