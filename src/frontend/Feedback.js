@@ -7,6 +7,12 @@ import { makeStyles } from "@material-ui/core/styles"
 import Rating from "@material-ui/lab/Rating"
 import Box from "@material-ui/core/Box"
 const Feedback = () => {
+  let history = useHistory()
+  if (
+    localStorage.getItem("loggedIn") == null ||
+    localStorage.getItem("loggedIn") == "false"
+  )
+    history.push("/login")
   var email = localStorage.getItem("email")
   const [describe, setDescribe] = useState(() => {
     return null
@@ -14,7 +20,6 @@ const Feedback = () => {
 
   var res = { isAllowed: false }
 
-  let history = useHistory()
   const labels = {
     0.5: "Useless",
     1: "Useless+",

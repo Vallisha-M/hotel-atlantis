@@ -5,6 +5,13 @@ import { Helmet } from "react-helmet"
 import { useHistory } from "react-router-dom"
 import axios from "axios"
 const Informal = () => {
+  let history = useHistory()
+
+  if (
+    localStorage.getItem("loggedIn") == null ||
+    localStorage.getItem("loggedIn") == "false"
+  )
+    history.push("/login")
   var today = new Date()
   var venue = "beach",
     date,
@@ -13,8 +20,6 @@ const Informal = () => {
     email = localStorage.getItem("email")
 
   var res = { isAllowed: false }
-
-  let history = useHistory()
 
   async function check() {
     const params = {

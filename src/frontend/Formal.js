@@ -1,19 +1,23 @@
-import './css/informal.css'
+import "./css/informal.css"
 
-import { Helmet } from 'react-helmet'
-import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import axios from 'axios'
+import { Helmet } from "react-helmet"
+import { useState } from "react"
+import { useHistory } from "react-router-dom"
+import axios from "axios"
 const Formal = () => {
+  let history = useHistory()
+  if (
+    localStorage.getItem("loggedIn") == null ||
+    localStorage.getItem("loggedIn") == "false"
+  )
+    history.push("/login")
   var today = new Date()
-  var guests = '0-10',
-    email = localStorage.getItem('email')
+  var guests = "0-10",
+    email = localStorage.getItem("email")
   const [date, setDate] = useState(() => {
     return today.toString().slice(0, 10)
   })
   var res = { isAllowed: false }
-
-  let history = useHistory()
 
   async function check() {
     const params = {
@@ -24,7 +28,7 @@ const Formal = () => {
 
     await axios
 
-      .post('http://localhost:5500/formal/add/', params)
+      .post("http://localhost:5500/formal/add/", params)
       .then((response) => {
         res = response.data
         console.log(res)
@@ -38,16 +42,16 @@ const Formal = () => {
   async function handleSubmit(e) {
     e.preventDefault()
     var flag = true
-    res = { is: 'a' }
+    res = { is: "a" }
 
     if (date == undefined) {
-      alert('Select a Date')
+      alert("Select a Date")
       flag = false
       return
     }
 
-    var dd = parseInt(String(today.getDate()).padStart(2, '0'))
-    var mm = parseInt(String(today.getMonth() + 1).padStart(2, '0')) //January is 0
+    var dd = parseInt(String(today.getDate()).padStart(2, "0"))
+    var mm = parseInt(String(today.getMonth() + 1).padStart(2, "0")) //January is 0
     if (date == undefined) date = today
     var yyyy = parseInt(today.getFullYear())
     var yyyy1 = parseInt(date.toString().slice(0, 4))
@@ -57,7 +61,7 @@ const Formal = () => {
     var valueSelected = dd1 + mm1 * 30 + yyyy1 * 365
 
     if (valueToday > valueSelected) {
-      alert('Enter correct date')
+      alert("Enter correct date")
       flag = false
       return
     }
@@ -65,8 +69,8 @@ const Formal = () => {
     if (flag)
       await check().then(() => {
         console.log(res)
-        if (res.duplicate == 1) alert('Slot taken, Try another date')
-        if (res.done == 1) history.push('/private/confirm')
+        if (res.duplicate == 1) alert("Slot taken, Try another date")
+        if (res.done == 1) history.push("/private/confirm")
       })
   }
 
@@ -101,7 +105,7 @@ const Formal = () => {
       <br />
       <br />
       <div>
-        <div style={{ overflowY: 'hidden', textAlign: 'center' }}>
+        <div style={{ overflowY: "hidden", textAlign: "center" }}>
           <h3>
             Answer these questions to help us understand your requirements
           </h3>
@@ -177,7 +181,7 @@ const Formal = () => {
             type='submit'
             className='submitButton'
             defaultValue='Confirm'
-            style={{ border: '2px solid #ffc800' }}
+            style={{ border: "2px solid #ffc800" }}
           />
         </form>
       </div>

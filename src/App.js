@@ -17,7 +17,7 @@ import EventAdded from "./frontend/EventAdded"
 import Private from "./frontend/Private"
 import Feedback from "./frontend/Feedback"
 import FeedbackConfirm from "./frontend/FeedbackConfirm"
-
+import LoginSuccess from "./frontend/LoginSuccess"
 function App() {
   return (
     <Router>
@@ -73,6 +73,9 @@ function App() {
           </Route>
           <Route exact path='/feedback'>
             <Feedback />
+          </Route>
+          <Route exact path='/login/success'>
+            <LoginSuccess />
           </Route>
           <Route path='*' component={NotFound} status={404} />
         </Switch>
