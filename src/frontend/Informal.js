@@ -1,16 +1,16 @@
-import './css/informal.css'
+import "./css/informal.css"
 
-import { Helmet } from 'react-helmet'
+import { Helmet } from "react-helmet"
 
-import { useHistory } from 'react-router-dom'
-import axios from 'axios'
+import { useHistory } from "react-router-dom"
+import axios from "axios"
 const Informal = () => {
   var today = new Date()
-  var venue = 'beach',
+  var venue = "beach",
     date,
-    eventType = 'wedding',
-    guests = '0-10',
-    email = localStorage.getItem('email')
+    eventType = "wedding",
+    guests = "0-10",
+    email = localStorage.getItem("email")
 
   var res = { isAllowed: false }
 
@@ -27,7 +27,7 @@ const Informal = () => {
 
     await axios
 
-      .post('http://localhost:5500/informal/add/', params)
+      .post("http://localhost:5500/informal/add/", params)
       .then((response) => {
         res = response.data
         console.log(res)
@@ -41,16 +41,16 @@ const Informal = () => {
   async function handleSubmit(e) {
     e.preventDefault()
     var flag = true
-    res = { is: 'a' }
+    res = { is: "a" }
 
     if (date == undefined) {
-      alert('Select a Date')
+      alert("Select a Date")
       flag = false
       return
     }
 
-    var dd = parseInt(String(today.getDate()).padStart(2, '0'))
-    var mm = parseInt(String(today.getMonth() + 1).padStart(2, '0')) //January is 0
+    var dd = parseInt(String(today.getDate()).padStart(2, "0"))
+    var mm = parseInt(String(today.getMonth() + 1).padStart(2, "0")) //January is 0
     if (date == undefined) date = today
     var yyyy = parseInt(today.getFullYear())
     var yyyy1 = parseInt(date.toString().slice(0, 4))
@@ -60,7 +60,7 @@ const Informal = () => {
     var valueSelected = dd1 + mm1 * 30 + yyyy1 * 365
 
     if (valueToday > valueSelected) {
-      alert('Enter correct date')
+      alert("Enter correct date")
       flag = false
       return
     }
@@ -68,8 +68,8 @@ const Informal = () => {
     if (flag)
       await check().then(() => {
         console.log(res)
-        if (res.duplicate == 1) alert('Slot taken, Try another date or venue')
-        if (res.done == 1) history.push('/private/confirm')
+        if (res.duplicate == 1) alert("Slot taken, Try another date or venue")
+        if (res.done == 1) history.push("/private/confirm")
       })
   }
 
@@ -104,7 +104,7 @@ const Informal = () => {
       <br />
       <br />
       <div>
-        <div style={{ overflowY: 'hidden', textAlign: 'center' }}>
+        <div style={{ overflowY: "hidden", textAlign: "center" }}>
           <h3>
             Answer these questions to help us understand your requirements
           </h3>
@@ -116,12 +116,12 @@ const Informal = () => {
           <div className='question'>
             <br />
             <h3>
-              {' '}
+              {" "}
               1. Select venue, beach or indoors?
               <br />
             </h3>
             <br />
-            <div style={{ fontSize: '20px' }}>
+            <div style={{ fontSize: "20px" }}>
               <select
                 name='venue'
                 id='venue'
@@ -129,7 +129,7 @@ const Informal = () => {
                 onChange={(e) => {
                   venue = e.target.value
                 }}
-                style={{ width: '300px', height: '30px', fontSize: '20px' }}
+                style={{ width: "300px", height: "30px", fontSize: "20px" }}
               >
                 <option value='beach'>Beach</option>
                 <option value='indoors'>Indoors</option>
@@ -241,7 +241,7 @@ const Informal = () => {
             type='submit'
             className='submitButton'
             defaultValue='Confirm'
-            style={{ border: '2px solid #ffc800' }}
+            style={{ border: "2px solid #ffc800" }}
           />
         </form>
       </div>

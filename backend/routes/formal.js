@@ -1,11 +1,22 @@
+require("dotenv").config()
 const router = require("express").Router()
 let Formal = require("../models/formal.model")
-
+const nodemailer = require("nodemailer")
+const nodemail = process.env.EMAIL
+const nodePass = process.env.EMAIL_PASS
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: nodemail,
+    pass: nodePass,
+  },
+})
 router.route("/").get((req, res) => {
   Formal.find()
     .then((formal) => res.json(formal))
     .catch((err) => res.status(400).json("Error: " + err))
 })
+
 router.delete("/delete/", async (req, res) => {
   await Formal.remove({ email: req.body.email }, false)
     .then(() => res.json({ done: 1 }))
@@ -31,7 +42,27 @@ router.route("/add").post(async (req, res) => {
 
     newFormal
       .save()
-      .then(() => res.json({ done: 1 }))
+      .then(() => {
+        var mailOptions = {
+          from: nodemail,
+          to: email,
+          subject: "Hotel Atlantis - Formal Event Confirmation",
+          html:
+            "<div style='font-size:20px'>An formal event has been booked with your account with the following details.<table><td>Guests</td><td>" +
+            guests +
+            "</td></tr><tr><td>Date(YYYY/MM/DD)</td><td>" +
+            date +
+            "</td></tr></table></div>",
+        }
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error)
+          } else {
+            console.log("Email sent: " + info.response)
+          }
+          res.json({ done: 1 })
+        })
+      })
       .catch((err) => {
         console.log(err)
         res.json({ error: 1, done: 0 })

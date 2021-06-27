@@ -5,7 +5,7 @@ const mongoose = require("mongoose")
 require("dotenv").config()
 
 const app = express()
-app.use(cors({ origin: "http://localhost:4000" }))
+app.use(cors({ origin: "http://localhost:3000" }))
 const port = process.env.PORT || 5500
 
 app.use(cors())

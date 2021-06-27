@@ -1,4 +1,3 @@
-const axios = require("axios")
 require("dotenv").config()
 const cors = require("cors")
 const express = require("express")
@@ -24,7 +23,7 @@ mongoose.connect(uri, {
   useCreateIndex: true,
   useUnifiedTopology: true,
 })
-var transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: nodemail,
