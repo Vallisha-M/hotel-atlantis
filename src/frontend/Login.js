@@ -1,16 +1,109 @@
-import React, { useState, useEffect } from "react";
-import { Helmet } from "react-helmet";
-
 import "./css/login.css";
-import validateForm from "./js/login.js";
 
-export default function Login() {
-	const [email, setEmail] = useState();
-	const [password, setPassword] = useState();
+import { Helmet } from "react-helmet";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import $ from "jquery";
 
-	useEffect(() => {
-		validateForm();
-	});
+const Login = () => {
+	var pass, email;
+
+	var res = { isAllowed: false };
+
+	let history = useHistory();
+
+	async function check() {
+		const params = {
+			email: email,
+			password: pass,
+		};
+		console.log(params);
+		var flag = false;
+		await axios
+			.post("http://localhost:4000/login", { params })
+			.then((response) => {
+				res = response.data;
+				flag = Boolean(res.isAllowed);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
+
+	async function handleSubmit(e) {
+		e.preventDefault();
+		await check().then(() => {
+			var url_var = "/";
+			alert(url_var);
+			var patt =
+				/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i;
+			var result = email.match(patt);
+			var spaceFlag = true;
+			if (result != null)
+				spaceFlag = true ? result.indexOf(" ") > -1 : false;
+			{
+				if (spaceFlag || result == null) {
+					$(".lmain").css("height", 310);
+					url_var = "/unvailablelogin";
+					$("#email").css("border-color", "red");
+					$("#email").css("background-color", "rgba(255,0,0,0.3)");
+					document.getElementById("fail1").innerHTML =
+						"Invalid email";
+					e.preventDefault();
+				} else {
+					$(".lmain").css("height", 285);
+					$("#email").css("border-color", "#ffc800");
+					$("#email").css("background-color", "white");
+					document.getElementById("fail1").innerHTML = null;
+				}
+			}
+			{
+				if (
+					((res.isAllowed != null && res.isAllowed == false) ||
+						res.isAllowed == null) &&
+					url_var == "/"
+				) {
+					url_var = "/unvailablelogin";
+					$(".lmain").css("height", 310);
+					document.getElementById("fail2").innerHTML =
+						"Password or email is wrong";
+					$("#password").css("border-color", "red");
+					$("#password").css("background-color", "rgba(255,0,0,0.3)");
+					$("#email").css("border-color", "red");
+					$("#email").css("background-color", "rgba(255,0,0,0.3)");
+					e.preventDefault();
+				} else {
+					$(".lmain").css("height", 285);
+
+					$("#email").css("border-color", "#ffc800");
+					$("#email").css("background-color", "white");
+					document.getElementById("fail2").innerHTML = null;
+
+					$("#password").css("border-color", "#ffc800");
+					$("#password").css("background-color", "white");
+				}
+			}
+			{
+				if (pass == "") {
+					url_var = "/unvailablelogin";
+					e.preventDefault();
+				}
+			}
+			if (url_var === "/") {
+				localStorage.setItem("accessToken", res.accessToken);
+				localStorage.setItem("refreshToken", res.refreshToken);
+				localStorage.setItem("loggedIn", res.isAllowed);
+				e.preventDefault();
+			}
+
+			if (url_var == "/") {
+				localStorage.setItem("email", email);
+				history.push(url_var);
+			}
+		});
+	}
+
 	return (
 		<div>
 			<Helmet>
@@ -41,8 +134,8 @@ export default function Login() {
 				/>
 			</Helmet>
 
-			<body id="body">
-				<div className="overlay">
+			<body id="lbody">
+				<div className="loverlay">
 					&nbsp;&nbsp;
 					<br />
 					<br />
@@ -50,7 +143,7 @@ export default function Login() {
 					<br />
 					<br />
 					<br />
-					<div className="main">
+					<div className="lmain">
 						<div style={{ fontSize: "30px", paddingTop: "8px" }}>
 							Login
 						</div>
@@ -59,9 +152,8 @@ export default function Login() {
 							id="login"
 							className="login"
 							name="login"
-							onSubmit="validateForm()"
-							action="login"
-							method="post"
+							onSubmit={handleSubmit}
+							action={"http://localhost:3000/"}
 						>
 							<div style={{ fontSize: "18px" }}>
 								E-mail&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
@@ -70,8 +162,8 @@ export default function Login() {
 									id="email"
 									name="email"
 									placeholder="username@example.domain"
+									onChange={(e) => (email = e.target.value)}
 									required
-									onChange={(e) => setEmail(e.target.value)}
 								/>
 							</div>
 							<div id="fail1" />
@@ -83,10 +175,8 @@ export default function Login() {
 									id="password"
 									name="password"
 									placeholder="Password"
+									onChange={(e) => (pass = e.target.value)}
 									required
-									onChange={(e) =>
-										setPassword(e.target.value)
-									}
 								/>
 							</div>
 							<div id="fail2" />
@@ -97,10 +187,11 @@ export default function Login() {
 								}}
 							>
 								<input type="submit" defaultValue="Login" />
-							</div>
-							<div id="signup">
-								Don't have an account?&nbsp;
-								<a href="signup.html">Sign Up</a>
+
+								<div id="signup">
+									Don't have an account?&nbsp;
+									<a href="signup">Sign Up</a>
+								</div>
 							</div>
 						</form>
 					</div>
@@ -108,4 +199,6 @@ export default function Login() {
 			</body>
 		</div>
 	);
-}
+};
+
+export default Login;
