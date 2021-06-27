@@ -55,7 +55,7 @@ function Navbar() {
           style={{ width: "118px", height: "52px", float: "left" }}
         />
       </a>
-      <a href={link} className='button1' style={{ width: "140px" }}>
+      <a href={link} className='button1' style={{ width: "100px" }}>
         <span>{name}</span>
       </a>
       <a href='/rooms' className='button1' style={{ width: "140px" }}>

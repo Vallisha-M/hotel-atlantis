@@ -8,7 +8,9 @@ import Rating from "@material-ui/lab/Rating"
 import Box from "@material-ui/core/Box"
 const Feedback = () => {
   var email = localStorage.getItem("email")
-  var describe = null
+  const [describe, setDescribe] = useState(() => {
+    return null
+  })
 
   var res = { isAllowed: false }
 
@@ -32,7 +34,7 @@ const Feedback = () => {
       alignItems: "center",
     },
   })
-  const [value, setValue] = React.useState(2)
+  const [value, setValue] = React.useState(5)
   const [hover, setHover] = React.useState(-1)
   const classes = useStyles()
   async function check() {
@@ -71,7 +73,7 @@ const Feedback = () => {
   return (
     <div>
       <Helmet>
-        <title>Hotel Atlantis | Formal</title>
+        <title>Hotel Atlantis | Feedback</title>
 
         <meta charset='utf-8' />
         <meta http-equiv='X-UA-Compatible' content='IE=edge' />
@@ -100,10 +102,12 @@ const Feedback = () => {
       <br />
       <div>
         <div style={{ overflowY: "hidden", textAlign: "left" }}>
-          <h3 style={{ marginLeft: "15px" }}>Feedback Form</h3>
+          <h2 style={{ marginLeft: "15px", textAlign: "center" }}>
+            Feedback Form
+          </h2>
         </div>
         <br />
-        <br />
+
         <form
           id='form'
           name='form'
@@ -153,6 +157,9 @@ const Feedback = () => {
               type='text'
               size='95'
               name='describe'
+              onChange={(event) => {
+                setDescribe(event.target.value)
+              }}
               style={{ width: "800px", height: "100px" }}
             />
             <br />

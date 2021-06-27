@@ -17,6 +17,7 @@ import EventAdded from "./frontend/EventAdded"
 import Private from "./frontend/Private"
 import Feedback from "./frontend/Feedback"
 import FeedbackConfirm from "./frontend/FeedbackConfirm"
+
 function App() {
   return (
     <Router>
