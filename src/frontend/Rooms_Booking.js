@@ -41,18 +41,30 @@ const Rooms_Booking = () => {
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		await checkAvailability().then(() => {
-			var cnt = rooms.length;
-			if (url_var == "confirm") {
-				if (cnt >= 3) url_var = "unavailable";
-			}
-			localStorage.setItem("cid", checkindate);
-			localStorage.setItem("cod", checkoutdate);
-			localStorage.setItem("numberofpeople", numberofpeople);
-			localStorage.setItem("roomtype", roomtype);
-			localStorage.setItem("amt", price);
-			history.push("/rooms/" + url_var);
-		});
+		var flag = true;
+		if (checkindate >= checkoutdate) flag = false;
+		else {
+			var d = new Date();
+			var n = d.getTime();
+			n -= 86400000;
+			d = new Date(n);
+			if (checkindate < d) flag = false;
+		}
+		if (!flag) history.push("/rooms/error");
+		else {
+			await checkAvailability().then(() => {
+				var cnt = rooms.length;
+				if (url_var == "confirm") {
+					if (cnt >= 3) url_var = "unavailable";
+				}
+				localStorage.setItem("cid", checkindate);
+				localStorage.setItem("cod", checkoutdate);
+				localStorage.setItem("numberofpeople", numberofpeople);
+				localStorage.setItem("roomtype", roomtype);
+				localStorage.setItem("amt", price);
+				history.push("/rooms/" + url_var);
+			});
+		}
 	}
 
 	function showPrice() {

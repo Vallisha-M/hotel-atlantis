@@ -21,7 +21,7 @@ const Login = () => {
 		console.log(params);
 		var flag = false;
 		await axios
-			.post("http://localhost:4000/login", { params })
+			.post("http://localhost:4000/login", params)
 			.then((response) => {
 				res = response.data;
 				flag = Boolean(res.isAllowed);

@@ -11,7 +11,7 @@ const Rooms_Payment = () => {
 	var amt = localStorage.getItem("amt");
 	var numberofpeople = localStorage.getItem("numberofpeople");
 	var roomtype = localStorage.getItem("roomtype");
-
+	var email_loc = localStorage.getItem("email");
 	const [user, setUser] = useState("");
 	var name, email;
 
@@ -20,10 +20,11 @@ const Rooms_Payment = () => {
 	}, []);
 
 	const getUserDetails = async () => {
-		await axios({
-			method: "get",
-			url: "http://localhost:5000/users/show",
-		})
+		const params = {
+			email: email_loc,
+		};
+		await axios
+			.get("http://localhost:5000/users/show", { params })
 			.then((response) => {
 				setUser(response.data);
 			})

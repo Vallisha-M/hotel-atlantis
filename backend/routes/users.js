@@ -5,7 +5,8 @@ const cookieParser = require("cookie-parser");
 const { route } = require("./rooms");
 
 router.route("/show").get(async (req, res) => {
-	await User.find()
+	var email = req.query.email;
+	await User.find({ email: email })
 		.then((users) => res.json(users))
 		.catch((err) => res.status(400).json("Error: " + err));
 });
