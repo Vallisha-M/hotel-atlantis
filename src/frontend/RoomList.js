@@ -26,28 +26,6 @@ const RoomList = () => {
 				//console.log(response.data);
 			})
 			.catch((error) => console.log(error));
-
-		if (typeof rooms[0] == "undefined") {
-			setCid("");
-			//console.log("if");
-		} else {
-			setCid(rooms[0].checkindate);
-			setCod(rooms[0].checkoutdate);
-			setRoomtype(rooms[0].roomtype);
-			setNum(rooms[0].numberofpeople);
-			switch (roomtype) {
-				case "standard_room":
-					setRoomtype("Standard Room");
-					break;
-				case "deluxe_room":
-					setRoomtype("Deluxe Room");
-					break;
-				case "suite":
-					setRoomtype("Suite");
-					break;
-			}
-			//console.log("else");
-		}
 	};
 
 	function switchfunc(roomtype) {
@@ -61,7 +39,7 @@ const RoomList = () => {
 		}
 	}
 
-	if (cid == "") {
+	if (rooms.length == 0) {
 		return (
 			<div>
 				<br />
