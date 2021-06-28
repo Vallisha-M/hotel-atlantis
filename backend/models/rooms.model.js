@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 const roomSchema = new Schema(
 	{
-		uniqueid: {
+		email: {
 			type: String,
 			unique: false,
-			required: false,
+			required: true,
 		},
 
 		checkindate: {

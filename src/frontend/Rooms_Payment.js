@@ -35,6 +35,7 @@ const Rooms_Payment = () => {
 
 	const handleSubmit = () => {
 		const room = {
+			email: email_loc,
 			checkindate: cid,
 			checkoutdate: cod,
 			roomtype: roomtype,

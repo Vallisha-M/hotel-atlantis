@@ -18,6 +18,18 @@ router.route("/show").get(async (req, res) => {
 		.catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/show_email").get(async (req, res) => {
+	var email = req.query.email;
+	await Rooms.find({
+		email: email,
+	})
+		.then((rooms) => {
+			res.json(rooms);
+			//console.log(rooms);
+		})
+		.catch((err) => res.status(400).json("Error: " + err));
+});
+
 // GET a specific collection
 router.route("/show/:id").get(async (req, res) => {
 	await Rooms.findById(req.params.id)

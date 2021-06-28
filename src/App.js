@@ -17,6 +17,8 @@ import Login from "./frontend/Login";
 import Gallery from "./frontend/Gallery";
 import Signup from "./frontend/Signup";
 import ProceedLogin from "./frontend/ProceedLogin";
+import Profile from "./frontend/Profile";
+import LoginSuccess from "./frontend/LoginSuccess";
 import { filterSelection } from "./frontend/js/gallery_filter";
 
 function App() {
@@ -60,11 +62,23 @@ function App() {
 						<Rooms />
 						<AlertDialogSlide1 />
 					</Route>
-					<Route exact path="/login" component={Login} />
-					<Route exact path="/signup" component={Signup} />
-					<Route exact path="/gallery" component={Gallery} />
+					<Route exact path="/login">
+						<Login />
+					</Route>
+					<Route exact path="/signup">
+						<Signup />
+					</Route>
 					<Route exact path="/signup/login">
-						<ProceedLogin />
+						<ProceedLogin></ProceedLogin>
+					</Route>
+					<Route exact path="/login/success">
+						<LoginSuccess />
+					</Route>
+					<Route exact path="/gallery">
+						<Gallery />
+					</Route>
+					<Route exact path="/profile">
+						<Profile />
 					</Route>
 					<Route path="*" component={NotFound} status={404} />
 				</Switch>
