@@ -4,14 +4,10 @@ import axios from "axios";
 const RoomList = () => {
 	var email_loc = localStorage.getItem("email");
 	const [rooms, setRooms] = useState([]);
-	const [cid, setCid] = useState(".");
-	const [cod, setCod] = useState("");
-	const [roomtype, setRoomtype] = useState("");
-	const [numberofpeople, setNum] = useState("");
 
 	useEffect(() => {
 		getRooms();
-	}, [cid]);
+	}, []);
 
 	const getRooms = async () => {
 		var params = {
@@ -23,7 +19,6 @@ const RoomList = () => {
 			.then((response) => {
 				var r = response.data;
 				setRooms(r);
-				//console.log(response.data);
 			})
 			.catch((error) => console.log(error));
 	};
