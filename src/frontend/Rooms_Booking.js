@@ -44,11 +44,9 @@ const Rooms_Booking = () => {
 		var flag = true;
 		if (checkindate >= checkoutdate) flag = false;
 		else {
-			var d = new Date();
-			var n = d.getTime();
-			n -= 86400000;
-			d = new Date(n);
-			if (checkindate < d) flag = false;
+			var d = new Date(),
+				cid = new Date(checkindate);
+			if (cid < d) flag = false;
 		}
 		if (!flag) history.push("/rooms/error");
 		else {
