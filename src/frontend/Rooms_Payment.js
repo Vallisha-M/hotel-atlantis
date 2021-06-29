@@ -35,6 +35,7 @@ const Rooms_Payment = () => {
 
 	const handleSubmit = () => {
 		const room = {
+			email: localStorage.getItem("email"),
 			checkindate: cid,
 			checkoutdate: cod,
 			roomtype: roomtype,

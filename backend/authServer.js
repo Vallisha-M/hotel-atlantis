@@ -58,7 +58,6 @@ app.get("/users/delete/email/", (req, res) => {
 			alert(err);
 			flag = false;
 		});
-	console.log("made it here");
 
 	User.deleteOne({ email: email })
 		.then((ress) => {
@@ -199,7 +198,6 @@ app.post("/signup", async (req, res) => {
 						res.json({ done: 1 });
 					})
 					.catch(() => {
-						console.log("here");
 						res.sendStatus(500);
 					});
 			})
@@ -207,7 +205,6 @@ app.post("/signup", async (req, res) => {
 				res.json({ ...err.keyPattern, done: 0 });
 			});
 	} catch {
-		console.log("there");
 		res.sendStatus(500);
 	}
 });

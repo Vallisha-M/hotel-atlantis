@@ -17,6 +17,7 @@ const Profile = () => {
 	const getUserDetails = async () => {
 		const params = {
 			email: email_loc,
+			token: localStorage.getItem("token"),
 		};
 		await axios
 			.get("http://localhost:5500/users/show", { params })
@@ -25,7 +26,7 @@ const Profile = () => {
 				console.log(response.data);
 			})
 			.catch((error) => {
-				console.log(error);
+				alert(error + "\nTry Re-logging in");
 			});
 	};
 

@@ -95,8 +95,6 @@ const Login = () => {
         }
       }
       if (url_var === "/") {
-        localStorage.setItem("accessToken", res.accessToken)
-        localStorage.setItem("refreshToken", res.refreshToken)
         localStorage.setItem("loggedIn", res.isAllowed)
         e.preventDefault()
       }

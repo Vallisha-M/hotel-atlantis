@@ -29,6 +29,7 @@ const InformalList = () => {
 	const getEvents = async () => {
 		var params = {
 			email: email_loc,
+			token: localStorage.getItem("token"),
 		};
 
 		await axios
@@ -50,9 +51,9 @@ const InformalList = () => {
 		return (
 			<div style={{ fontSize: "20px" }}>
 				<table>
-					<tr>
+					<tr style={{ fontWeight: "bold" }}>
 						<td>Venue</td>
-						<td>Adjective</td>
+						<td>Event Type</td>
 						<td>Guests</td>
 						<td>Date</td>
 					</tr>
@@ -84,6 +85,9 @@ const InformalList = () => {
 															eventType:
 																ievent.adjective,
 															venue: ievent.venue,
+															token: localStorage.getItem(
+																"token"
+															),
 														}
 													)
 													.then((res) => {
@@ -95,7 +99,12 @@ const InformalList = () => {
 															alert("ERROR");
 														}
 													})
-													.catch((e) => alert(e));
+													.catch((e) =>
+														alert(
+															e +
+																"\nTry Re-logging in"
+														)
+													);
 											} else {
 												alert(
 													"Cannot cancel when less than 2 days remain"

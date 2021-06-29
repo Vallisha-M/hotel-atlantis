@@ -7,10 +7,10 @@ const nodePass = process.env.EMAIL_PASS;
 let Token = require("../models/token.model");
 router.route("/show_email").get(async (req, res) => {
 	var email = req.query.email;
-	var token = req.body.token;
+	var token = req.query.token;
 	var flag1 = false;
-	await Token.find({ email: email }, { _id: 0 }).then((res) => {
-		if (res[0].token == token) {
+	await Token.find({ email: email }, { _id: 0 }).then((ress) => {
+		if (res != null && ress[0].token == token) {
 			flag1 = true;
 		} else return res.sendStatus(500).json({ done: 0 });
 	});
@@ -34,18 +34,17 @@ const transporter = nodemailer.createTransport({
 });
 router.route("/add").post(async (req, res) => {
 	var flag1 = false;
-
 	const email = req.body.email;
 	const venue = req.body.venue;
 	const adjective = req.body.adjective;
 	const guests = req.body.guests;
 	const date = req.body.date;
 	const token = req.body.token;
-	await Token.find({ email: email }, { _id: 0 }).then((res) => {
-		if (res[0].token == token) {
+	await Token.find({ email: email }, { _id: 0 }).then((ress) => {
+		if (ress[0].token == token) {
 			flag1 = true;
 		} else {
-			return res.sendStatus(500).json({ done: 0 });
+			res.sendStatus(500).json({ done: 0 });
 		}
 	});
 	if (flag1) {
@@ -67,36 +66,38 @@ router.route("/add").post(async (req, res) => {
 				date: date,
 			});
 
-			await newInformal.save().then(() => {
-				var mailOptions = {
-					from: nodemail,
-					to: email,
-					subject: "Hotel Atlantis - Informal Evenet Confirmation",
-					html:
-						"<div style='font-size:20px'>An informal event has been booked with your account with the following details.<table><tr><td>Venue</td><td>" +
-						venue +
-						"</td></tr><tr><td>Event Type</td><td>" +
-						adjective +
-						"</td></td><tr><td>Guests</td><td>" +
-						guests +
-						"</td></tr><tr><td>Date(YYYY/MM/DD)</td><td>" +
-						date +
-						"</td></tr></table></div>",
-				};
-				transporter
-					.sendMail(mailOptions, function (error, info) {
+			await newInformal
+				.save()
+				.then(() => {
+					var mailOptions = {
+						from: nodemail,
+						to: email,
+						subject:
+							"Hotel Atlantis - Informal Evenet Confirmation",
+						html:
+							"<div style='font-size:20px'>An informal event has been booked with your account with the following details.<table><tr><td>Venue</td><td>" +
+							venue +
+							"</td></tr><tr><td>Event Type</td><td>" +
+							adjective +
+							"</td></td><tr><td>Guests</td><td>" +
+							guests +
+							"</td></tr><tr><td>Date(YYYY/MM/DD)</td><td>" +
+							date +
+							"</td></tr></table></div>",
+					};
+					transporter.sendMail(mailOptions, function (error, info) {
 						if (error) {
 							console.log(error);
 						} else {
 							console.log("Email sent: " + info.response);
 						}
 						res.json({ done: 1 });
-					})
-					.catch((err) => {
-						console.log(err);
-						res.json({ done: 0, error: 1 });
 					});
-			});
+				})
+				.catch((err) => {
+					console.log(err);
+					res.json({ done: 0, error: 1 });
+				});
 		}
 	}
 });
@@ -108,8 +109,8 @@ router.post("/cancel", async (req, res) => {
 	const adjective = req.body.eventType;
 	const token = req.body.token;
 	var flag1 = false;
-	await Token.find({ email: email }, { _id: 0 }).then((res) => {
-		if (res[0].token == token) {
+	await Token.find({ email: email }, { _id: 0 }).then((ress) => {
+		if (ress[0].token == token) {
 			flag1 = true;
 		} else {
 			return res.sendStatus(500).json({ done: 0 });
