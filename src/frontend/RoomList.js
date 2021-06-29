@@ -39,7 +39,7 @@ const RoomList = () => {
       <div>
         <br />
         <br />
-        <h2>You have not booked any rooms yet</h2>
+        (You have not booked any rooms yet)
       </div>
     )
   } else {

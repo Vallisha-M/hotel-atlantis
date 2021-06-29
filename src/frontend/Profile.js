@@ -41,16 +41,12 @@ const Profile = () => {
 
   return (
     <div align='center'>
-      <div class='parallax1-event'>
-        <div class='overlayText-event'>
-          <div class='justText-event'>Profile</div>
-        </div>
-      </div>
       <hr color='#ffc800' />
       <div className='main'>
-        <div className='heading'>
+        <div className='heading' style={{ width: "200px" }}>
           <br />
-          UserDetails
+          <br />
+          User Details
         </div>
         <br />
         {/* User */}
@@ -67,7 +63,7 @@ const Profile = () => {
         </div>
         {/* Rooms */}
         <div style={{ fontSize: "20px" }}>
-          <div className='heading'>
+          <div className='heading' style={{ width: "250px" }}>
             <br />
             Room Bookings
           </div>
@@ -75,7 +71,7 @@ const Profile = () => {
         </div>
         {/* Formal Events */}
         <div style={{ fontSize: "20px" }}>
-          <div className='heading'>
+          <div className='heading' style={{ width: "250px" }}>
             <br />
             Formal Events
           </div>
@@ -83,7 +79,7 @@ const Profile = () => {
         </div>
         {/* Informal Events */}
         <div style={{ fontSize: "20px" }}>
-          <div className='heading'>
+          <div className='heading' style={{ width: "250px" }}>
             <br />
             Informal Events
           </div>

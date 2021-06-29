@@ -29,7 +29,6 @@ const Formal = () => {
     }
 
     await axios
-
       .post("http://localhost:5500/formal/add/", params)
       .then((response) => {
         res = response.data
@@ -70,7 +69,6 @@ const Formal = () => {
 
     if (flag)
       await check().then(() => {
-        console.log(res)
         if (res.duplicate == 1) alert("Slot taken, Try another date")
         if (res.done == 1) history.push("/private/confirm")
       })

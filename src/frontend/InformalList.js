@@ -43,7 +43,7 @@ const InformalList = () => {
     return (
       <div>
         <br />
-        <h2>You have not made any reservations yet.</h2>
+        (You have not made any reservations yet.)
       </div>
     )
   } else {
