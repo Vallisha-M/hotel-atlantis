@@ -39,8 +39,85 @@ const connection = mongoose.connection
 connection.once("open", () => {
   console.log("MongoDB database connection established successfully")
 })
+app.post("/users/pass/forgot", async (req, res) => {
+  const email = req.body.email
+  const randomPassword = crypto.randomBytes(5).toString("hex")
+  const hashedPassword = await bcrypt.hash(randomPassword, 10)
+  console.log("email = " + email)
+  await User.find({ email: email }, { _id: 0 })
+    .then(async (response) => {
+      if (response.length > 0) {
+        await User.updateOne(
+          { email: email },
+          { $set: { password: hashedPassword } }
+        )
+          .then(() => {
+            var mailOptions = {
+              from: nodemail,
+              to: email,
+              subject: "Hotel Atlantis - Forgot Password",
+              html:
+                "Use this password and change your password after successful login <br/>" +
+                randomPassword.toString(),
+            }
+            transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error)
+              } else {
+                console.log("Email sent: " + info.response)
+              }
+            })
+            res.json({ done: 1 })
+          })
+          .catch((err) => {
+            console.log(err)
+            res.json({ error: 1, done: 0 })
+          })
+      } else {
+        res.json({ notExist: 1, done: 0 })
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+      res.json({ error: 1, done: 0 })
+    })
+})
+app.post("/users/pass/change/", async (req, res) => {
+  const email = req.body.email
+  const token = req.body.token
+  const pass = req.body.password
+
+  var flag1 = false
+  await Token.find({ email: email }, { _id: 0 }).then(async (ress) => {
+    if (ress[0].token == token) {
+      flag1 = true
+    } else {
+      res.json({ done: 0 })
+    }
+  })
+  if (flag1) {
+    const hashedPassword = await bcrypt.hash(pass, 10)
+    User.updateOne({ email: email }, { $set: { password: hashedPassword } })
+      .then(() => {
+        var mailOptions = {
+          from: nodemail,
+          to: email,
+          subject: "Hotel Atlantis - Password Change",
+          html: "Password Change Successful",
+        }
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error)
+          } else {
+            console.log("Email sent: " + info.response)
+          }
+        })
+        res.json({ done: 1 })
+      })
+      .catch(() => res, json({ done: 0 }))
+  }
+})
 app.get("/users/delete/email/", (req, res) => {
-  console.log("started")
   const adr = "http://localhost:4000" + req.url.toString()
   const q = url.parse(adr, true)
   const key = q.query.key
@@ -163,7 +240,7 @@ app.post("/signup", async (req, res) => {
     await newUser
       .save()
       .then(async () => {
-        var id = crypto.randomBytes(20).toString("hex")
+        const id = crypto.randomBytes(20).toString("hex")
         const newDeleteUser = new DeleteUser({ email: email, delKey: id })
         await newDeleteUser
           .save()

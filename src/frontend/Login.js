@@ -190,6 +190,10 @@ const Login = () => {
                 <div id='signup'>
                   Don't have an account?&nbsp;<a href='signup'>Sign Up</a>
                 </div>
+                <br />
+                <div id='signup'>
+                  <a href='forgot'>Forgot Password</a>
+                </div>
               </div>
             </form>
           </div>

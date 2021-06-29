@@ -15,7 +15,7 @@ const RoomList = () => {
     }
 
     await axios
-      .get("http://localhost:5000/rooms/show_email", { params })
+      .get("http://localhost:5500/rooms/show_email", { params })
       .then((response) => {
         var r = response.data
         setRooms(r)
@@ -48,7 +48,7 @@ const RoomList = () => {
         <br />
         <br />
         <table>
-          <tr>
+          <tr style={{ fontWeight: "bold" }}>
             <td>Check-in Date</td>
             <td>Check-out Date</td>
             <td>Room Type</td>
