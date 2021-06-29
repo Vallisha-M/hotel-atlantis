@@ -53,7 +53,7 @@ const Feedback = () => {
 
 		await axios
 
-			.post("http://localhost:5000/feedback/add/", params)
+			.post("http://localhost:5500/feedback/add/", params)
 			.then((response) => {
 				res = response.data;
 				console.log(res);

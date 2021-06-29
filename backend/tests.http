@@ -1,4 +1,4 @@
-post http://localhost:5000/users/add
+post http://localhost:5500/users/add
 Content-Type: application/json
 
 {

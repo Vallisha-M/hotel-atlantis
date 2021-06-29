@@ -35,7 +35,7 @@ const Informal = () => {
 
 		await axios
 
-			.post("http://localhost:5000/informal/add/", params)
+			.post("http://localhost:5500/informal/add/", params)
 			.then((response) => {
 				res = response.data;
 				console.log(res);

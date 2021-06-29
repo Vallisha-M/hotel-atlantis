@@ -12,7 +12,7 @@ export default function EventList() {
 	const getAllEvents = () => {
 		axios({
 			method: "get",
-			url: "http://localhost:5000/event/",
+			url: "http://localhost:5500/event/",
 		})
 			.then((response) => {
 				const allEvents = response.data;
