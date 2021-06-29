@@ -18,6 +18,13 @@ import Private from "./frontend/Private"
 import Feedback from "./frontend/Feedback"
 import FeedbackConfirm from "./frontend/FeedbackConfirm"
 import LoginSuccess from "./frontend/LoginSuccess"
+import Gallery from "./frontend/Gallery"
+import Rooms from "./frontend/Rooms"
+import Profile from "./frontend/Profile"
+import Rooms_Payment from "./frontend/Rooms_Payment"
+import AlertDialogSlide from "./frontend/AlertDialogSlide"
+import AlertDialogSlide1 from "./frontend/AlertDialogSlide1"
+import CancelSuccess from "./frontend/CancelSuccess"
 function App() {
   return (
     <Router>
@@ -54,7 +61,7 @@ function App() {
             <Signup />
           </Route>
           <Route exact path='/signup/login'>
-            <ProceedLogin></ProceedLogin>
+            <ProceedLogin />
           </Route>
           <Route exact path='/private/informal'>
             <Informal />
@@ -77,6 +84,27 @@ function App() {
           <Route exact path='/login/success'>
             <LoginSuccess />
           </Route>
+          <Route exact path='/rooms'>
+            <Rooms />
+          </Route>
+          <Route exact path='/profile'>
+            <Profile />
+          </Route>
+          <Route exact path='/rooms/confirm'>
+            <Rooms_Payment />
+          </Route>
+          <Route exact path='/rooms/error'>
+            <Rooms />
+            <AlertDialogSlide />
+          </Route>
+          <Route exact path='/rooms/unavailable'>
+            <Rooms />
+            <AlertDialogSlide1 />
+          </Route>
+          <Route exact path='/cancel/success'>
+            <CancelSuccess />
+          </Route>
+          <Route exact path='/gallery' component={Gallery} />
           <Route path='*' component={NotFound} status={404} />
         </Switch>
 

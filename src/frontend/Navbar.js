@@ -18,22 +18,22 @@ function Navbar() {
       <a href='/profile' className='button1' style={{ width: "100px" }}>
         <span>Profile</span>
       </a>
-      <a href='/rooms' className='button1' style={{ width: "140px" }}>
+      <a href='/rooms' className='button1' style={{ width: "160px" }}>
         <span>Book a Room</span>
       </a>
-      <a href='/contact' className='button1' style={{ width: "110px" }}>
+      <a href='/contact' className='button1' style={{ width: "130px" }}>
         <span>Contact Us</span>
       </a>
-      <a href='/dining' className='button2' style={{ width: "70px" }}>
+      <a href='/dining' className='button2' style={{ width: "90px" }}>
         <span>Dining</span>
       </a>
-      <a href='/feedback' className='button1' style={{ width: "100px" }}>
+      <a href='/feedback' className='button1' style={{ width: "120px" }}>
         <span>Feedback</span>
       </a>
-      <a href='/event' className='button2' style={{ width: "70px" }}>
+      <a href='/event' className='button2' style={{ width: "90px" }}>
         <span>Events</span>
       </a>
-      <a href='/private' className='button1' style={{ width: "130px" }}>
+      <a href='/private' className='button1' style={{ width: "150px" }}>
         <span>Private Events</span>
       </a>
       <a href='/gallery' className='button2' style={{ width: "100px" }}>

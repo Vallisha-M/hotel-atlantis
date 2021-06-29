@@ -103,6 +103,7 @@ const Login = () => {
 
       if (url_var == "/") {
         localStorage.setItem("email", email)
+        localStorage.setItem("token", res.token)
         var proceed = localStorage.getItem("proceed")
         if (proceed != null && proceed != "null") {
           history.push(proceed)
