@@ -49,6 +49,7 @@ const Feedback = () => {
 			star: value,
 			email: email,
 			describe: describe,
+			token: localStorage.getItem("token"),
 		};
 
 		await axios

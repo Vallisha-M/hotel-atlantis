@@ -64,7 +64,7 @@ const RoomList = () => {
 				<br />
 				<br />
 				<table>
-					<tr>
+					<tr style={{ fontWeight: "bold" }}>
 						<td>Check-in Date</td>
 						<td>Check-out Date</td>
 						<td>Room Type</td>

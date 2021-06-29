@@ -1,6 +1,5 @@
 import Navbar from "./frontend/Navbar";
 import Footer from "./frontend/Footer";
-
 import { Helmet } from "react-helmet";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Welcome from "./frontend/Welcome";
@@ -25,6 +24,10 @@ import Rooms_Payment from "./frontend/Rooms_Payment";
 import AlertDialogSlide from "./frontend/AlertDialogSlide";
 import AlertDialogSlide1 from "./frontend/AlertDialogSlide1";
 import CancelSuccess from "./frontend/CancelSuccess";
+import Forgot from "./frontend/Forgot";
+import PassChangeConfirm from "./frontend/PassChangeConfirm";
+import ChangePassword from "./frontend/ChangePassword";
+import ForgotSuccess from "./frontend/ForgotSuccess";
 import RoomBooked from "./frontend/RoomBooked";
 
 function App() {
@@ -50,6 +53,12 @@ function App() {
 					<Route exact path="/">
 						<Welcome />
 					</Route>
+					<Route exact path="/changepassword">
+						<ChangePassword />
+					</Route>
+					<Route exact path="/forgot/success">
+						<ForgotSuccess />
+					</Route>
 					<Route exact path="/event">
 						<Event />
 					</Route>
@@ -64,6 +73,9 @@ function App() {
 					</Route>
 					<Route exact path="/signup/login">
 						<ProceedLogin />
+					</Route>
+					<Route exact path="/forgot">
+						<Forgot />
 					</Route>
 					<Route exact path="/private/informal">
 						<Informal />
@@ -101,6 +113,9 @@ function App() {
 					</Route>
 					<Route exact path="/rooms/booked">
 						<RoomBooked />
+					</Route>
+					<Route exact path="/passchange/success">
+						<PassChangeConfirm />
 					</Route>
 					<Route exact path="/rooms/unavailable">
 						<Rooms />

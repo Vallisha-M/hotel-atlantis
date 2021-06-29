@@ -18,6 +18,7 @@ const Login = () => {
 			email: email,
 			password: pass,
 		};
+		console.log(params);
 
 		var flag = false;
 		await axios
@@ -25,12 +26,15 @@ const Login = () => {
 			.post("http://localhost:4000/login", params)
 			.then((response) => {
 				res = response.data;
+				console.log("frontend");
+				console.log(res);
 				flag = Boolean(res.isAllowed);
 			})
 			.catch((error) => {
 				alert(error);
 				console.log(error);
 			});
+		console.log(flag);
 	}
 
 	async function handleSubmit(e) {
@@ -198,6 +202,10 @@ const Login = () => {
 								<div id="signup">
 									Don't have an account?&nbsp;
 									<a href="signup">Sign Up</a>
+								</div>
+								<br />
+								<div id="signup">
+									<a href="forgot">Forgot Password</a>
 								</div>
 							</div>
 						</form>

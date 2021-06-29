@@ -10,7 +10,7 @@ router.route("/show_email").get(async (req, res) => {
 	var token = req.query.token;
 	var flag1 = false;
 	await Token.find({ email: email }, { _id: 0 }).then((ress) => {
-		if (res != null && ress[0].token == token) {
+		if (ress != null && ress[0].token == token) {
 			flag1 = true;
 		} else return res.sendStatus(500).json({ done: 0 });
 	});

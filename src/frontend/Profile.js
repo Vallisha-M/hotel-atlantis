@@ -69,6 +69,9 @@ const Profile = () => {
 					Mobile number: <span>{phoneno}</span>
 					<br />
 					<br />
+					<a href="changepassword">
+						<button className="changepass">Change password</button>
+					</a>
 				</div>
 				{/* Rooms */}
 				<div style={{ fontSize: "20px" }}>

@@ -1,7 +1,7 @@
-import React from 'react'
-import './css/style.css'
-import './css/footer.css'
-import logo from './css/img/logo1.png'
+import React from "react"
+import "./css/style.css"
+import "./css/footer.css"
+import logo from "./css/img/logo1.png"
 
 export default function Footer() {
   return (
@@ -9,7 +9,8 @@ export default function Footer() {
       <div className='footer-left'>
         <img src={logo} />
         <p className='footer-links'>
-          <a>Home</a>|<a href='contact.html'>Contact</a>|<a>About Us</a>
+          <a href='/'>Home</a>|<a href='contact'>Contact</a>|
+          <a href='/#hotelAtlantis'>About Us</a>
         </p>
         <p className='footer-company-name'>
           ATLANTIS GROUP OF HOTELS Pvt. Ltd.
@@ -45,7 +46,7 @@ export default function Footer() {
         </div>
       </div>
       <div className='mapside'>
-        <div className='mapDiv' style={{ right: '-50px' }}>
+        <div className='mapDiv' style={{ right: "-50px" }}>
           &nbsp;&nbsp;
           <iframe
             width={350}
@@ -56,14 +57,14 @@ export default function Footer() {
             marginWidth={0}
             src='https://www.openstreetmap.org/export/embed.html?bbox=-122.25184679031373%2C37.861691632077644%2C-122.2436285018921%2C37.8667906114285&layer=mapnik&marker=37.86424116585334%2C-122.2477376461029'
             style={{
-              float: 'right',
-              border: '1px solid #ffc800',
-              boxShadow: '-1px 6px 44px -2px rgba(0,0,0,0.75)',
+              float: "right",
+              border: "1px solid #ffc800",
+              boxShadow: "-1px 6px 44px -2px rgba(0,0,0,0.75)",
             }}
           />
         </div>
         <a href='https://www.openstreetmap.org/way/109193723#map=17/37.86428/-122.24677'>
-          <button className='mapButton'>Expand Map</button>{' '}
+          <button className='mapButton'>Expand Map</button>{" "}
         </a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <div className='mapText'>
