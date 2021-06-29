@@ -4,7 +4,12 @@ let Informal = require("../models/informal.model")
 const nodemailer = require("nodemailer")
 const nodemail = process.env.EMAIL
 const nodePass = process.env.EMAIL_PASS
-
+router.route("/show_email").get(async (req, res) => {
+  var email = req.query.email
+  await Informal.find({ email: email })
+    .then((informal) => res.json(informal))
+    .catch((err) => res.status(400).json("Error: " + err))
+})
 router.route("/").get((req, res) => {
   Informal.find()
     .then((informal) => res.json(informal))
@@ -72,11 +77,41 @@ router.route("/add").post(async (req, res) => {
     })
   }
 })
-
-router.post("/delete/", async (req, res) => {
-  console.log("here")
-  await Informal.remove({ email: req.body.email }, false)
-    .then(() => res.json({ done: 1 }))
+router.post("/cancel", async (req, res) => {
+  const email = req.body.email
+  const venue = req.body.venue
+  const guests = req.body.guests
+  const date = req.body.date
+  console.log("venue = " + venue)
+  const adjective = req.body.eventType
+  //await Informal.find({ venue: venue }).then((ss) => console.log(ss))
+  await Informal.deleteOne({ venue: venue, date: date })
+    .then(() => {
+      console.log("in done")
+      var mailOptions = {
+        from: nodemail,
+        to: email,
+        subject: "Hotel Atlantis - Informal Event Cancellation",
+        html:
+          "<div style='font-size:20px'>An informal event has been cancelled bearing the following details.<table><tr><td>Venue</td><td>" +
+          venue +
+          "</td></tr><tr><td>Event Type</td><td>" +
+          adjective +
+          "</td></td><tr><td>Guests</td><td>" +
+          guests +
+          "</td></tr><tr><td>Date(YYYY/MM/DD)</td><td>" +
+          date +
+          "</td></tr></table></div>",
+      }
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error)
+        } else {
+          console.log("Email sent: " + info.response)
+        }
+        res.json({ done: 1 })
+      })
+    })
     .catch((err) => res.json({ done: 0 }))
 })
 

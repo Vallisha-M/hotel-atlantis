@@ -11,15 +11,45 @@ const transporter = nodemailer.createTransport({
     pass: nodePass,
   },
 })
+
+router.route("/show_email").get(async (req, res) => {
+  var email = req.query.email
+  await Formal.find({ email: email })
+    .then((fevents) => {
+      res.json(fevents)
+    })
+    .catch((err) => res.status(400).json("Error: " + err))
+})
 router.route("/").get((req, res) => {
   Formal.find()
     .then((formal) => res.json(formal))
     .catch((err) => res.status(400).json("Error: " + err))
 })
 
-router.delete("/delete/", async (req, res) => {
-  await Formal.remove({ email: req.body.email }, false)
-    .then(() => res.json({ done: 1 }))
+router.post("/cancel", async (req, res) => {
+  await Formal.deleteOne({ email: req.body.email, date: req.body.date })
+    .then(() => {
+      console.log("in done")
+      var mailOptions = {
+        from: nodemail,
+        to: req.body.email,
+        subject: "Hotel Atlantis - Formal Event Cancellation",
+        html:
+          "<div style='font-size:20px'>A formal event has been cancelled bearing the following details.<table><td>Guests</td><td>" +
+          req.body.guests +
+          "</td></tr><tr><td>Date(YYYY/MM/DD)</td><td>" +
+          req.body.date +
+          "</td></tr></table></div>",
+      }
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error)
+        } else {
+          console.log("Email sent: " + info.response)
+        }
+        res.json({ done: 1 })
+      })
+    })
     .catch((err) => res.json({ done: 0 }))
 })
 router.route("/add").post(async (req, res) => {
@@ -48,7 +78,7 @@ router.route("/add").post(async (req, res) => {
           to: email,
           subject: "Hotel Atlantis - Formal Event Confirmation",
           html:
-            "<div style='font-size:20px'>An formal event has been booked with your account with the following details.<table><td>Guests</td><td>" +
+            "<div style='font-size:20px'>A formal event has been booked with your account with the following details.<table><td>Guests</td><td>" +
             guests +
             "</td></tr><tr><td>Date(YYYY/MM/DD)</td><td>" +
             date +
