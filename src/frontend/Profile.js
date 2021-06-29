@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import "./css/events.css";
 import axios from "axios";
 import RoomList from "./RoomList";
@@ -6,6 +7,14 @@ import FormalList from "./FormalList";
 import InformalList from "./InformalList";
 
 const Profile = () => {
+	let history = useHistory();
+	if (
+		localStorage.getItem("loggedIn") == null ||
+		localStorage.getItem("loggedIn") == "false"
+	) {
+		localStorage.setItem("proceed", "/profile");
+		history.push("/login");
+	}
 	const [user, setUser] = useState("");
 	var email_loc = localStorage.getItem("email");
 	var name, email, phoneno;
@@ -23,7 +32,6 @@ const Profile = () => {
 			.get("http://localhost:5500/users/show", { params })
 			.then((response) => {
 				setUser(response.data);
-				console.log(response.data);
 			})
 			.catch((error) => {
 				alert(error + "\nTry Re-logging in");

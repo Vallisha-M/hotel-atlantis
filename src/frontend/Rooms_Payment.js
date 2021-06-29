@@ -2,10 +2,19 @@ import "./css/rooms.css";
 import "./css/scrolling.css";
 
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 
 const Rooms_Payment = () => {
+	let history = useHistory();
+	if (
+		localStorage.getItem("loggedIn") == null ||
+		localStorage.getItem("loggedIn") == "false"
+	) {
+		localStorage.setItem("proceed", "/rooms/confirm");
+		history.push("/login");
+	}
 	var cid = localStorage.getItem("cid");
 	var cod = localStorage.getItem("cod");
 	var amt = localStorage.getItem("amt");
@@ -13,7 +22,7 @@ const Rooms_Payment = () => {
 	var roomtype = localStorage.getItem("roomtype");
 	var email_loc = localStorage.getItem("email");
 	const [user, setUser] = useState("");
-	var name, email;
+	var name, email, resp;
 
 	useEffect(() => {
 		getUserDetails();
@@ -33,22 +42,31 @@ const Rooms_Payment = () => {
 			});
 	};
 
-	const handleSubmit = () => {
+	async function check() {
 		const room = {
 			email: localStorage.getItem("email"),
 			checkindate: cid,
 			checkoutdate: cod,
 			roomtype: roomtype,
 			numberofpeople: numberofpeople,
+			token: localStorage.getItem("token"),
 		};
-		axios
+		await axios
 			.post("http://localhost:5500/rooms/add/", room)
-			.then(() => {
-				console.log("Room added");
+			.then((response) => {
+				resp = response.data;
 			})
 			.catch((error) => {
 				console.log(error);
 			});
+	}
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		await check().then(() => {
+			if (resp.done == 1) history.push("/rooms/booked");
+			else alert("Error");
+		});
 	};
 
 	if (typeof user[0] == "undefined") {
