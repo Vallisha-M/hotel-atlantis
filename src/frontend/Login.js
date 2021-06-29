@@ -1,14 +1,14 @@
-import './css/login.css'
+import "./css/login.css"
 
-import { Helmet } from 'react-helmet'
-import React, { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
-import axios from 'axios'
-import $ from 'jquery'
+import { Helmet } from "react-helmet"
+import React, { useState } from "react"
+import { useHistory } from "react-router-dom"
+import axios from "axios"
+import $ from "jquery"
 
 const Login = () => {
-  var pass, email
-
+  const [pass, setPass] = useState()
+  const [email, setEmail] = useState()
   var res = { isAllowed: false }
 
   let history = useHistory()
@@ -18,14 +18,15 @@ const Login = () => {
       email: email,
       password: pass,
     }
+    console.log(params)
 
     var flag = false
     await axios
 
-      .post('http://localhost:4000/login', params)
+      .post("http://localhost:4000/login", params)
       .then((response) => {
         res = response.data
-        console.log('frontend')
+        console.log("frontend")
         console.log(res)
         flag = Boolean(res.isAllowed)
       })
@@ -39,70 +40,76 @@ const Login = () => {
   async function handleSubmit(e) {
     e.preventDefault()
     await check().then(() => {
-      var url_var = '/'
-      alert(url_var)
+      var url_var = "/"
+
       var patt =
         /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i
       var result = email.match(patt)
       var spaceFlag = true
-      if (result != null) spaceFlag = true ? result.indexOf(' ') > -1 : false
+      if (result != null) spaceFlag = true ? result.indexOf(" ") > -1 : false
       {
         if (spaceFlag || result == null) {
-          $('.lmain').css('height', 310)
-          url_var = '/unvailablelogin'
-          $('#email').css('border-color', 'red')
-          $('#email').css('background-color', 'rgba(255,0,0,0.3)')
-          document.getElementById('fail1').innerHTML = 'Invalid email'
+          $(".lmain").css("height", 310)
+          url_var = "/unvailablelogin"
+          $("#email").css("border-color", "red")
+          $("#email").css("background-color", "rgba(255,0,0,0.3)")
+          document.getElementById("fail1").innerHTML = "Invalid email"
           e.preventDefault()
         } else {
-          $('.lmain').css('height', 285)
-          $('#email').css('border-color', '#ffc800')
-          $('#email').css('background-color', 'white')
-          document.getElementById('fail1').innerHTML = null
+          $(".lmain").css("height", 285)
+          $("#email").css("border-color", "#ffc800")
+          $("#email").css("background-color", "white")
+          document.getElementById("fail1").innerHTML = null
         }
       }
       {
         if (
           ((res.isAllowed != null && res.isAllowed == false) ||
             res.isAllowed == null) &&
-          url_var == '/'
+          url_var == "/"
         ) {
-          url_var = '/unvailablelogin'
-          $('.lmain').css('height', 310)
-          document.getElementById('fail2').innerHTML =
-            'Password or email is wrong'
-          $('#password').css('border-color', 'red')
-          $('#password').css('background-color', 'rgba(255,0,0,0.3)')
-          $('#email').css('border-color', 'red')
-          $('#email').css('background-color', 'rgba(255,0,0,0.3)')
+          url_var = "/unvailablelogin"
+          $(".lmain").css("height", 310)
+          document.getElementById("fail2").innerHTML =
+            "Password or email is wrong"
+          $("#password").css("border-color", "red")
+          $("#password").css("background-color", "rgba(255,0,0,0.3)")
+          $("#email").css("border-color", "red")
+          $("#email").css("background-color", "rgba(255,0,0,0.3)")
           e.preventDefault()
         } else {
-          $('.lmain').css('height', 285)
+          $(".lmain").css("height", 285)
 
-          $('#email').css('border-color', '#ffc800')
-          $('#email').css('background-color', 'white')
-          document.getElementById('fail2').innerHTML = null
+          $("#email").css("border-color", "#ffc800")
+          $("#email").css("background-color", "white")
+          document.getElementById("fail2").innerHTML = null
 
-          $('#password').css('border-color', '#ffc800')
-          $('#password').css('background-color', 'white')
+          $("#password").css("border-color", "#ffc800")
+          $("#password").css("background-color", "white")
         }
       }
       {
-        if (pass == '') {
-          url_var = '/unvailablelogin'
+        if (pass == "") {
+          url_var = "/unvailablelogin"
           e.preventDefault()
         }
       }
-      if (url_var === '/') {
-        localStorage.setItem('accessToken', res.accessToken)
-        localStorage.setItem('refreshToken', res.refreshToken)
-        localStorage.setItem('loggedIn', res.isAllowed)
+      if (url_var === "/") {
+        localStorage.setItem("accessToken", res.accessToken)
+        localStorage.setItem("refreshToken", res.refreshToken)
+        localStorage.setItem("loggedIn", res.isAllowed)
         e.preventDefault()
       }
 
-      if (url_var == '/') {
-        localStorage.setItem('email', email)
-        history.push(url_var)
+      if (url_var == "/") {
+        localStorage.setItem("email", email)
+        var proceed = localStorage.getItem("proceed")
+        if (proceed != null && proceed != "null") {
+          history.push(proceed)
+          localStorage.setItem("proceed", "null")
+        } else {
+          history.push("/")
+        }
       }
     })
   }
@@ -144,41 +151,41 @@ const Login = () => {
           <br />
           <br />
           <div className='lmain'>
-            <div style={{ fontSize: '30px', paddingTop: '8px' }}>Login</div>
+            <div style={{ fontSize: "30px", paddingTop: "8px" }}>Login</div>
             <br />
             <form
               id='login'
               className='login'
               name='login'
               onSubmit={handleSubmit}
-              action={'http://localhost:3000/'}
+              action={"http://localhost:3000/"}
             >
-              <div style={{ fontSize: '18px' }}>
+              <div style={{ fontSize: "18px" }}>
                 E-mail&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
                 <input
                   type='text'
                   id='email'
                   name='email'
                   placeholder='username@example.domain'
-                  onChange={(e) => (email = e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
               <div id='fail1' />
               <br />
-              <div style={{ fontSize: '18px' }}>
+              <div style={{ fontSize: "18px" }}>
                 Password :
                 <input
                   type='password'
                   id='password'
                   name='password'
                   placeholder='Password'
-                  onChange={(e) => (pass = e.target.value)}
+                  onChange={(e) => setPass(e.target.value)}
                   required
                 />
               </div>
               <div id='fail2' />
-              <div style={{ paddingTop: '18px', paddingBottom: '9px' }}>
+              <div style={{ paddingTop: "18px", paddingBottom: "9px" }}>
                 <input type='submit' defaultValue='Login' />
 
                 <div id='signup'>

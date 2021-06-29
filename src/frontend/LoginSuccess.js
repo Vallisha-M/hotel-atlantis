@@ -12,7 +12,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
 })
 
-export default function ProceedLogin() {
+export default function LoginSuccess() {
   let history = useHistory()
   if (
     localStorage.getItem("loggedIn") == null ||
@@ -39,7 +39,7 @@ export default function ProceedLogin() {
         <DialogTitle id='alert-dialog-slide-title'>{"Success!"}</DialogTitle>
         <DialogContent>
           <DialogContentText id='alert-dialog-slide-description'>
-            Feedback Recieved. Thank you!
+            Login Successfull
           </DialogContentText>
         </DialogContent>
         <DialogActions>

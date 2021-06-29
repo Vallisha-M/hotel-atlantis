@@ -5,6 +5,16 @@ import { Helmet } from "react-helmet"
 import { useHistory } from "react-router-dom"
 import axios from "axios"
 const Informal = () => {
+  let history = useHistory()
+
+  if (
+    localStorage.getItem("loggedIn") == null ||
+    localStorage.getItem("loggedIn") == "false"
+  ) {
+    localStorage.setItem("proceed", "/private/informal")
+    history.push("/login")
+  }
+
   var today = new Date()
   var venue = "beach",
     date,
@@ -13,8 +23,6 @@ const Informal = () => {
     email = localStorage.getItem("email")
 
   var res = { isAllowed: false }
-
-  let history = useHistory()
 
   async function check() {
     const params = {
@@ -104,7 +112,14 @@ const Informal = () => {
       <br />
       <br />
       <div>
-        <div style={{ overflowY: "hidden", textAlign: "center" }}>
+        <div
+          style={{
+            overflowY: "hidden",
+            textAlign: "center",
+            fontFamily: "Oxygen",
+          }}
+        >
+          <h1>Informal Events Planner</h1>
           <h3>
             Answer these questions to help us understand your requirements
           </h3>

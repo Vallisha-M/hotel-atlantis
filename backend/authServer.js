@@ -12,16 +12,21 @@ const nodemailer = require("nodemailer")
 const url = require("url")
 
 const app = express()
+app.use(cors({ origin: "http://localhost:3000" }))
 const nodemail = process.env.EMAIL
 
 const port = process.env.PORT || 4000
 const uri = process.env.ATLAS_URI
 const nodePass = process.env.EMAIL_PASS
-app.use(cors({ origin: "http://localhost:3000" }))
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
+})
+app.use(express.json())
+app.use(express.urlencoded())
+app.listen(port, () => {
+  console.log(`Authorization Server is running on port: ${port}`)
 })
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -115,41 +120,55 @@ app.post("/login", async (req, res) => {
   console.log("password : " + req.body.password)
   await User.find({ email: email }, { password: 1, _id: 0 })
     .then(async (passwordRaw) => {
+      var flag = true
+      if (passwordRaw.length == 0) {
+        flag = false
+        res.json({ isAllowed: false })
+      }
       console.log("passwordRaw : " + passwordRaw)
-      const hashedPassword = passwordRaw[0].password
-      const requestedPassword = req.body.password
-      try {
-        if (await bcrypt.compare(requestedPassword, hashedPassword)) {
-          console.log("in if")
-          const user = { email: email }
+      if (flag) {
+        const hashedPassword = passwordRaw[0].password
+        const requestedPassword = req.body.password
+        try {
+          if (await bcrypt.compare(requestedPassword, hashedPassword)) {
+            console.log("in if")
+            const user = { email: email }
 
-          const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: "10m",
-          })
+            const accessToken = jwt.sign(
+              user,
+              process.env.ACCESS_TOKEN_SECRET,
+              {
+                expiresIn: "10m",
+              }
+            )
 
-          const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
-          const newRefreshToken = new Refresh({ token: refreshToken })
-          newRefreshToken
-            .save()
-            .then(() => {
-              console.log("allowed")
-              res.json({
-                accessToken: accessToken,
-                refreshToken: refreshToken,
-                isAllowed: true,
+            const refreshToken = jwt.sign(
+              user,
+              process.env.REFRESH_TOKEN_SECRET
+            )
+            const newRefreshToken = new Refresh({ token: refreshToken })
+            newRefreshToken
+              .save()
+              .then(() => {
+                console.log("allowed")
+                res.json({
+                  accessToken: accessToken,
+                  refreshToken: refreshToken,
+                  isAllowed: true,
+                })
               })
-            })
-            .catch((err) => {
-              console.log("error")
-              res.status(400).json("Error: " + err)
-            })
-        } else {
-          console.log("not allowed / in else")
-          res.json({ isAllowed: false })
+              .catch((err) => {
+                console.log("error")
+                res.status(400).json("Error: " + err)
+              })
+          } else {
+            console.log("not allowed / in else")
+            res.json({ isAllowed: false })
+          }
+        } catch (err) {
+          console.log(err)
+          res.sendStatus(500)
         }
-      } catch (err) {
-        console.log(err)
-        res.sendStatus(500)
       }
     })
     .catch((err) => {
@@ -226,7 +245,4 @@ app.delete("/logout", (req, res) => {
     res.status(403).json("Not Logged in")
   }
   res.status(400).json("Bad request")
-})
-app.listen(port, () => {
-  console.log(`Authorization Server is running on port: ${port}`)
 })
