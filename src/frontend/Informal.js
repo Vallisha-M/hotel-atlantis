@@ -31,6 +31,7 @@ const Informal = () => {
       date: date.toString().slice(0, 10),
       guests: guests,
       adjective: eventType,
+      token: localStorage.getItem("token"),
     }
 
     await axios
@@ -38,11 +39,9 @@ const Informal = () => {
       .post("http://localhost:5500/informal/add/", params)
       .then((response) => {
         res = response.data
-        console.log(res)
       })
       .catch((error) => {
-        alert(error)
-        console.log(error)
+        alert(error + "\nTry Re-logging in")
       })
   }
 

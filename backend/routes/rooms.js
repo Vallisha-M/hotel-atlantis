@@ -13,7 +13,6 @@ router.route("/show").get(async (req, res) => {
   })
     .then((rooms) => {
       res.json(rooms)
-      //console.log(rooms);
     })
     .catch((err) => res.status(400).json("Error: " + err))
 })
@@ -68,12 +67,14 @@ router.route("/add").post((req, res) => {
   const checkoutdate = Date.parse(req.body.checkoutdate)
   const roomtype = req.body.roomtype
   const numberofpeople = Number(req.body.numberofpeople)
-
+  const email = req.body.email
+  console.log(req.body)
   const newRoom = new Rooms({
     checkindate: checkindate,
     checkoutdate: checkoutdate,
     roomtype: roomtype,
     numberofpeople: numberofpeople,
+    email: email,
   })
 
   newRoom

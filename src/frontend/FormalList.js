@@ -26,6 +26,7 @@ const FormalList = () => {
   const getEvents = async () => {
     var params = {
       email: email_loc,
+      token: localStorage.getItem("token"),
     }
 
     await axios
@@ -47,7 +48,7 @@ const FormalList = () => {
     return (
       <div style={{ fontSize: "20px" }}>
         <table>
-          <tr>
+          <tr style={{ fontWeight: "bold" }}>
             <td>Guests</td>
             <td>Date</td>
           </tr>
@@ -67,6 +68,7 @@ const FormalList = () => {
                             email: fevent.email,
                             date: fevent.date,
                             guests: fevent.guests,
+                            token: localStorage.getItem("token"),
                           })
                           .then((res) => {
                             if (res.data.done == 1)
@@ -75,7 +77,7 @@ const FormalList = () => {
                               alert("ERROR")
                             }
                           })
-                          .catch(() => alert("ERROR"))
+                          .catch((e) => alert(e + "\nTry Re-logging in"))
                       } else {
                         alert("Cannot cancel when less than 2 days remain")
                       }

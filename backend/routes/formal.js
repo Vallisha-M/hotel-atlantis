@@ -14,11 +14,11 @@ const transporter = nodemailer.createTransport({
 })
 
 router.route("/show_email").get(async (req, res) => {
-  const token = req.body.token
+  const token = req.query.token
   var email = req.query.email
   var flag1 = false
-  await Token.find({ email: req.body.email }, { _id: 0 }).then((res) => {
-    if (res[0].token == token) {
+  await Token.find({ email: email }, { _id: 0 }).then((ress) => {
+    if (ress[0].token == token) {
       flag1 = true
     } else return res.sendStatus(500).json({ done: 0 })
   })
@@ -37,10 +37,11 @@ router.route("/").get((req, res) => {
 })
 
 router.post("/cancel", async (req, res) => {
+  console.log("body = ")
   const token = req.body.token
   var flag1 = false
-  await Token.find({ email: req.body.email }, { _id: 0 }).then((res) => {
-    if (res[0].token == token) {
+  await Token.find({ email: req.body.email }, { _id: 0 }).then((ress) => {
+    if (ress[0].token == token) {
       flag1 = true
     } else return res.sendStatus(500).json({ done: 0 })
   })
@@ -77,8 +78,8 @@ router.route("/add").post(async (req, res) => {
   const email = req.body.email
   const guests = req.body.guests
   const date = req.body.date
-  await Token.find({ email: email }, { _id: 0 }).then((res) => {
-    if (res[0].token == token) {
+  await Token.find({ email: email }, { _id: 0 }).then((ress) => {
+    if (ress[0].token == token) {
       flag1 = true
     } else return res.sendStatus(500).json({ done: 0 })
   })

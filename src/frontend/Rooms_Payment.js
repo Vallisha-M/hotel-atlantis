@@ -24,7 +24,7 @@ const Rooms_Payment = () => {
       email: email_loc,
     }
     await axios
-      .get("http://localhost:5000/users/show", { params })
+      .get("http://localhost:5500/users/show", { params })
       .then((response) => {
         setUser(response.data)
       })
@@ -35,6 +35,7 @@ const Rooms_Payment = () => {
 
   const handleSubmit = () => {
     const room = {
+      email: localStorage.getItem("email"),
       checkindate: cid,
       checkoutdate: cod,
       roomtype: roomtype,

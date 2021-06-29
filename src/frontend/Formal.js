@@ -26,6 +26,7 @@ const Formal = () => {
       email: email,
       guests: guests,
       date: date.toString().slice(0, 10),
+      token: localStorage.getItem("token"),
     }
 
     await axios
