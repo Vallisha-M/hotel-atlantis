@@ -4,7 +4,21 @@ import { getEventListener } from "events"
 import { useHistory } from "react-router-dom"
 import IconButton from "@material-ui/core/IconButton"
 import DeleteIcon from "@material-ui/icons/Delete"
+import dateDiff from "./js/dateDiff"
 const InformalList = () => {
+  var today = new Date()
+
+  var dd = today.getDate()
+  var mm = today.getMonth() + 1
+
+  var yyyy = today.getFullYear()
+  if (dd < 10) {
+    dd = "0" + dd
+  }
+  if (mm < 10) {
+    mm = "0" + mm
+  }
+  today = yyyy + "-" + mm + "-" + dd
   var email_loc = localStorage.getItem("email")
   const [ievents, setIevents] = useState([])
   let history = useHistory()
@@ -54,23 +68,28 @@ const InformalList = () => {
                     console.log(ievent.date)
                     console.log(ievent.email)
                     if (window.confirm("Are you sure?")) {
-                      console.log("Cancelled")
-                      await axios
-                        .post("http://localhost:5500/informal/cancel/", {
-                          email: ievent.email,
-                          date: ievent.date,
-                          guests: ievent.guests,
-                          eventType: ievent.adjective,
-                          venue: ievent.venue,
-                        })
-                        .then((res) => {
-                          if (res.data.done == 1)
-                            history.push("/cancel/success")
-                          else {
-                            alert("ERROR")
-                          }
-                        })
-                        .catch((e) => alert(e))
+                      var flag = dateDiff(today, ievent.date)
+
+                      if (flag) {
+                        await axios
+                          .post("http://localhost:5500/informal/cancel/", {
+                            email: ievent.email,
+                            date: ievent.date,
+                            guests: ievent.guests,
+                            eventType: ievent.adjective,
+                            venue: ievent.venue,
+                          })
+                          .then((res) => {
+                            if (res.data.done == 1)
+                              history.push("/cancel/success")
+                            else {
+                              alert("ERROR")
+                            }
+                          })
+                          .catch((e) => alert(e))
+                      } else {
+                        alert("Cannot cancel when less than 2 days remain")
+                      }
                     } else {
                       console.log("Not cancelled")
                     }
