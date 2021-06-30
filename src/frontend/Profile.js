@@ -4,16 +4,41 @@ import axios from "axios"
 import RoomList from "./RoomList"
 import FormalList from "./FormalList"
 import InformalList from "./InformalList"
-
+import { useHistory } from "react-router-dom"
 const Profile = () => {
   const [user, setUser] = useState("")
   var email_loc = localStorage.getItem("email")
   var name, email, phoneno
-
+  let history = useHistory()
   useEffect(() => {
     getUserDetails()
   }, [])
-
+  const logout = async () => {
+    await axios
+      .post("http://localhost:4000/logout", {
+        email: localStorage.getItem("email"),
+      })
+      .then((res) => {
+        if (res.data.done == 1) {
+          localStorage.removeItem("loggedIn")
+          localStorage.removeItem("loginChanged")
+          localStorage.removeItem("token")
+          localStorage.removeItem("numberofpeople")
+          localStorage.removeItem("roomtype")
+          localStorage.removeItem("amt")
+          localStorage.removeItem("cid")
+          localStorage.removeItem("cod")
+          localStorage.removeItem("email")
+          history.push("/logout/success")
+        } else {
+          alert("Logout Unsuccessful")
+        }
+      })
+      .catch((e) => {
+        alert(e)
+        alert("Logout Unsuccessful")
+      })
+  }
   const getUserDetails = async () => {
     const params = {
       email: email_loc,
@@ -47,6 +72,18 @@ const Profile = () => {
         <div className='heading' style={{ width: "200px" }}>
           <br />
           <br />
+          <button
+            onClick={() => {
+              if (window.confirm("Are you sure?")) {
+                logout()
+              }
+            }}
+            className='changepass'
+            style={{ position: "relative", left: "500px" }}
+          >
+            Logout
+          </button>
+          <br />
           User Details
         </div>
         <br />
@@ -55,15 +92,15 @@ const Profile = () => {
           Name: <span>{name}</span>
           <br />
           <br />
-          Email ID: <span>{email}</span>
+          Email ID: <span>{email}</span>&nbsp;&nbsp;
+          <a href='changepassword'>
+            <button className='changepass'>Change password</button>
+          </a>
           <br />
           <br />
           Mobile number: <span>{phoneno}</span>
           <br />
           <br />
-          <a href='changepassword'>
-            <button className='changepass'>Change password</button>
-          </a>
         </div>
         {/* Rooms */}
         <div style={{ fontSize: "20px" }}>

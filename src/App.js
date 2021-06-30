@@ -17,7 +17,7 @@ import EventAdded from "./frontend/EventAdded"
 import Private from "./frontend/Private"
 import Feedback from "./frontend/Feedback"
 import FeedbackConfirm from "./frontend/FeedbackConfirm"
-import LoginSuccess from "./frontend/LoginSuccess"
+
 import Gallery from "./frontend/Gallery"
 import Rooms from "./frontend/Rooms"
 import Profile from "./frontend/Profile"
@@ -29,6 +29,8 @@ import Forgot from "./frontend/Forgot"
 import PassChangeConfirm from "./frontend/PassChangeConfirm"
 import ChangePassword from "./frontend/ChangePassword"
 import ForgotSuccess from "./frontend/ForgotSuccess"
+import LogoutSuccess from "./frontend/LogoutSuccess"
+import LoginSuccess from "./frontend/LoginSuccess"
 function App() {
   return (
     <Router>
@@ -58,6 +60,9 @@ function App() {
           <Route exact path='/forgot/success'>
             <ForgotSuccess />
           </Route>
+          <Route exact path='/logout/success'>
+            <LogoutSuccess />
+          </Route>
           <Route exact path='/event'>
             <Event />
           </Route>
@@ -69,6 +74,9 @@ function App() {
           </Route>
           <Route exact path='/signup'>
             <Signup />
+          </Route>
+          <Route exact path='/login/success'>
+            <LoginSuccess />
           </Route>
           <Route exact path='/signup/login'>
             <ProceedLogin />
@@ -94,9 +102,7 @@ function App() {
           <Route exact path='/feedback'>
             <Feedback />
           </Route>
-          <Route exact path='/login/success'>
-            <LoginSuccess />
-          </Route>
+
           <Route exact path='/rooms'>
             <Rooms />
           </Route>
