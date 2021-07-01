@@ -6,7 +6,7 @@ let User = require("./models/user.model")
 let DeleteUser = require("./models/delete_user.model")
 const mongoose = require("mongoose")
 const Token = require("./models/token.model")
-
+const OTP = require("./models/otp.model")
 const crypto = require("crypto")
 const nodemailer = require("nodemailer")
 const url = require("url")
@@ -38,6 +38,63 @@ const transporter = nodemailer.createTransport({
 const connection = mongoose.connection
 connection.once("open", () => {
   console.log("MongoDB database connection established successfully")
+})
+app.post("/users/check/duplicate", async (req, res) => {
+  const email = req.body.email
+  const phone = req.body.phone
+
+  var flag = true
+  await User.find({ email: email })
+    .then((ress) => {
+      if (ress.length > 0) {
+        flag = false
+        res.json({ email: 1, done: 0 })
+      }
+    })
+    .catch((err) => {
+      res.json({ done: 0, error: err })
+    })
+  if (flag) {
+    await User.find({ phone: phone })
+      .then((ress) => {
+        if (ress.length > 0) {
+          flag = false
+          res.json({ phone: 1, done: 0 })
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+        res.json({ done: 0, error: err })
+      })
+  }
+  if (flag) {
+    const rand = crypto.randomBytes(6).toString("hex")
+    const newOTP = new OTP({ email: email, password: rand })
+
+    await newOTP
+      .save()
+      .then(() => {
+        console.log("hey")
+        var mailOptions = {
+          from: nodemail,
+          to: email,
+          subject: "Hotel Atlantis - OTP",
+          html:
+            "This is your OTP : " +
+            rand +
+            "<br/><br/>Regards,<br/>Hotel Atlantis",
+        }
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error)
+          } else {
+            console.log("Email sent: " + info.response)
+          }
+        })
+        res.json({ done: 1 })
+      })
+      .catch((err) => res.json({ done: 0, error: err }))
+  }
 })
 app.post("/users/pass/forgot", async (req, res) => {
   const email = req.body.email
@@ -135,7 +192,6 @@ app.get("/users/delete/email/", (req, res) => {
       alert(err)
       flag = false
     })
-  console.log("made it here")
 
   User.deleteOne({ email: email })
     .then((ress) => {
@@ -156,10 +212,7 @@ app.get("/users/delete/email/", (req, res) => {
       alert(err)
       flag = false
     })
-  if (!flag)
-    res.sendFile(
-      "/home/lenovo/Documents/Code/Labs/IV/project/hotel-atlantis/backend/Failure.html"
-    )
+  if (!flag) res.sendFile(process.cwd() + "/Failure.html")
 })
 /*
 app.post("/verify/refresh/", (req, res) => {
@@ -192,7 +245,7 @@ app.post("/login", async (req, res) => {
         const requestedPassword = req.body.password
         try {
           if (await bcrypt.compare(requestedPassword, hashedPassword)) {
-            var id = crypto.randomBytes(20).toString("hex")
+            const id = crypto.randomBytes(20).toString("hex")
             const newToken = new Token({ token: id, email: email })
             await Token.deleteOne({ email: email })
               .then(async () => {
@@ -233,58 +286,80 @@ app.post("/signup", async (req, res) => {
   const lastName = req.body.lastName
   const password = req.body.password
   const phone = req.body.phone
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10)
-    const newUser = new User({
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-      password: hashedPassword,
-      phone: phone,
-    })
-
-    await newUser
-      .save()
-      .then(async () => {
-        const id = crypto.randomBytes(20).toString("hex")
-        const newDeleteUser = new DeleteUser({
-          email: email,
-          delKey: id,
-        })
-        await newDeleteUser
-          .save()
+  const otp = req.body.otp.toString()
+  console.log(email)
+  console.log(otp)
+  var f = true
+  OTP.find({ email: email, password: otp })
+    .then(async (ress) => {
+      if (ress.length == 0) {
+        res.json({ done: 0, invalid: 1 })
+        f = false
+      } else {
+        await OTP.deleteMany({ email: email })
           .then(() => {
-            var mailOptions = {
-              from: nodemail,
-              to: email,
-              subject: "Welcome to Hotel Atlantis!",
-              html:
-                "<div style='font-size:20px'>Account has been created!.<br/>To delete the account(<b style='color:red;'>irreversible</b>)  , click this <a href='http://localhost:4000/users/delete/email/?email=" +
-                email +
-                "&key=" +
-                id +
-                "'>link</a>.</div>",
-            }
-            transporter.sendMail(mailOptions, function (error, info) {
-              if (error) {
-                console.log(error)
-              } else {
-                console.log("Email sent: " + info.response)
+            console.log("done")
+          })
+          .catch(() => (f = false))
+      }
+    })
+    .catch(() => {
+      f = false
+      res.json({ done: 0, error: 1 })
+    })
+  console.log(true)
+  if (f) {
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10)
+      const newUser = new User({
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        password: hashedPassword,
+        phone: phone,
+      })
+
+      await newUser
+        .save()
+        .then(async () => {
+          const id = crypto.randomBytes(20).toString("hex")
+          const newDeleteUser = new DeleteUser({
+            email: email,
+            delKey: id,
+          })
+          await newDeleteUser
+            .save()
+            .then(() => {
+              var mailOptions = {
+                from: nodemail,
+                to: email,
+                subject: "Welcome to Hotel Atlantis!",
+                html:
+                  "<div style='font-size:20px'>Account has been created!.<br/>To delete the account(<b style='color:red;'>irreversible</b>)  , click this <a href='http://localhost:4000/users/delete/email/?email=" +
+                  email +
+                  "&key=" +
+                  id +
+                  "'>link</a>.</div>",
               }
+              transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                  console.log(error)
+                } else {
+                  console.log("Email sent: " + info.response)
+                }
+              })
+              res.json({ done: 1 })
             })
-            res.json({ done: 1 })
-          })
-          .catch(() => {
-            console.log("here")
-            res.sendStatus(500)
-          })
-      })
-      .catch((err) => {
-        res.json({ ...err.keyPattern, done: 0 })
-      })
-  } catch {
-    console.log("there")
-    res.sendStatus(500)
+            .catch(() => {
+              res.json({ done: 0 })
+            })
+        })
+        .catch(() => {
+          res.json({ done: 0 })
+        })
+    } catch {
+      res.json({ done: 0 })
+    }
   }
 })
 app.post("/logout", async (req, res) => {

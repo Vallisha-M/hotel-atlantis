@@ -1,33 +1,33 @@
 import "./css/informal.css"
-import isPass from "./js/isPass"
+
 import { Helmet } from "react-helmet"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import axios from "axios"
 const ChangePassword = () => {
   let history = useHistory()
-  if (
-    localStorage.getItem("loggedIn") == null ||
-    localStorage.getItem("loggedIn") == "false"
-  ) {
-    localStorage.setItem("proceed", "/private/informal")
-    history.push("/protect")
-  }
-
   const email = localStorage.getItem("email")
-  const [pass, setPass] = useState()
+  const firstName = localStorage.getItem("firstName")
+  const lastName = localStorage.getItem("lastName")
+  const password = localStorage.getItem("password")
+  const phone = localStorage.getItem("phone")
+  const [otp, setOTP] = useState()
   var res = { isAllowed: false }
   async function check() {
     const params = {
       email: email,
-      password: pass,
-      token: localStorage.getItem("token"),
+      otp: otp,
+      phone: phone,
+      lastName: lastName,
+      firstName: firstName,
+      password: password,
     }
 
     await axios
-      .post("http://localhost:4000/users/pass/change/", params)
+      .post("http://localhost:4000/signup", params)
       .then((response) => {
         res = response.data
+        console.log(res)
       })
       .catch((error) => {
         alert(error)
@@ -37,27 +37,25 @@ const ChangePassword = () => {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const flag = isPass(pass)
 
     res = { is: "a" }
-    if (flag)
-      await check()
-        .then(() => {
-          if (res.done == 0) alert("ERROR\nTry Relogin")
-          else if (res.done == 1) history.push("/passchange/success")
-        })
-        .catch((error) => alert(error))
-    else {
-      alert(
-        "password must contain one special character and length must be greater than 4"
-      )
-    }
+
+    await check()
+      .then(() => {
+        if (res.done == 1) {
+          const proceed = localStorage.getItem("proceed")
+          localStorage.clear()
+          localStorage.setItem("proceed", proceed)
+          history.push("/signup/login")
+        } else alert("Invalid OTP")
+      })
+      .catch((error) => alert(error))
   }
 
   return (
     <div>
       <Helmet>
-        <title>Hotel Atlantis | Change Password</title>
+        <title>Hotel Atlantis | OTP</title>
 
         <meta charset='utf-8' />
         <meta http-equiv='X-UA-Compatible' content='IE=edge' />
@@ -86,7 +84,7 @@ const ChangePassword = () => {
       <br />
       <div>
         <div style={{ overflowY: "hidden", textAlign: "center" }}>
-          <h1>Reset Password</h1>
+          <h1>OTP</h1>
         </div>
         <br />
         <br />
@@ -97,7 +95,7 @@ const ChangePassword = () => {
           <div>
             <label htmlFor='guests'>
               <div style={{ fontSize: "25px" }}>
-                Enter your new password&nbsp;&nbsp;&nbsp;
+                Enter your OTP&nbsp;&nbsp;&nbsp;
               </div>
             </label>
             <br />
@@ -109,7 +107,7 @@ const ChangePassword = () => {
                 fontSize: "20px",
               }}
               onChange={(e) => {
-                setPass(e.target.value)
+                setOTP(e.target.value)
               }}
               type='text'
               required

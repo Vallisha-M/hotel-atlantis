@@ -31,6 +31,7 @@ import ForgotSuccess from "./frontend/ForgotSuccess"
 import RoomBooked from "./frontend/RoomBooked"
 import LogoutSuccess from "./frontend/LogoutSuccess"
 import ProtectAlert from "./frontend/ProtectAlert"
+import OTPCheck from "./frontend/OTPCheck"
 function App() {
   return (
     <Router>
@@ -71,6 +72,9 @@ function App() {
           </Route>
           <Route exact path='/logout/success'>
             <LogoutSuccess />
+          </Route>
+          <Route exact path='/otpcheck'>
+            <OTPCheck />
           </Route>
           <Route exact path='/signup'>
             <Signup />
