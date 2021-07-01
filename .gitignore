@@ -42,3 +42,5 @@ frontend/html/*
 .envsendgrid.env
 backend/routes/.env
 backend/.env
+backend/node_modules/
+node_modules
