@@ -135,6 +135,7 @@ app.get("/users/delete/email/", (req, res) => {
       alert(err)
       flag = false
     })
+  console.log("made it here")
 
   User.deleteOne({ email: email })
     .then((ress) => {
@@ -148,7 +149,7 @@ app.get("/users/delete/email/", (req, res) => {
     })
     .catch((err) => {
       console.log(err)
-
+      alert(err)
       flag = false
     })
   if (!flag)
@@ -182,6 +183,7 @@ app.post("/login", async (req, res) => {
         flag = false
         res.json({ isAllowed: false })
       }
+      console.log("passwordRaw : " + passwordRaw)
       if (flag) {
         const hashedPassword = passwordRaw[0].password
         const requestedPassword = req.body.password
@@ -264,6 +266,7 @@ app.post("/signup", async (req, res) => {
             res.json({ done: 1 })
           })
           .catch(() => {
+            console.log("here")
             res.sendStatus(500)
           })
       })
@@ -271,13 +274,14 @@ app.post("/signup", async (req, res) => {
         res.json({ ...err.keyPattern, done: 0 })
       })
   } catch {
+    console.log("there")
     res.sendStatus(500)
   }
 })
-app.post("/logout", async (req, res) => {
-  const email = req.body.email
-
-  await Token.deleteMany({ email: email })
+app.delete("/logout", async (req, res) => {
+  var email = req.body.email
+  var token = req.body.token
+  await Token.deleteAll({ email: email, token: token })
     .then(() => {
       res.json({ done: 1 })
     })

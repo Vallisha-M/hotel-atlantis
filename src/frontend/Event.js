@@ -1,11 +1,10 @@
-import React from "react"
-import EventList from "./EventList"
-import "./css/events.css"
+import React from 'react'
+import EventList from './EventList'
+import './css/events.css'
 export default function Event() {
-  localStorage.removeItem("token")
-  localStorage.removeItem("email")
-
-  localStorage.removeItem("loggedIn")
+  localStorage.removeItem('refreshToken')
+  localStorage.setItem('loggedIn', false)
+  localStorage.setItem('loginChanged', true)
   return (
     <div>
       <div class='parallax1-event'>
@@ -20,7 +19,7 @@ export default function Event() {
           Events
         </div>
         <br />
-        <div style={{ fontSize: "20px" }}>
+        <div style={{ fontSize: '20px' }}>
           Every week we host a variety of celebrity performance <br />
           <br />
           Here's the list of upcoming events.

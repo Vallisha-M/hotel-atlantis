@@ -49,7 +49,7 @@ const ChangePassword = () => {
         .catch((error) => alert(error))
     else {
       alert(
-        "password must contain one lower case and one upper case letter, 1 digit and length must be greater than 7"
+        "password must contain one special character and length must be greater than 4"
       )
     }
   }

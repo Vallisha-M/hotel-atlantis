@@ -105,9 +105,9 @@ const Login = () => {
         var proceed = localStorage.getItem("proceed")
         if (proceed != null && proceed != "null") {
           history.push(proceed)
-          localStorage.removeItem("proceed")
+          localStorage.setItem("proceed", "null")
         } else {
-          history.push("/login/success")
+          history.push("/")
         }
       }
     })

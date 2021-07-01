@@ -1,7 +1,13 @@
-import React from "react"
+import React from 'react'
 
-import "./css/notFound.css"
+import './css/notFound.css'
 export default function example() {
+  // localStorage.setItem(
+  //   'refreshToken',
+  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZhbGxpc2hhQGdtYWlsLmNvbSIsImlhdCI6MTYyMjI3NDE1N30.4oiXsRvkPXBgCw1JUEhwnZ5vVr0rOHQ-oSVn53vkYys'
+  // )
+  // localStorage.setItem('loggedIn', true)
+  // localStorage.setItem('loginChanged', false)
   return (
     <div className='notFound'>
       <div className='wrap'>
