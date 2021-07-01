@@ -117,7 +117,7 @@ app.post("/users/pass/change/", async (req, res) => {
 				});
 				res.json({ done: 1 });
 			})
-			.catch(() => res, json({ done: 0 }));
+			.catch(() => res.json({ done: 0 }));
 	}
 });
 app.get("/users/delete/email/", (req, res) => {
