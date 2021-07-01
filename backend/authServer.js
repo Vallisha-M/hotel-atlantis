@@ -140,9 +140,13 @@ app.get("/users/delete/email/", (req, res) => {
   User.deleteOne({ email: email })
     .then((ress) => {
       DeleteUser.deleteOne({ email: email }).then(() => {
-        res.sendFile(
-          "/home/lenovo/Documents/Code/Labs/IV/project/hotel-atlantis/backend/Success.html"
-        )
+        Token.deleteMany({ email: email })
+          .then(() => {
+            res.sendFile(process.cwd() + "/Success.html")
+          })
+          .catch(() => {
+            res.sendFile(process.cwd() + "/Failure.html")
+          })
       })
 
       console.log("done")

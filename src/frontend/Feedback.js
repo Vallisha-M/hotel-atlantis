@@ -61,6 +61,7 @@ const Feedback = () => {
       })
       .catch((error) => {
         alert(error)
+        alert("Try relogin")
         console.log(error)
       })
   }

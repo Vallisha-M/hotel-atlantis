@@ -22,11 +22,10 @@ router.route("/add").post(async (req, res) => {
   const token = req.body.token
   console.log(token)
   await Token.find({ email: email }, { _id: 0 }).then((ress) => {
-    console.log(ress.length)
-    console.log(ress)
-    if (ress[0].token == token) {
+    if (ress[0] != undefined && ress[0].token == token) {
       flag1 = true
     } else {
+      console.log("here")
       res.json({ done: 0 })
     }
   })
