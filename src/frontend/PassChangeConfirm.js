@@ -17,7 +17,7 @@ export default function PassChangeConfirm() {
   let history = useHistory()
   const handleClose = () => {
     setOpen(false)
-    history.push("/login")
+    history.push("/profile")
   }
 
   return (

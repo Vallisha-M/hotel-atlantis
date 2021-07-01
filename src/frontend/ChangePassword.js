@@ -11,7 +11,7 @@ const ChangePassword = () => {
     localStorage.getItem("loggedIn") == "false"
   ) {
     localStorage.setItem("proceed", "/private/informal")
-    history.push("/login")
+    history.push("/protect")
   }
 
   const email = localStorage.getItem("email")

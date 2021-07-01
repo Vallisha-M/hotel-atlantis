@@ -13,7 +13,7 @@ const Profile = () => {
     localStorage.getItem("loggedIn") == "false"
   ) {
     localStorage.setItem("proceed", "/profile")
-    history.push("/login")
+    history.push("/protect")
   }
   const [user, setUser] = useState("")
   var email_loc = localStorage.getItem("email")

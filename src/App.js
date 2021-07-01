@@ -30,7 +30,7 @@ import ChangePassword from "./frontend/ChangePassword"
 import ForgotSuccess from "./frontend/ForgotSuccess"
 import RoomBooked from "./frontend/RoomBooked"
 import LogoutSuccess from "./frontend/LogoutSuccess"
-
+import ProtectAlert from "./frontend/ProtectAlert"
 function App() {
   return (
     <Router>
@@ -114,6 +114,9 @@ function App() {
           <Route exact path='/rooms/error'>
             <Rooms />
             <AlertDialogSlide />
+          </Route>
+          <Route exact path='/protect'>
+            <ProtectAlert />
           </Route>
           <Route exact path='/rooms/booked'>
             <RoomBooked />
