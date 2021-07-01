@@ -1,6 +1,7 @@
 require("dotenv").config()
 const router = require("express").Router()
 let Feedback = require("../models/feedback.model")
+let Token = require("../models/token.model")
 const nodemailer = require("nodemailer")
 const nodemail = process.env.EMAIL
 const nodePass = process.env.EMAIL_PASS
@@ -19,11 +20,14 @@ router.route("/add").post(async (req, res) => {
   var flag = true
   var flag1 = false
   const token = req.body.token
+  console.log(token)
   await Token.find({ email: email }, { _id: 0 }).then((ress) => {
+    console.log(ress.length)
+    console.log(ress)
     if (ress[0].token == token) {
       flag1 = true
     } else {
-      res.sendStatus(500).json({ done: 0 })
+      res.json({ done: 0 })
     }
   })
   if (flag1) {
