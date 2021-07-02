@@ -32,6 +32,10 @@ import RoomBooked from "./frontend/RoomBooked"
 import LogoutSuccess from "./frontend/LogoutSuccess"
 import ProtectAlert from "./frontend/ProtectAlert"
 import OTPCheck from "./frontend/OTPCheck"
+import Dining from "./frontend/Dining"
+import Indian from "./frontend/Indian"
+import TableReserved from "./frontend/TableReserved"
+import DiningPayment from "./frontend/DiningPayment"
 function App() {
   return (
     <Router>
@@ -69,6 +73,19 @@ function App() {
           </Route>
           <Route exact path='/login'>
             <Login />
+          </Route>
+          <Route exact path='/dining/payment'>
+            <DiningPayment />
+          </Route>
+          <Route exact path='/dining'>
+            <Dining />
+          </Route>
+
+          <Route exact path='/dining/confirm'>
+            <TableReserved />
+          </Route>
+          <Route exact path='/dining/indian'>
+            <Indian />
           </Route>
           <Route exact path='/logout/success'>
             <LogoutSuccess />

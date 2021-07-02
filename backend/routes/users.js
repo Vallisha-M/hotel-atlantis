@@ -37,7 +37,7 @@ router.route("/").get((req, res) => {
 router.route("/check/duplicate").post(async (req, res) => {
   const email = req.body.email
   const phone = req.body.phone
-
+  await OTP.deleteMany({ email: email })
   var flag = true
   await User.find({ email: email })
     .then((ress) => {
@@ -66,7 +66,7 @@ router.route("/check/duplicate").post(async (req, res) => {
     const rand = crypto.randomBytes(6).toString("hex")
     const hashedPassword = await bcrypt.hash(rand, 10)
     const newOTP = new OTP({ email: email, password: hashedPassword })
-
+    console.log(newOTP)
     await newOTP
       .save()
       .then(() => {
@@ -282,7 +282,7 @@ router.route("/signup").post(async (req, res) => {
   const lastName = req.body.lastName
   const password = req.body.password
   const phone = req.body.phone
-  const otp = req.body.otp.toString()
+  const otp = req.body.otp
   console.log(email)
   console.log(otp)
   var f = true
@@ -310,57 +310,55 @@ router.route("/signup").post(async (req, res) => {
     })
   console.log(true)
   if (f) {
-    try {
-      const hashedPassword = await bcrypt.hash(password, 10)
-      const newUser = new User({
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
-        password: hashedPassword,
-        phone: phone,
-      })
+    const hashedPassword = await bcrypt.hash(password, 10)
+    const newUser = new User({
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      password: hashedPassword,
+      phone: phone,
+    })
 
-      await newUser
-        .save()
-        .then(async () => {
-          const id = crypto.randomBytes(20).toString("hex")
-          const newDeleteUser = new DeleteUser({
-            email: email,
-            delKey: id,
-          })
-          await newDeleteUser
-            .save()
-            .then(() => {
-              var mailOptions = {
-                from: nodemail,
-                to: email,
-                subject: "Welcome to Hotel Atlantis!",
-                html:
-                  "<div style='font-size:20px'>Account has been created!.<br/>To delete the account(<b style='color:red;'>irreversible</b>)  , click this <a href='http://localhost:5500/users/delete/email/?email=" +
-                  email +
-                  "&key=" +
-                  id +
-                  "'>link</a>.</div>",
+    await newUser
+      .save()
+      .then(async () => {
+        const id = crypto.randomBytes(20).toString("hex")
+        const newDeleteUser = new DeleteUser({
+          email: email,
+          delKey: id,
+        })
+        console.log("saved the user")
+        await newDeleteUser
+          .save()
+          .then(() => {
+            console.log("here")
+            var mailOptions = {
+              from: nodemail,
+              to: email,
+              subject: "Welcome to Hotel Atlantis!",
+              html:
+                "<div style='font-size:20px'>Account has been created!.<br/>To delete the account(<b style='color:red;'>irreversible</b>)  , click this <a href='http://localhost:5500/users/delete/email/?email=" +
+                email +
+                "&key=" +
+                id +
+                "'>link</a>.</div>",
+            }
+            transporter.sendMail(mailOptions, function (error, info) {
+              if (error) {
+                console.log(error)
+              } else {
+                console.log("Email sent: " + info.response)
               }
-              transporter.sendMail(mailOptions, function (error, info) {
-                if (error) {
-                  console.log(error)
-                } else {
-                  console.log("Email sent: " + info.response)
-                }
-              })
-              res.json({ done: 1 })
             })
-            .catch(() => {
-              res.json({ done: 0 })
-            })
-        })
-        .catch(() => {
-          res.json({ done: 0 })
-        })
-    } catch {
-      res.json({ done: 0 })
-    }
+            res.json({ done: 1 })
+          })
+          .catch(() => {
+            res.json({ done: 0 })
+          })
+      })
+      .catch(() => {
+        res.json({ done: 0 })
+      })
   }
 })
 router.route("/logout").post(async (req, res) => {

@@ -22,10 +22,10 @@ function Navbar() {
       <a href='/rooms' className='button1' style={{ width: "160px" }}>
         <span>Book a Room</span>
       </a>
-      <a href='/contact' className='button1' style={{ width: "130px" }}>
+      <a href='/contact' className='button2' style={{ width: "130px" }}>
         <span>Contact Us</span>
       </a>
-      <a href='/dining' className='button2' style={{ width: "90px" }}>
+      <a href='/dining' className='button1' style={{ width: "90px" }}>
         <span>Dining</span>
       </a>
       <a href='/feedback' className='button1' style={{ width: "120px" }}>

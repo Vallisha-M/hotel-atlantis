@@ -5,6 +5,8 @@ import axios from "axios"
 import RoomList from "./RoomList"
 import FormalList from "./FormalList"
 import InformalList from "./InformalList"
+import DiningList from "./DiningList"
+import IndianpreList from "./IndianpreList"
 import $ from "jquery"
 import "./css/loading.css"
 import load from "./img/loading.gif"
@@ -136,6 +138,20 @@ const Profile = () => {
             Informal Events
           </div>
           <InformalList />
+        </div>
+        <div style={{ fontSize: "20px" }}>
+          <div className='heading' style={{ width: "250px" }}>
+            <br />
+            Table Reservation
+          </div>
+          <DiningList />
+        </div>
+        <div style={{ fontSize: "20px" }}>
+          <div className='heading' style={{ width: "250px" }}>
+            <br />
+            Pre Orders
+          </div>
+          <IndianpreList />
         </div>
       </div>
     </div>

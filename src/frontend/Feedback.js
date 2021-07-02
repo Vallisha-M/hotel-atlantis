@@ -56,7 +56,7 @@ const Feedback = () => {
       token: localStorage.getItem("token"),
     }
     $(".loading").css("display", "block")
-    console.log("here")
+
     await axios
       .post("http://localhost:5500/feedback/add/", params)
       .then((response) => {

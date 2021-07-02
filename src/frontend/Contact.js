@@ -25,7 +25,15 @@ export default function Contact() {
           <br />
           Mail :{" "}
           <a
-            style={{ textDecoration: "none", color: "#ffca00" }}
+            style={{
+              textDecoration: "none",
+              color: "black",
+              backgroundColor: "#ffc800",
+              paddingLeft: "2px",
+              paddingRight: "2px",
+              paddingTop: "2px",
+              paddingBottom: "2px",
+            }}
             href='mailto:hotelatlantisproject@gmail.com'
           >
             hotelatlantisproject@gmail.com
