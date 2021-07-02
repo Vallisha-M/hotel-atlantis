@@ -2,8 +2,9 @@ import React, { useState } from "react"
 import "./css/style.css"
 import logo from "./css/img/logo1.png"
 import "./css/welcome1.css"
-
+import scrolling from "./js/scrolling.js"
 function Navbar() {
+  scrolling()
   return (
     <div className='navbar' id='navbar'>
       <hr style={{ width: "100%", height: "2px" }} />

@@ -7,6 +7,7 @@ import { useState } from "react"
 import axios from "axios"
 import $ from "jquery"
 import "./css/loading.css"
+import load from "./img/loading.gif"
 const Signup = () => {
   const [pass1, setPass1] = useState(null)
   const [pass2, setPass2] = useState(null)
@@ -259,10 +260,7 @@ const Signup = () => {
         />
       </Helmet>
       <div class='loading' id='loading'>
-        <img
-          class='load'
-          src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
-        />
+        <img class='load' src={load} />
       </div>
       <body class='sbody'>
         <div class='overlays'>
@@ -313,7 +311,7 @@ const Signup = () => {
                   id='email'
                   name='email'
                   placeholder='username@example.domain'
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value.toLowerCase())}
                   required
                 />
               </div>

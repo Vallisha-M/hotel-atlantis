@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom"
 import axios from "axios"
 import "./css/loading.css"
 import $ from "jquery"
+import load from "./img/loading.gif"
 const Forgot = () => {
   let history = useHistory()
 
@@ -50,10 +51,7 @@ const Forgot = () => {
   return (
     <div>
       <div class='loading' id='loading'>
-        <img
-          class='load'
-          src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
-        />
+        <img class='load' src={load} />
       </div>
       <Helmet>
         <title>Hotel Atlantis | Forgot Password</title>
@@ -110,7 +108,7 @@ const Forgot = () => {
                 fontSize: "20px",
               }}
               onChange={(e) => {
-                setEmail(e.target.value)
+                setEmail(e.target.value.toLowerCase())
               }}
               type='email'
               required

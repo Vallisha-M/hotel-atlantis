@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom"
 import axios from "axios"
 import "./css/loading.css"
 import $ from "jquery"
+import load from "./img/loading.gif"
 const Formal = () => {
   let history = useHistory()
   if (
@@ -110,10 +111,7 @@ const Formal = () => {
       <br />
       <br />
       <div class='loading' id='loading'>
-        <img
-          class='load'
-          src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
-        />
+        <img class='load' src={load} />
       </div>
       <div>
         <div style={{ overflowY: "hidden", textAlign: "center" }}>

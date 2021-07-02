@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom"
 import "./css/loading.css"
 import $ from "jquery"
 import axios from "axios"
+import load from "./img/loading.gif"
 const ChangePassword = () => {
   let history = useHistory()
   if (
@@ -61,10 +62,7 @@ const ChangePassword = () => {
   return (
     <div>
       <div class='loading' id='loading'>
-        <img
-          class='load'
-          src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
-        />
+        <img class='load' src={load} />
       </div>
       <Helmet>
         <title>Hotel Atlantis | Change Password</title>

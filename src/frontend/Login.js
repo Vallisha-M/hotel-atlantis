@@ -5,7 +5,7 @@ import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
 import axios from "axios"
 import $ from "jquery"
-
+import load from "./img/loading.gif"
 const Login = () => {
   const [pass, setPass] = useState()
   const [email, setEmail] = useState()
@@ -151,10 +151,7 @@ const Login = () => {
           <br />
           <br />
           <div class='loading' id='loading'>
-            <img
-              class='load'
-              src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
-            />
+            <img class='load' src={load} />
           </div>
           <div className='lmain'>
             <div style={{ fontSize: "30px", paddingTop: "8px" }}>Login</div>
@@ -173,7 +170,7 @@ const Login = () => {
                   id='email'
                   name='email'
                   placeholder='username@example.domain'
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value.toLowerCase())}
                   required
                 />
               </div>
