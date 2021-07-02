@@ -4,7 +4,8 @@ import axios from "axios"
 import IconButton from "@material-ui/core/IconButton"
 import DeleteIcon from "@material-ui/icons/Delete"
 import dateDiff from "./js/dateDiff"
-
+import $ from "jquery"
+import "./css/loading.css"
 const RoomList = () => {
   var today = new Date()
   var dd = today.getDate()
@@ -29,14 +30,18 @@ const RoomList = () => {
     var params = {
       email: email_loc,
     }
-
+    $(".loading").css("display", "block")
     await axios
       .get("http://localhost:5500/rooms/show_email", { params })
       .then((response) => {
+        $(".loading").css("display", "none")
         var r = response.data
         setRooms(r)
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        $(".loading").css("display", "none")
+        console.log(error)
+      })
   }
 
   function switchfunc(roomtype) {
@@ -61,6 +66,12 @@ const RoomList = () => {
   } else {
     return (
       <div style={{ fontSize: "20px" }}>
+        <div class='loading' id='loading'>
+          <img
+            class='load'
+            src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
+          />
+        </div>
         <br />
         <br />
         <table>
@@ -86,6 +97,7 @@ const RoomList = () => {
                       )
 
                       if (flag) {
+                        $(".loading").css("display", "block")
                         await axios
                           .post("http://localhost:5500/rooms/cancel", {
                             email: email_loc,
@@ -96,9 +108,11 @@ const RoomList = () => {
                             token: localStorage.getItem("token"),
                           })
                           .then((res) => {
+                            $(".loading").css("display", "none")
                             if (res.data.done == 1)
                               history.push("/cancel/success")
                             else {
+                              $(".loading").css("display", "none")
                               alert("ERROR")
                             }
                           })

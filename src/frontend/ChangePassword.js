@@ -3,6 +3,8 @@ import isPass from "./js/isPass"
 import { Helmet } from "react-helmet"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
+import "./css/loading.css"
+import $ from "jquery"
 import axios from "axios"
 const ChangePassword = () => {
   let history = useHistory()
@@ -23,13 +25,15 @@ const ChangePassword = () => {
       password: pass,
       token: localStorage.getItem("token"),
     }
-
+    $(".loading").css("display", "block")
     await axios
-      .post("http://localhost:4000/users/pass/change/", params)
+      .post("http://localhost:5500/users/pass/change/", params)
       .then((response) => {
+        $(".loading").css("display", "none")
         res = response.data
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         alert(error)
         console.log(error)
       })
@@ -56,6 +60,12 @@ const ChangePassword = () => {
 
   return (
     <div>
+      <div class='loading' id='loading'>
+        <img
+          class='load'
+          src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
+        />
+      </div>
       <Helmet>
         <title>Hotel Atlantis | Change Password</title>
 

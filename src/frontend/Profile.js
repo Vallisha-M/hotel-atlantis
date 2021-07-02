@@ -5,7 +5,8 @@ import axios from "axios"
 import RoomList from "./RoomList"
 import FormalList from "./FormalList"
 import InformalList from "./InformalList"
-
+import $ from "jquery"
+import "./css/loading.css"
 const Profile = () => {
   let history = useHistory()
   if (
@@ -28,31 +29,27 @@ const Profile = () => {
       email: email_loc,
       token: localStorage.getItem("token"),
     }
+    $(".loading").css("display", "block")
     await axios
       .get("http://localhost:5500/users/show", { params })
       .then((response) => {
+        $(".loading").css("display", "none")
         setUser(response.data)
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         alert(error + "\nTry Re-logging in")
       })
   }
   const logout = async () => {
+    $(".loading").css("display", "block")
     await axios
-      .post("http://localhost:4000/logout", {
+      .post("http://localhost:5500/users/logout", {
         email: localStorage.getItem("email"),
       })
       .then((res) => {
+        $(".loading").css("display", "none")
         if (res.data.done == 1) {
-          //   localStorage.removeItem("loggedIn")
-          //   localStorage.removeItem("loginChanged")
-          //   localStorage.removeItem("token")
-          //   localStorage.removeItem("numberofpeople")
-          //   localStorage.removeItem("roomtype")
-          //   localStorage.removeItem("amt")
-          //   localStorage.removeItem("cid")
-          //   localStorage.removeItem("cod")
-          //   localStorage.removeItem("email")
           localStorage.clear()
           history.push("/logout/success")
         } else {
@@ -60,6 +57,7 @@ const Profile = () => {
         }
       })
       .catch((e) => {
+        $(".loading").css("display", "none")
         alert(e)
         alert("Logout Unsuccessful")
       })
@@ -76,6 +74,12 @@ const Profile = () => {
 
   return (
     <div align='center'>
+      <div class='loading' id='loading'>
+        <img
+          class='load'
+          src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
+        />
+      </div>
       <hr color='#ffc800' />
       <div className='main'>
         <div className='heading' style={{ width: "200px" }}>

@@ -4,6 +4,8 @@ import { Helmet } from "react-helmet"
 
 import { useHistory } from "react-router-dom"
 import axios from "axios"
+import "./css/loading.css"
+import $ from "jquery"
 const Informal = () => {
   let history = useHistory()
 
@@ -33,14 +35,15 @@ const Informal = () => {
       adjective: eventType,
       token: localStorage.getItem("token"),
     }
-
+    $(".loading").css("display", "block")
     await axios
-
       .post("http://localhost:5500/informal/add/", params)
       .then((response) => {
+        $(".loading").css("display", "none")
         res = response.data
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         alert(error + "\nTry Re-logging in")
       })
   }
@@ -110,6 +113,12 @@ const Informal = () => {
       <br />
       <br />
       <br />
+      <div class='loading' id='loading'>
+        <img
+          class='load'
+          src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
+        />
+      </div>
       <div>
         <div
           style={{

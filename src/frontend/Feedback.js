@@ -6,8 +6,11 @@ import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import Rating from "@material-ui/lab/Rating"
 import Box from "@material-ui/core/Box"
+import "./css/loading.css"
+import $ from "jquery"
 const Feedback = () => {
   let history = useHistory()
+  var load = document.getElementById("loading")
   if (
     localStorage.getItem("loggedIn") == null ||
     localStorage.getItem("loggedIn") == "false"
@@ -51,16 +54,20 @@ const Feedback = () => {
       describe: describe,
       token: localStorage.getItem("token"),
     }
-
+    $(".loading").css("display", "block")
+    console.log("here")
     await axios
-
       .post("http://localhost:5500/feedback/add/", params)
       .then((response) => {
         res = response.data
+        console.log("theer")
+        $(".loading").css("display", "none")
         console.log(res)
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         alert(error)
+
         alert("Try relogin")
         console.log(error)
       })
@@ -109,6 +116,13 @@ const Feedback = () => {
       <br />
       <br />
       <br />
+      <div class='loading' id='loading'>
+        <img
+          class='load'
+          src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
+        />
+      </div>
+
       <div>
         <div style={{ overflowY: "hidden", textAlign: "left" }}>
           <h2 style={{ marginLeft: "15px", textAlign: "center" }}>

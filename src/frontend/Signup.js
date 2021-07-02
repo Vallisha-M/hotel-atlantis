@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom"
 import { useState } from "react"
 import axios from "axios"
 import $ from "jquery"
+import "./css/loading.css"
 const Signup = () => {
   const [pass1, setPass1] = useState(null)
   const [pass2, setPass2] = useState(null)
@@ -22,14 +23,16 @@ const Signup = () => {
       email: email,
       phone: parseInt(pno),
     }
-
+    $(".loading").css("display", "block")
     await axios
-      .post("http://localhost:4000/users/check/duplicate", params)
+      .post("http://localhost:5500/users/check/duplicate", params)
       .then((response) => {
+        $(".loading").css("display", "none")
         res = response.data
         console.log(res)
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         alert(error)
         console.log(error)
       })
@@ -255,6 +258,12 @@ const Signup = () => {
           type='text/css'
         />
       </Helmet>
+      <div class='loading' id='loading'>
+        <img
+          class='load'
+          src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
+        />
+      </div>
       <body class='sbody'>
         <div class='overlays'>
           &nbsp;&nbsp;
@@ -353,7 +362,7 @@ const Signup = () => {
                 <div id='sfail5'></div>
               </div>
               <div style={{ paddingTop: "18px", paddingBottom: "9px" }}>
-                <input type='submit' value='SignUp' />
+                <input type='submit' value='Get OTP' />
               </div>
               <div id='login'>
                 Have an account?&nbsp;<a href='login'>Login</a>

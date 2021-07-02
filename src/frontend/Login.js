@@ -1,5 +1,5 @@
 import "./css/login.css"
-
+import "./css/loading.css"
 import { Helmet } from "react-helmet"
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
@@ -21,16 +21,17 @@ const Login = () => {
     console.log(params)
 
     var flag = false
+    $(".loading").css("display", "block")
     await axios
 
-      .post("http://localhost:4000/login", params)
+      .post("http://localhost:5500/users/login", params)
       .then((response) => {
+        $(".loading").css("display", "none")
         res = response.data
-        console.log("frontend")
-        console.log(res)
         flag = Boolean(res.isAllowed)
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         alert(error)
         console.log(error)
       })
@@ -149,6 +150,12 @@ const Login = () => {
           <br />
           <br />
           <br />
+          <div class='loading' id='loading'>
+            <img
+              class='load'
+              src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
+            />
+          </div>
           <div className='lmain'>
             <div style={{ fontSize: "30px", paddingTop: "8px" }}>Login</div>
             <br />

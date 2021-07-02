@@ -4,6 +4,8 @@ import { Helmet } from "react-helmet"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import axios from "axios"
+import "./css/loading.css"
+import $ from "jquery"
 const Forgot = () => {
   let history = useHistory()
 
@@ -15,14 +17,16 @@ const Forgot = () => {
       email: email,
       token: localStorage.getItem("token"),
     }
-
+    $(".loading").css("display", "block")
     await axios
-      .post("http://localhost:4000/users/pass/forgot", params)
+      .post("http://localhost:5500/users/pass/forgot", params)
       .then((response) => {
+        $(".loading").css("display", "none")
         res = response.data
         console.log(res)
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         alert(error)
         console.log(error)
       })
@@ -35,7 +39,7 @@ const Forgot = () => {
 
     if (flag)
       await check().then(() => {
-        if (res.notExist == 1) alert("not exist")
+        if (res.notExist == 1) alert("email not registered\nSignup")
         else if (res.done == 0) alert("ERROR\nTry Relogin")
         if (res.done == 1) {
           history.push("/forgot/success")
@@ -45,6 +49,12 @@ const Forgot = () => {
 
   return (
     <div>
+      <div class='loading' id='loading'>
+        <img
+          class='load'
+          src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
+        />
+      </div>
       <Helmet>
         <title>Hotel Atlantis | Forgot Password</title>
 

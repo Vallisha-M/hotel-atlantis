@@ -5,7 +5,8 @@ import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import axios from "axios"
 import { Helmet } from "react-helmet"
-
+import "./css/loading.css"
+import $ from "jquery"
 const Rooms_Payment = () => {
   let history = useHistory()
   if (
@@ -32,12 +33,15 @@ const Rooms_Payment = () => {
     const params = {
       email: email_loc,
     }
+    $(".loading").css("display", "block")
     await axios
       .get("http://localhost:5500/users/show", { params })
       .then((response) => {
+        $(".loading").css("display", "none")
         setUser(response.data)
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         console.log(error)
       })
   }
@@ -51,12 +55,15 @@ const Rooms_Payment = () => {
       numberofpeople: numberofpeople,
       token: localStorage.getItem("token"),
     }
+    $(".loading").css("display", "block")
     await axios
       .post("http://localhost:5500/rooms/add/", room)
       .then((response) => {
+        $(".loading").css("display", "none")
         resp = response.data
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         console.log(error)
       })
   }
@@ -85,10 +92,17 @@ const Rooms_Payment = () => {
 
   return (
     <div>
+      <div class='loading' id='loading'>
+        <img
+          class='load'
+          src='https://media2.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e472y9ys724kuop9ggv1bab9evw4ul8qodktgxzm8zs&rid=giphy.gif'
+        />
+      </div>
       <Helmet>
         <link rel='stylesheet' href='css/rooms.css' />
         <link rel='stylesheet' href='css/welcome.css' />
       </Helmet>
+
       <div
         align='center'
         style={{
