@@ -26,7 +26,9 @@ export default function Footer() {
           <br />
           <i className='fa fa-envelope' />
           <p>
-            <a href='mailto:support@eduonix.com'>support@hotel_atlantis.com</a>
+            <a href='mailto:hotelatlantisproject@gmail.com'>
+              hotelatlantisproject@gmail.com
+            </a>
           </p>
         </div>
         <p id='follow'>FOLLOW US ON SOCIAL MEDIA</p>

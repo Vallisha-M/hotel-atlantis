@@ -1,5 +1,5 @@
-import React from 'react'
-import './css/contact.css'
+import React from "react"
+import "./css/contact.css"
 export default function Contact() {
   return (
     <div>
@@ -18,12 +18,18 @@ export default function Contact() {
           Contact Us
         </div>
         <br />
-        <div style={{ fontSize: '20px' }}>
+        <div style={{ fontSize: "20px" }}>
           Here are our contact details ;<br />
           <br />
           Phone : +91 22-27782183 <br />
           <br />
-          Mail : support@hotel_atlantis.com
+          Mail :{" "}
+          <a
+            style={{ textDecoration: "none", color: "#ffca00" }}
+            href='mailto:hotelatlantisproject@gmail.com'
+          >
+            hotelatlantisproject@gmail.com
+          </a>
           <br />
           <br />
         </div>
