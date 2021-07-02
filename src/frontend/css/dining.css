@@ -1,0 +1,182 @@
+
+     
+    .introImage-d{
+        position: relative;
+        top:60px;
+        width:100%;
+        
+    }
+    
+    #rimage-d {
+        width:100%;
+        height:360px;
+    }
+    
+    .parallax1-d{
+      top:50px;
+      background-image: url('../img/image2.jpg');
+      height: 100%; 
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      width: 100%;
+      height:720px;
+    }
+    .overlayText-d{
+        padding-left:70px;
+        position: relative;
+        font-size: 80px;
+        font-family: 'Oxygen', sans-serif;
+        text-align: center;
+        
+    }
+    .justText-d{
+        top: 75px;
+  padding-left: 6px;
+  padding-right: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  position: relative;
+  text-align: center;
+  border: 2px solid #ffc800;
+  border-radius: 6px;
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-size: 100px;
+  left: 550px;
+
+    }
+    
+    
+     h2{
+        text-decoration: underline #ffc800 ;
+    }
+    .mainContent-d{
+       margin-left: 10px;
+        border-top: 3px solid #ffc800;
+        margin-top: 5px;;
+        box-shadow: -1px -40px 24px 0px rgba(0,0,0,0.75);
+        font-family:'Oxygen', sans-serif;
+        font-size:25px;
+        padding:20px;
+        margin-bottom: 10px;
+        background-color: rgb(255, 255, 255);
+    }
+    
+    
+    
+    
+     
+    
+    
+    .card-d {
+          
+          max-width: 600px;
+         padding:0px 0px 20px 0px ;
+          text-align: center;
+          font-family: arial;
+         margin:5px 5px;
+         
+         background-color:  #dfc257;
+         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    
+        }
+    
+        .card-d a{
+            text-decoration: none;
+            color: black;
+        }
+    
+        .button3-d {
+            vertical-align:bottom;
+        border:5px solid #dfc25b;
+        
+        border-radius: 4px;
+        background-color: #f1f1f1;
+       
+        color: #666560;
+        text-align: center;
+        font-size: 14px;
+        padding: 5px; 
+        transition: all 0.5s;
+        cursor: pointer;
+        margin-top: 10px;
+        }
+    
+        .button3-d:hover
+    {    
+          background-color:  #dfc25b;
+        
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+    }   
+    
+      
+    
+        .card-d:hover {
+        
+        background-color:rgb(255, 255, 255) ;
+       
+        }
+        
+        .cardlist-d {
+            
+        color:black;
+        background-color: rgb(255, 255, 255);
+          display: grid;
+          grid-template-columns: auto auto auto ;
+          margin-bottom: 50px;
+          padding:0px 0px;
+             
+        }
+        #details-d {
+            padding:2px 2px 4px 2px;
+            top:0;
+            font-size: 15px;
+            margin-top: 7px;
+    
+    
+        }
+        h4 {
+            margin:5px 0px 0px 0px;
+        }
+    
+        #back {
+            background-color: #f5ebc7;
+            padding: 50px 0px 50px 0px;
+    
+        }
+    
+        #form-table-d {
+                    margin-left: 500px;
+                    margin-right: 500px;
+                   
+                    background-color: white;
+                    padding-top: 5px;
+                    padding-left: 80px;
+                    border: 4px;
+                    border-style: outset;
+                    border-color: #ddb00d;
+                    box-shadow: 4px;
+                  
+                 
+                }
+    #booking
+    {
+        display: table;}
+        label { display: table-cell; color:black;}
+        input { display: table-cell;
+    }
+    
+     .center-d {
+    display: block;
+   
+      }  
+    #submitbtn-d:hover{
+        cursor: pointer;
+    } 
+    
+    #submitbtn-d{
+        margin:0px 5px 0px 0px;
+        
+    }

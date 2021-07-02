@@ -1,0 +1,382 @@
+
+img {
+  height: 80;
+}
+
+.overlayText {
+  position: absolute;
+  font-size: 80px;
+  font-family: 'Oxygen', sans-serif;
+  text-align: center;
+  top: 200px;
+  left: 25px;
+  padding: 0px 500px;
+}
+.justText {
+  border: 2px solid #ffc800;
+  position: absolute;
+  width: 45%;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px 0px;
+  top:100px;
+}
+
+h3 {
+  color: black;
+  font-weight: 500;
+
+  margin: 2px;
+}
+.item_image {
+  width: 100%;
+}
+h1 {
+  margin-top: 62px;
+  padding: 3px 25px 2px 25px;
+  margin-left: 100px;
+  margin-right: 100px;
+  background-color: #ffc800;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  border-bottom: 5px solid #333;
+}
+
+.banner {
+  width: 100%;
+  padding: 0px 0px;
+}
+
+.card {
+  max-width: 400px;
+  padding: 15px 15px 10px 15px;
+  text-align: center;
+  font-family: arial;
+  margin: 5px 5px;
+  border: 1.5px solid transparent;
+  background-color: #ffffff;
+}
+
+.card:hover {
+  border: 1.5px solid #ffc800;
+  background-color: #f8f7f5;
+}
+
+.cardlist {
+  background-color: #ffffff;
+  color: black;
+
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  margin: 0px 100px 50px 100px;
+  padding: 5px 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.item_price {
+  color: grey;
+  font-size: 18px;
+  margin: 7px;
+  text-align: center;
+  padding-right: 12px;
+}
+
+.add_button {
+  margin-bottom: 10px;
+
+  border-radius: 4px;
+  background-color: #ffc800;
+  border: 2px solid rgb(255, 255, 255);
+  color: #ffffff;
+  text-align: center;
+  font-size: 17px;
+  padding: 12px 60px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin-top: 2px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin: 0px 10px;
+}
+
+.add_button:hover {
+  opacity: 0.5;
+  color: black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.add_button:active {
+  transform: scale(1.1);
+
+  border: 1px solid white;
+}
+
+.cart_button {
+  position: fixed;
+
+  margin: 20px;
+  float: right;
+  right: 10px;
+  top: 50px;
+  border-radius: 8px;
+  background-color: #ffc800;
+
+  color: #ffffff;
+  text-align: center;
+  padding: 13px;
+
+  border: 2px solid transparent;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.cart_button:hover {
+  transform: scale(1.1);
+  color: black;
+}
+
+.card_button :active {
+  transform: scale(1.1);
+  border: 2px solid transparent;
+}
+
+/*cart*/
+
+#hide {
+  position: relative;
+  z-index: 9;
+}
+
+.close_cart {
+  position: relative;
+  z-index: 5;
+  left: 500px;
+  top: -50px;
+  margin: 0;
+  font-size: 40px;
+  color: white;
+  background-color: red;
+  cursor: pointer;
+
+  padding: 0px 12px;
+}
+
+.close_cart:hover {
+  opacity: 0.5;
+}
+.close_cart:active {
+  transform: scale(1.1);
+  color: red;
+  background-color: white;
+}
+
+.btn-primary {
+  position: relative;
+
+  border-radius: 8px;
+  background-color: #ffc800;
+  z-index: 3;
+  color: #ffffff;
+  text-align: center;
+  padding: 12px;
+  border: 3px solid rgb(247, 245, 242);
+  top: 430px;
+  margin: 0px 10px;
+
+  left: -20px;
+  font-size: 1.5em;
+
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn-primary:active {
+  opacity: 0.8;
+  color: black;
+  transform: scale(1.1);
+}
+
+.cart-row:last-child {
+  border-bottom: 1px solid black;
+}
+
+.cart-row:last-child .cart-column {
+  border: none;
+}
+
+.cart-total {
+  text-align: end;
+  margin-top: 10px;
+  margin-right: 15px;
+}
+
+.cart-total-title {
+  font-weight: bold;
+  font-size: 1.5em;
+  color: black;
+  margin-right: 10px;
+}
+
+.cart-total-price {
+  color: #333;
+  font-size: 25px;
+  margin-right: 10px;
+}
+
+.content-section {
+  margin: 1em;
+}
+
+.container-d {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5em;
+}
+.section-header {
+  font-family: 'Metal Mania';
+  font-weight: normal;
+  color: #333;
+  text-align: center;
+  font-size: 2.5em;
+}
+
+.cart-header {
+  font-weight: bold;
+  font-size: 1.25em;
+  color: #333;
+}
+
+.cart-column {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid black;
+  margin-right: 1.5em;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+
+.cart-row {
+  display: flex;
+}
+
+.cart-item {
+  width: 45%;
+}
+
+.cart-price {
+  width: 20%;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.cart-quantity {
+  width: 35%;
+}
+
+.cart-item-title {
+  color: #333;
+  margin-left: 0.5em;
+  font-size: 1.2em;
+}
+
+.cart-item-image {
+  width: 75px;
+  height: auto;
+  border-radius: 10px;
+}
+#cartdiv {
+  position: fixed;
+  right: 330px;
+  left: 350px;
+  z-index: 10;
+  top: 80px;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  background-color: rgb(248, 253, 216);
+  width: 850px;
+  height: 500px;
+  padding: 10px 10px;
+  padding-bottom: 50px;
+  color: black;
+  border: #ffc800 2px solid;
+  display: none;
+  text-align: center;
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.item_remove {
+  color: white;
+  background-color: #eb5757;
+  border: none;
+  border-radius: 0.3em;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.item_remove:hover {
+  background-color: #cc4c4c;
+}
+
+.cart-quantity-input {
+  height: 34px;
+  width: 50px;
+  border-radius: 5px;
+  border: 1px solid #56ccf2;
+  background-color: #eee;
+  color: #333;
+  padding: 0;
+  text-align: center;
+  font-size: 1.2em;
+  margin-right: 25px;
+}
+.scroll_div {
+  position: fixed;
+  top: 200px;
+  width: 800px;
+  height: 380px;
+  left: 375px;
+  right: 405px;
+  margin: 0px 10px 0px 0px;
+  background-color: rgb(255, 255, 255);
+  padding-left: 20px;
+  padding-right: 5px;
+  padding-bottom: 10px;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.scroll {
+  z-index: 10;
+  top: 540px;
+  position: absolute;
+  left: 50%;
+  align: center;
+  background-color: #ffc800; /* Green */
+  border: 2px solid #ffc800;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  background-color: #0000;
+  color: black;
+  border: 2px solid #ffc800;
+}
+
+.scroll:hover {
+  background-color: #ffc800;
+  color: white;
+}
+.slide a:after {
+  visibility: hidden;
+}
