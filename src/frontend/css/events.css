@@ -7,6 +7,11 @@
   width: 120px;
   cursor: pointer;
 }
+.eventTable {
+  position: relative;
+  left: 160px;
+  text-align: center;
+}
 .changepass:hover {
   background-color: #ffc8007a;
 }
@@ -29,7 +34,7 @@
   text-align: center;
   border: 2px solid #ffc800;
   border-radius: 6px;
-  width: 300px;
+  width: 330px;
   background-color: rgba(255, 255, 255, 0.5);
   font-size: 100px;
   left: 490px;

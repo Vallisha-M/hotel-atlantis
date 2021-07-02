@@ -1,25 +1,30 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const Indian_preSchema = new Schema(
   {
     checkin: {
-      type: Date,
+      type: String,
       required: true,
       unique: false,
     },
     seats: {
-      type: Number,
+      type: String,
       required: true,
       unique: false,
       trim: true,
-      minlength: 1,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: false,
+      trim: true,
+      minlength: 5,
     },
     time: {
       type: String,
       required: true,
-      minlength: 9,
-      maxlength: 9,
+      minlength: 0,
     },
     order: {
       type: Object,
@@ -29,5 +34,5 @@ const Indian_preSchema = new Schema(
     timestamps: true,
   }
 )
-const Indian_pre = mongoose.model('Indian_pre', Indian_preSchema)
+const Indian_pre = mongoose.model("Indian_pre", Indian_preSchema)
 module.exports = Indian_pre

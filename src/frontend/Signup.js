@@ -3,11 +3,18 @@ import isPass from "./js/isPass.js"
 import { Helmet } from "react-helmet"
 // import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom"
+import { useState } from "react"
 import axios from "axios"
 import $ from "jquery"
+import "./css/loading.css"
+import load from "./img/loading.gif"
 const Signup = () => {
-  var pass1, email, pass2, fname, lname, pno
-
+  const [pass1, setPass1] = useState(null)
+  const [pass2, setPass2] = useState(null)
+  const [email, setEmail] = useState(null)
+  const [fname, setFname] = useState(null)
+  const [lname, setLname] = useState(null)
+  const [pno, setPno] = useState(null)
   var res = { isAllowed: false },
     url_var = "/signup/login"
   let history = useHistory()
@@ -15,20 +22,18 @@ const Signup = () => {
   async function check() {
     const params = {
       email: email,
-      password: pass1,
-      lastName: lname,
-      firstName: fname,
-      phone: pno,
+      phone: parseInt(pno),
     }
-
+    $(".loading").css("display", "block")
     await axios
-
-      .post("http://localhost:4000/signup", params)
+      .post("http://localhost:5500/users/check/duplicate", params)
       .then((response) => {
+        $(".loading").css("display", "none")
         res = response.data
         console.log(res)
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         alert(error)
         console.log(error)
       })
@@ -50,8 +55,8 @@ const Signup = () => {
 
     var patt =
       /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i
-
-    var result = email.match(patt)
+    var result = null
+    if (email != undefined) result = email.match(patt)
     var spaceFlag = true
     if (result != null) spaceFlag = true ? result.indexOf(" ") > -1 : false
 
@@ -186,9 +191,8 @@ const Signup = () => {
     if (errors > 0) e.preventDefault()
     if (errors == 0)
       await check().then(() => {
-        if (res.done != null && res.done == 0) url_var = "/unvailablelogin"
         {
-          if (res.phone != null) {
+          if (res.phone == 1) {
             $("#pno").css("border-color", "red")
             $("#pno").css("background-color", "rgba(255, 0, 0, 0.1)")
             errors = errors + 1
@@ -202,7 +206,7 @@ const Signup = () => {
           }
         }
         {
-          if (res.email != null) {
+          if (res.email == 1) {
             $("#email").css("border-color", "red")
             $("#email").css("background-color", "rgba(255, 0, 0, 0.1)")
             errors = errors + 1
@@ -218,8 +222,14 @@ const Signup = () => {
         var aheight = 530 + errors * 15
         aheight = aheight.toString() + "px"
         $(".mains").css("height", aheight)
-        if (errors == 0 && res.done != null && res.done == 1)
-          history.push("/signup/login")
+        if (res.done == 1) {
+          localStorage.setItem("password", pass1)
+          localStorage.setItem("lastName", lname)
+          localStorage.setItem("firstName", fname)
+          localStorage.setItem("phone", pno)
+          localStorage.setItem("email", email)
+          history.push("/otpcheck")
+        }
       })
   }
 
@@ -249,6 +259,9 @@ const Signup = () => {
           type='text/css'
         />
       </Helmet>
+      <div class='loading' id='loading'>
+        <img class='load' src={load} />
+      </div>
       <body class='sbody'>
         <div class='overlays'>
           &nbsp;&nbsp;
@@ -270,7 +283,7 @@ const Signup = () => {
                   id='fname'
                   name='fname'
                   placeholder='First Name'
-                  onChange={(e) => (fname = e.target.value)}
+                  onChange={(e) => setFname(e.target.value)}
                   required
                 />
                 <div id='sfail1'></div>
@@ -284,7 +297,7 @@ const Signup = () => {
                   id='lname'
                   name='lname'
                   placeholder='Last Name'
-                  onChange={(e) => (lname = e.target.value)}
+                  onChange={(e) => setLname(e.target.value)}
                   required
                 />
                 <div id='sfail2'></div>
@@ -298,7 +311,7 @@ const Signup = () => {
                   id='email'
                   name='email'
                   placeholder='username@example.domain'
-                  onChange={(e) => (email = e.target.value)}
+                  onChange={(e) => setEmail(e.target.value.toLowerCase())}
                   required
                 />
               </div>
@@ -313,7 +326,7 @@ const Signup = () => {
                   id='pno'
                   name='pno'
                   placeholder='Phone Number'
-                  onChange={(e) => (pno = e.target.value)}
+                  onChange={(e) => setPno(e.target.value)}
                   required
                 />
               </div>
@@ -328,7 +341,7 @@ const Signup = () => {
                   id='password'
                   name='pass'
                   placeholder='Password'
-                  onChange={(e) => (pass1 = e.target.value)}
+                  onChange={(e) => setPass1(e.target.value)}
                   required
                 />
               </div>
@@ -341,13 +354,13 @@ const Signup = () => {
                   id='confirm'
                   name='confirm'
                   placeholder='Confirm Password'
-                  onChange={(e) => (pass2 = e.target.value)}
+                  onChange={(e) => setPass2(e.target.value)}
                   required
                 />
                 <div id='sfail5'></div>
               </div>
               <div style={{ paddingTop: "18px", paddingBottom: "9px" }}>
-                <input type='submit' value='SignUp' />
+                <input type='submit' value='Get OTP' />
               </div>
               <div id='login'>
                 Have an account?&nbsp;<a href='login'>Login</a>

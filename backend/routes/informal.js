@@ -10,7 +10,7 @@ router.route("/show_email").get(async (req, res) => {
   var token = req.query.token
   var flag1 = false
   await Token.find({ email: email }, { _id: 0 }).then((ress) => {
-    if (ress[0].token == token) {
+    if (ress != null && ress[0].token == token) {
       flag1 = true
     } else return res.sendStatus(500).json({ done: 0 })
   })
@@ -34,7 +34,6 @@ const transporter = nodemailer.createTransport({
 })
 router.route("/add").post(async (req, res) => {
   var flag1 = false
-  console.log("here")
   const email = req.body.email
   const venue = req.body.venue
   const adjective = req.body.adjective
@@ -45,7 +44,7 @@ router.route("/add").post(async (req, res) => {
     if (ress[0].token == token) {
       flag1 = true
     } else {
-      res.sendStatus(500).json({ done: 0 })
+      res.json({ done: 0 })
     }
   })
   if (flag1) {

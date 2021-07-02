@@ -1,9 +1,12 @@
-import React from 'react'
-import './css/private.css'
-
+import React from "react"
+import "./css/private.css"
+import { Helmet } from "react-helmet"
 export default function Private() {
   return (
     <div className='private'>
+      <Helmet>
+        <title>Hotel Atlantis | Private Events</title>
+      </Helmet>
       <div className='pparallax1'>
         <div className='poverlayText'>
           &nbsp;&nbsp;&nbsp;

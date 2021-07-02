@@ -1,11 +1,11 @@
 import "./css/login.css"
-
+import "./css/loading.css"
 import { Helmet } from "react-helmet"
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
 import axios from "axios"
 import $ from "jquery"
-
+import load from "./img/loading.gif"
 const Login = () => {
   const [pass, setPass] = useState()
   const [email, setEmail] = useState()
@@ -21,16 +21,17 @@ const Login = () => {
     console.log(params)
 
     var flag = false
+    $(".loading").css("display", "block")
     await axios
 
-      .post("http://localhost:4000/login", params)
+      .post("http://localhost:5500/users/login", params)
       .then((response) => {
+        $(".loading").css("display", "none")
         res = response.data
-        console.log("frontend")
-        console.log(res)
         flag = Boolean(res.isAllowed)
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         alert(error)
         console.log(error)
       })
@@ -105,7 +106,7 @@ const Login = () => {
         var proceed = localStorage.getItem("proceed")
         if (proceed != null && proceed != "null") {
           history.push(proceed)
-          localStorage.setItem("proceed", "null")
+          localStorage.removeItem("proceed")
         } else {
           history.push("/")
         }
@@ -149,6 +150,9 @@ const Login = () => {
           <br />
           <br />
           <br />
+          <div class='loading' id='loading'>
+            <img class='load' src={load} />
+          </div>
           <div className='lmain'>
             <div style={{ fontSize: "30px", paddingTop: "8px" }}>Login</div>
             <br />
@@ -166,7 +170,7 @@ const Login = () => {
                   id='email'
                   name='email'
                   placeholder='username@example.domain'
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value.toLowerCase())}
                   required
                 />
               </div>
@@ -184,11 +188,17 @@ const Login = () => {
                 />
               </div>
               <div id='fail2' />
-              <div style={{ paddingTop: "18px", paddingBottom: "9px" }}>
+              <div
+                style={{
+                  paddingTop: "18px",
+                  paddingBottom: "9px",
+                }}
+              >
                 <input type='submit' defaultValue='Login' />
 
                 <div id='signup'>
-                  Don't have an account?&nbsp;<a href='signup'>Sign Up</a>
+                  Don't have an account?&nbsp;
+                  <a href='signup'>Sign Up</a>
                 </div>
                 <br />
                 <div id='signup'>

@@ -12,18 +12,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
 })
 
-export default function ProceedLogin() {
-  let history = useHistory()
-  if (
-    localStorage.getItem("loggedIn") == null ||
-    localStorage.getItem("loggedIn") == "false"
-  )
-    history.push("/protect")
+export default function ProtectAlert() {
   const [open, setOpen] = React.useState(true)
+
+  let history = useHistory()
 
   const handleClose = () => {
     setOpen(false)
-    history.push("/")
+    history.push("/login")
   }
 
   return (
@@ -36,15 +32,17 @@ export default function ProceedLogin() {
         aria-labelledby='alert-dialog-slide-title'
         aria-describedby='alert-dialog-slide-description'
       >
-        <DialogTitle id='alert-dialog-slide-title'>{"Success!"}</DialogTitle>
+        <DialogTitle id='alert-dialog-slide-title'>
+          {"Not authorized"}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id='alert-dialog-slide-description'>
-            Feedback Recieved. Thank you!
+            You have to login to use this feature
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color='primary'>
-            Proceed
+            Login
           </Button>
         </DialogActions>
       </Dialog>

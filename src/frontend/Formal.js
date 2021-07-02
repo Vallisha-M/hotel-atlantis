@@ -4,6 +4,9 @@ import { Helmet } from "react-helmet"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import axios from "axios"
+import "./css/loading.css"
+import $ from "jquery"
+import load from "./img/loading.gif"
 const Formal = () => {
   let history = useHistory()
   if (
@@ -11,7 +14,7 @@ const Formal = () => {
     localStorage.getItem("loggedIn") == "false"
   ) {
     localStorage.setItem("proceed", "/private/formal")
-    history.push("/login")
+    history.push("/protect")
   }
   var today = new Date()
   var guests = "0-10",
@@ -28,14 +31,16 @@ const Formal = () => {
       date: date.toString().slice(0, 10),
       token: localStorage.getItem("token"),
     }
-
+    $(".loading").css("display", "block")
     await axios
       .post("http://localhost:5500/formal/add/", params)
       .then((response) => {
+        $(".loading").css("display", "none")
         res = response.data
         console.log(res)
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         alert(error)
         console.log(error)
       })
@@ -105,6 +110,9 @@ const Formal = () => {
       <br />
       <br />
       <br />
+      <div class='loading' id='loading'>
+        <img class='load' src={load} />
+      </div>
       <div>
         <div style={{ overflowY: "hidden", textAlign: "center" }}>
           <h1>Formal Events Planner</h1>

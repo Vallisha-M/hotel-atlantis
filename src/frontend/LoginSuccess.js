@@ -18,7 +18,7 @@ export default function LoginSuccess() {
     localStorage.getItem("loggedIn") == null ||
     localStorage.getItem("loggedIn") == "false"
   )
-    history.push("/login")
+    history.push("/protect")
   const [open, setOpen] = React.useState(true)
 
   const handleClose = () => {

@@ -1,94 +1,65 @@
 import "./css/rooms.css"
 import "./css/scrolling.css"
-
-import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { Helmet } from "react-helmet"
-import "./css/loading.css"
 import $ from "jquery"
 import load from "./img/loading.gif"
-const Rooms_Payment = () => {
+export default function DiningPayment() {
   let history = useHistory()
-  if (
-    localStorage.getItem("loggedIn") == null ||
-    localStorage.getItem("loggedIn") == "false"
-  ) {
-    localStorage.setItem("proceed", "/rooms/confirm")
-    history.push("/protect")
-  }
-  var cid = localStorage.getItem("cid")
+  var checkin = localStorage.getItem("checkinpre")
   var cod = localStorage.getItem("cod")
   var amt = localStorage.getItem("amt")
-  var numberofpeople = localStorage.getItem("numberofpeople")
-  var roomtype = localStorage.getItem("roomtype")
-  var email_loc = localStorage.getItem("email")
+  var seats = localStorage.getItem("seatspre")
+  var time = localStorage.getItem("timepre")
+  var email = localStorage.getItem("email")
+  var stringlist = localStorage.getItem("orderlist")
   const [user, setUser] = useState("")
-  var name, email, resp
-
-  useEffect(() => {
-    getUserDetails()
-  }, [])
-
-  const getUserDetails = async () => {
-    const params = {
-      email: email_loc,
-    }
-    $(".loading").css("display", "block")
-    await axios
-      .get("http://localhost:5500/users/show", { params })
-      .then((response) => {
-        $(".loading").css("display", "none")
-        setUser(response.data)
-      })
-      .catch((error) => {
-        $(".loading").css("display", "none")
-        console.log(error)
-      })
-  }
+  var res = { isAllowed: false }
+  var order = JSON.parse(stringlist)
 
   async function check() {
-    const room = {
-      email: localStorage.getItem("email"),
-      checkindate: cid,
-      checkoutdate: cod,
-      roomtype: roomtype,
-      numberofpeople: numberofpeople,
+    const params = {
+      email: email,
+      checkin: checkin.toString().slice(0, 10),
+      seats: seats,
+      time: time,
+      order: order,
       token: localStorage.getItem("token"),
     }
     $(".loading").css("display", "block")
     await axios
-      .post("http://localhost:5500/rooms/add/", room)
+      .post("http://localhost:5500/indian_pre/add/", params)
       .then((response) => {
         $(".loading").css("display", "none")
-        resp = response.data
+        res = response.data
+        console.log(res)
       })
       .catch((error) => {
         $(".loading").css("display", "none")
+        alert(error)
         console.log(error)
       })
   }
-
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault()
+
+    res = { is: "a" }
+
     await check().then(() => {
-      if (resp.done == 1) {
-        localStorage.removeItem("cid")
+      if (res.duplicate == 1) alert("Slot taken, Try another date ")
+      if (res.done == 1) {
+        localStorage.removeItem("checkinpre")
         localStorage.removeItem("cod")
         localStorage.removeItem("amt")
-        localStorage.removeItem("roomtype")
-        localStorage.removeItem("numberofpeople")
-        history.push("/rooms/booked")
-      } else alert("Error")
-    })
-  }
+        localStorage.removeItem("seatspre")
+        localStorage.removeItem("timepre")
 
-  if (typeof user[0] == "undefined") {
-    name = ""
-    email = ""
-  } else {
-    name = user[0].firstName + " " + user[0].lastName
-    email = user[0].email
+        localStorage.removeItem("orderlist")
+        history.push("/dining/confirm")
+      }
+    })
   }
 
   return (
@@ -100,7 +71,6 @@ const Rooms_Payment = () => {
         <link rel='stylesheet' href='css/rooms.css' />
         <link rel='stylesheet' href='css/welcome.css' />
       </Helmet>
-
       <div
         align='center'
         style={{
@@ -110,34 +80,41 @@ const Rooms_Payment = () => {
           paddingTop: "60px",
         }}
       >
-        <h2>Rooms are available as per your choice</h2>
+        {" "}
+        <br></br>
+        <h2>Table available for reservation</h2>
         <br />
         <h3>Confirm your details</h3>
         <br />
         <hr />
-        <p style={{ backgroundColor: "#DCDCDC", padding: "10px" }}>
-          Name: {name}
-        </p>
-        <hr />
         <p style={{ padding: "10px" }}>Email: {email}</p>
         <hr />
         <p style={{ backgroundColor: "#DCDCDC", padding: "10px" }}>
-          Check-in date: <span id='Check_in'>{cid}</span>
+          Check-in date: <span id='Check_in'>{checkin}</span>
         </p>
         <hr />
-        <p style={{ padding: "10px" }}>
-          Check-out date: <span id='Check_out'>{cod}</span>
-        </p>
+        <p style={{ padding: "10px" }}>Time: {time}</p>
         <hr />
         <p style={{ backgroundColor: "#DCDCDC", padding: "10px" }}>
-          Amount payable ($) : <span id='amount'>{amt}</span>
+          Seats : <span id='Seats'>{seats}</span>
         </p>
+        <hr />
+        <hr />
+        <p style={{ text: "bold", padding: "10px" }}>
+          Amount payable: <span id='amount'>{amt}</span>
+        </p>
+        <hr />
         <hr />
       </div>
       <br />
       <br />
-      <div className='center' align='center'>
-        <form name='Payment' action='' onSubmit={handleSubmit}>
+      <div className='center-d' align='center'>
+        <form
+          name='Payment'
+          onSubmit={async (e) => {
+            await handleSubmit(e)
+          }}
+        >
           <p style={{ display: "table-row" }}>
             <label>Card Number:</label>
             <input
@@ -172,7 +149,7 @@ const Rooms_Payment = () => {
           <input
             type='submit'
             value='Confirm Payment'
-            id='submitBtn'
+            id='submitBtn-d'
             className='button'
             style={{
               width: "200px",
@@ -185,5 +162,3 @@ const Rooms_Payment = () => {
     </div>
   )
 }
-
-export default Rooms_Payment

@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from "react"
+import { useHistory } from "react-router-dom"
 import "./css/events.css"
 import axios from "axios"
 import RoomList from "./RoomList"
 import FormalList from "./FormalList"
 import InformalList from "./InformalList"
-
+import DiningList from "./DiningList"
+import IndianpreList from "./IndianpreList"
+import $ from "jquery"
+import "./css/loading.css"
+import load from "./img/loading.gif"
 const Profile = () => {
+  let history = useHistory()
+  if (
+    localStorage.getItem("loggedIn") == null ||
+    localStorage.getItem("loggedIn") == "false"
+  ) {
+    localStorage.setItem("proceed", "/profile")
+    history.push("/protect")
+  }
   const [user, setUser] = useState("")
   var email_loc = localStorage.getItem("email")
   var name, email, phoneno
@@ -19,17 +32,39 @@ const Profile = () => {
       email: email_loc,
       token: localStorage.getItem("token"),
     }
+    $(".loading").css("display", "block")
     await axios
       .get("http://localhost:5500/users/show", { params })
       .then((response) => {
+        $(".loading").css("display", "none")
         setUser(response.data)
-        console.log(response.data)
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         alert(error + "\nTry Re-logging in")
       })
   }
-
+  const logout = async () => {
+    $(".loading").css("display", "block")
+    await axios
+      .post("http://localhost:5500/users/logout", {
+        email: localStorage.getItem("email"),
+      })
+      .then((res) => {
+        $(".loading").css("display", "none")
+        if (res.data.done == 1) {
+          localStorage.clear()
+          history.push("/logout/success")
+        } else {
+          alert("Logout Unsuccessful")
+        }
+      })
+      .catch((e) => {
+        $(".loading").css("display", "none")
+        alert(e)
+        alert("Logout Unsuccessful")
+      })
+  }
   if (typeof user[0] == "undefined") {
     name = ""
     email = ""
@@ -42,10 +77,25 @@ const Profile = () => {
 
   return (
     <div align='center'>
+      <div class='loading' id='loading'>
+        <img class='load' src={load} />
+      </div>
       <hr color='#ffc800' />
       <div className='main'>
         <div className='heading' style={{ width: "200px" }}>
           <br />
+          <br />
+          <button
+            onClick={() => {
+              if (window.confirm("Are you sure?")) {
+                logout()
+              }
+            }}
+            className='changepass'
+            style={{ position: "relative", left: "500px" }}
+          >
+            Logout
+          </button>
           <br />
           User Details
         </div>
@@ -88,6 +138,20 @@ const Profile = () => {
             Informal Events
           </div>
           <InformalList />
+        </div>
+        <div style={{ fontSize: "20px" }}>
+          <div className='heading' style={{ width: "250px" }}>
+            <br />
+            Table Reservation
+          </div>
+          <DiningList />
+        </div>
+        <div style={{ fontSize: "20px" }}>
+          <div className='heading' style={{ width: "250px" }}>
+            <br />
+            Pre Orders
+          </div>
+          <IndianpreList />
         </div>
       </div>
     </div>

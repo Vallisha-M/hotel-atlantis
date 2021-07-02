@@ -4,6 +4,9 @@ import { Helmet } from "react-helmet"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
 import axios from "axios"
+import "./css/loading.css"
+import $ from "jquery"
+import load from "./img/loading.gif"
 const Forgot = () => {
   let history = useHistory()
 
@@ -15,14 +18,16 @@ const Forgot = () => {
       email: email,
       token: localStorage.getItem("token"),
     }
-
+    $(".loading").css("display", "block")
     await axios
-      .post("http://localhost:4000/users/pass/forgot", params)
+      .post("http://localhost:5500/users/pass/forgot", params)
       .then((response) => {
+        $(".loading").css("display", "none")
         res = response.data
         console.log(res)
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         alert(error)
         console.log(error)
       })
@@ -35,7 +40,7 @@ const Forgot = () => {
 
     if (flag)
       await check().then(() => {
-        if (res.notExist == 1) alert("not exist")
+        if (res.notExist == 1) alert("email not registered\nSignup")
         else if (res.done == 0) alert("ERROR\nTry Relogin")
         if (res.done == 1) {
           history.push("/forgot/success")
@@ -45,8 +50,11 @@ const Forgot = () => {
 
   return (
     <div>
+      <div class='loading' id='loading'>
+        <img class='load' src={load} />
+      </div>
       <Helmet>
-        <title>Hotel Atlantis | Formal</title>
+        <title>Hotel Atlantis | Forgot Password</title>
 
         <meta charset='utf-8' />
         <meta http-equiv='X-UA-Compatible' content='IE=edge' />
@@ -100,7 +108,7 @@ const Forgot = () => {
                 fontSize: "20px",
               }}
               onChange={(e) => {
-                setEmail(e.target.value)
+                setEmail(e.target.value.toLowerCase())
               }}
               type='email'
               required

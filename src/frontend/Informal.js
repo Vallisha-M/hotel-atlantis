@@ -4,6 +4,9 @@ import { Helmet } from "react-helmet"
 
 import { useHistory } from "react-router-dom"
 import axios from "axios"
+import "./css/loading.css"
+import $ from "jquery"
+import load from "./img/loading.gif"
 const Informal = () => {
   let history = useHistory()
 
@@ -12,7 +15,7 @@ const Informal = () => {
     localStorage.getItem("loggedIn") == "false"
   ) {
     localStorage.setItem("proceed", "/private/informal")
-    history.push("/login")
+    history.push("/protect")
   }
 
   var today = new Date()
@@ -33,14 +36,15 @@ const Informal = () => {
       adjective: eventType,
       token: localStorage.getItem("token"),
     }
-
+    $(".loading").css("display", "block")
     await axios
-
       .post("http://localhost:5500/informal/add/", params)
       .then((response) => {
+        $(".loading").css("display", "none")
         res = response.data
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         alert(error + "\nTry Re-logging in")
       })
   }
@@ -110,6 +114,9 @@ const Informal = () => {
       <br />
       <br />
       <br />
+      <div class='loading' id='loading'>
+        <img class='load' src={load} />
+      </div>
       <div>
         <div
           style={{
@@ -143,7 +150,11 @@ const Informal = () => {
                 onChange={(e) => {
                   venue = e.target.value
                 }}
-                style={{ width: "300px", height: "30px", fontSize: "20px" }}
+                style={{
+                  width: "300px",
+                  height: "30px",
+                  fontSize: "20px",
+                }}
               >
                 <option value='beach'>Beach</option>
                 <option value='indoors'>Indoors</option>

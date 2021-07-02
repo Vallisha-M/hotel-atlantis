@@ -1,30 +1,36 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const IndianSchema = new Schema(
   {
     checkin: {
-      type: Date,
-      required: true,
+      type: String,
       unique: false,
+      required: true,
     },
-    seats: {
-      type: Number,
+
+    email: {
+      type: String,
       required: true,
       unique: false,
       trim: true,
-      minlength: 1,
+      minlength: 5,
+    },
+    seats: {
+      type: String,
+      required: true,
+      unique: false,
+      trim: true,
     },
     time: {
       type: String,
       required: true,
-      minlength: 9,
-      maxlength: 9,
+      minlength: 0,
     },
   },
   {
     timestamps: true,
   }
 )
-const Indian = mongoose.model('Indian', IndianSchema)
+const Indian = mongoose.model("Indian", IndianSchema)
 module.exports = Indian

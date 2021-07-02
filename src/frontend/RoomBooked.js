@@ -13,20 +13,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function AlertDialogSlide() {
-	const [open, setOpen] = React.useState(true);
-
 	let history = useHistory();
-	if (
-		localStorage.getItem("loggedIn") == null ||
-		localStorage.getItem("loggedIn") == "false"
-	) {
-		localStorage.setItem("proceed", "/rooms/unavailable");
-		history.push("/login");
-	}
+	const [open, setOpen] = React.useState(true);
 
 	const handleClose = () => {
 		setOpen(false);
-		history.push("/rooms");
+		history.push("/");
 	};
 
 	return (
@@ -40,13 +32,11 @@ export default function AlertDialogSlide() {
 				aria-describedby="alert-dialog-slide-description"
 			>
 				<DialogTitle id="alert-dialog-slide-title">
-					{"Error"}
+					{"Room Booked!"}
 				</DialogTitle>
 				<DialogContent>
 					<DialogContentText id="alert-dialog-slide-description">
-						Rooms are not available for the selected check-in and
-						check-out dates. Please choose a different set of dates
-						or room type.
+						Room booking confirmed!
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>

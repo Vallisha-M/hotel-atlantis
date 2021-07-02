@@ -1,6 +1,5 @@
 import Navbar from "./frontend/Navbar"
 import Footer from "./frontend/Footer"
-
 import { Helmet } from "react-helmet"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import Welcome from "./frontend/Welcome"
@@ -29,6 +28,14 @@ import Forgot from "./frontend/Forgot"
 import PassChangeConfirm from "./frontend/PassChangeConfirm"
 import ChangePassword from "./frontend/ChangePassword"
 import ForgotSuccess from "./frontend/ForgotSuccess"
+import RoomBooked from "./frontend/RoomBooked"
+import LogoutSuccess from "./frontend/LogoutSuccess"
+import ProtectAlert from "./frontend/ProtectAlert"
+import OTPCheck from "./frontend/OTPCheck"
+import Dining from "./frontend/Dining"
+import Indian from "./frontend/Indian"
+import TableReserved from "./frontend/TableReserved"
+import DiningPayment from "./frontend/DiningPayment"
 function App() {
   return (
     <Router>
@@ -66,6 +73,25 @@ function App() {
           </Route>
           <Route exact path='/login'>
             <Login />
+          </Route>
+          <Route exact path='/dining/payment'>
+            <DiningPayment />
+          </Route>
+          <Route exact path='/dining'>
+            <Dining />
+          </Route>
+
+          <Route exact path='/dining/confirm'>
+            <TableReserved />
+          </Route>
+          <Route exact path='/dining/indian'>
+            <Indian />
+          </Route>
+          <Route exact path='/logout/success'>
+            <LogoutSuccess />
+          </Route>
+          <Route exact path='/otpcheck'>
+            <OTPCheck />
           </Route>
           <Route exact path='/signup'>
             <Signup />
@@ -109,6 +135,12 @@ function App() {
           <Route exact path='/rooms/error'>
             <Rooms />
             <AlertDialogSlide />
+          </Route>
+          <Route exact path='/protect'>
+            <ProtectAlert />
+          </Route>
+          <Route exact path='/rooms/booked'>
+            <RoomBooked />
           </Route>
           <Route exact path='/passchange/success'>
             <PassChangeConfirm />

@@ -5,6 +5,9 @@ import { useHistory } from "react-router-dom"
 import IconButton from "@material-ui/core/IconButton"
 import DeleteIcon from "@material-ui/icons/Delete"
 import dateDiff from "./js/dateDiff"
+import "./css/loading.css"
+import $ from "jquery"
+import load from "./img/loading.gif"
 const InformalList = () => {
   var today = new Date()
 
@@ -31,14 +34,18 @@ const InformalList = () => {
       email: email_loc,
       token: localStorage.getItem("token"),
     }
-
+    $(".loading").css("display", "block")
     await axios
       .get("http://localhost:5500/informal/show_email", { params })
       .then((response) => {
+        $(".loading").css("display", "none")
         var r = response.data
         setIevents(r)
       })
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        console.log(error)
+        $(".loading").css("display", "none")
+      })
   }
   if (ievents.length == 0) {
     return (
@@ -50,6 +57,9 @@ const InformalList = () => {
   } else {
     return (
       <div style={{ fontSize: "20px" }}>
+        <div class='loading' id='loading'>
+          <img class='load' src={load} />
+        </div>
         <table>
           <tr style={{ fontWeight: "bold" }}>
             <td>Venue</td>
@@ -72,6 +82,7 @@ const InformalList = () => {
                       var flag = dateDiff(today, ievent.date)
 
                       if (flag) {
+                        $(".loading").css("display", "block")
                         await axios
                           .post("http://localhost:5500/informal/cancel/", {
                             email: ievent.email,
@@ -82,13 +93,17 @@ const InformalList = () => {
                             token: localStorage.getItem("token"),
                           })
                           .then((res) => {
+                            $(".loading").css("display", "none")
                             if (res.data.done == 1)
                               history.push("/cancel/success")
                             else {
                               alert("ERROR")
                             }
                           })
-                          .catch((e) => alert(e + "\nTry Re-logging in"))
+                          .catch((e) => {
+                            $(".loading").css("display", "none")
+                            alert(e + "\nTry Re-logging in")
+                          })
                       } else {
                         alert("Cannot cancel when less than 2 days remain")
                       }

@@ -12,18 +12,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
 })
 
-export default function ProceedLogin() {
+export default function LogoutSuccess() {
   let history = useHistory()
-  if (
-    localStorage.getItem("loggedIn") == null ||
-    localStorage.getItem("loggedIn") == "false"
-  )
-    history.push("/protect")
+
   const [open, setOpen] = React.useState(true)
 
   const handleClose = () => {
     setOpen(false)
-    history.push("/")
+    history.push("/login")
   }
 
   return (
@@ -39,7 +35,7 @@ export default function ProceedLogin() {
         <DialogTitle id='alert-dialog-slide-title'>{"Success!"}</DialogTitle>
         <DialogContent>
           <DialogContentText id='alert-dialog-slide-description'>
-            Feedback Recieved. Thank you!
+            Logout Successfull
           </DialogContentText>
         </DialogContent>
         <DialogActions>

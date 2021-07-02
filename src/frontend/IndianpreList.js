@@ -7,10 +7,12 @@ import dateDiff from "./js/dateDiff"
 import "./css/loading.css"
 import $ from "jquery"
 import load from "./img/loading.gif"
-const FormalList = () => {
+const IndianpreList = () => {
   var today = new Date()
+
   var dd = today.getDate()
   var mm = today.getMonth() + 1
+
   var yyyy = today.getFullYear()
   if (dd < 10) {
     dd = "0" + dd
@@ -20,10 +22,10 @@ const FormalList = () => {
   }
   today = yyyy + "-" + mm + "-" + dd
   var email_loc = localStorage.getItem("email")
-  const [fevents, setFevents] = useState([])
+  const [devents, setDevents] = useState([])
   let history = useHistory()
-  useEffect(() => {
-    getEvents()
+  useEffect(async () => {
+    await getEvents()
   }, [])
 
   const getEvents = async () => {
@@ -33,20 +35,23 @@ const FormalList = () => {
     }
     $(".loading").css("display", "block")
     await axios
-      .get("http://localhost:5500/formal/show_email", { params })
+      .get("http://localhost:5500/indian_pre/show_email", { params })
       .then((response) => {
         $(".loading").css("display", "none")
         var r = response.data
-        setFevents(r)
+        setDevents(r)
       })
       .catch((error) => {
         $(".loading").css("display", "none")
-        console.log(error)
+        alert("ERROR")
       })
   }
-  if (fevents.length == 0) {
+  if (devents.length == 0) {
     return (
       <div>
+        <div class='loading' id='loading'>
+          <img class='load' src={load} />
+        </div>
         <br />
         (You have not made any reservations yet.)
       </div>
@@ -59,26 +64,37 @@ const FormalList = () => {
         </div>
         <table>
           <tr style={{ fontWeight: "bold" }}>
-            <td>Guests</td>
-            <td>Date</td>
+            <td>Checkin</td>
+
+            <td>Time</td>
+            <td>Order</td>
           </tr>
-          {fevents.map((fevent, index) => {
+          {devents.map((devent, index) => {
+            var ans = ""
+            for (const [key, value] of Object.entries(devent.order)) {
+              ans = ans.concat(`${key}: ${value}` + ", ")
+            }
             return (
               <tr>
-                <td>{fevent.guests}</td>
-                <td>{fevent.date}</td>
+                <td>{devent.checkin}</td>
+
+                <td>{devent.time}</td>
+                <td>{ans}</td>
                 <td
                   onClick={async () => {
+                    console.log(devent.checkin)
+                    console.log(devent.email)
                     if (window.confirm("Are you sure?")) {
-                      var flag = dateDiff(today, fevent.date)
+                      var flag = dateDiff(today, devent.checkin)
 
                       if (flag) {
                         $(".loading").css("display", "block")
                         await axios
-                          .post("http://localhost:5500/formal/cancel/", {
-                            email: fevent.email,
-                            date: fevent.date,
-                            guests: fevent.guests,
+                          .post("http://localhost:5500/indian_pre/cancel/", {
+                            email: devent.email,
+                            checkin: devent.checkin,
+                            seats: devent.seats,
+                            time: devent.time,
                             token: localStorage.getItem("token"),
                           })
                           .then((res) => {
@@ -86,11 +102,13 @@ const FormalList = () => {
                             if (res.data.done == 1)
                               history.push("/cancel/success")
                             else {
-                              $(".loading").css("display", "none")
                               alert("ERROR")
                             }
                           })
-                          .catch((e) => alert(e + "\nTry Re-logging in"))
+                          .catch((e) => {
+                            $(".loading").css("display", "none")
+                            alert(e + "\nTry Re-logging in")
+                          })
                       } else {
                         alert("Cannot cancel when less than 2 days remain")
                       }
@@ -113,4 +131,4 @@ const FormalList = () => {
   }
 }
 
-export default FormalList
+export default IndianpreList

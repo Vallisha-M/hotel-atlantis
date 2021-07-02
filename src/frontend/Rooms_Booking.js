@@ -5,13 +5,15 @@ import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 import axios from "axios"
 import AlertDialogSlide from "./AlertDialogSlide"
-
+import "./css/loading.css"
+import $ from "jquery"
+import load from "./img/loading.gif"
 const Rooms_Booking = () => {
   const [price, setPrice] = useState("")
   const [checkindate, setCheckindate] = useState("")
   const [checkoutdate, setCheckoutdate] = useState("")
   const [roomtype, setRoomtype] = useState("standard_room")
-  const [numberofpeople, setNumberofpeople] = useState("")
+  const [numberofpeople, setNumberofpeople] = useState("1")
   var rooms,
     url_var = ""
   let history = useHistory()
@@ -26,16 +28,17 @@ const Rooms_Booking = () => {
       checkoutdate: checkoutdate,
       roomtype: roomtype,
     }
-
+    $(".loading").css("display", "block")
     await axios
       .get("http://localhost:5500/rooms/show", { params })
       .then((response) => {
+        $(".loading").css("display", "none")
         rooms = response.data
-        
       })
       .catch((error) => {
+        $(".loading").css("display", "none")
         console.log(error)
-       alert(error)
+        alert(error)
       })
   }
 
@@ -87,6 +90,9 @@ const Rooms_Booking = () => {
 
   return (
     <div>
+      <div class='loading' id='loading'>
+        <img class='load' src={load} />
+      </div>
       <div className='bg'>
         <div
           className='center'
@@ -146,9 +152,11 @@ const Rooms_Booking = () => {
                 type='number'
                 style={{ width: "135px" }}
                 name='numberofpeople'
-                required
+                placeHolder={1}
+                defaultValue={1}
                 value={numberofpeople}
                 onChange={(e) => setNumberofpeople(e.target.value)}
+                required
               />
             </p>
             <br />
