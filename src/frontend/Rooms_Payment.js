@@ -2,10 +2,21 @@ import "./css/rooms.css";
 import "./css/scrolling.css";
 
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { Helmet } from "react-helmet";
-
+import "./css/loading.css";
+import $ from "jquery";
+import load from "./img/loading.gif";
 const Rooms_Payment = () => {
+	let history = useHistory();
+	if (
+		localStorage.getItem("loggedIn") == null ||
+		localStorage.getItem("loggedIn") == "false"
+	) {
+		localStorage.setItem("proceed", "/rooms/confirm");
+		history.push("/protect");
+	}
 	var cid = localStorage.getItem("cid");
 	var cod = localStorage.getItem("cod");
 	var amt = localStorage.getItem("amt");
@@ -13,7 +24,7 @@ const Rooms_Payment = () => {
 	var roomtype = localStorage.getItem("roomtype");
 	var email_loc = localStorage.getItem("email");
 	const [user, setUser] = useState("");
-	var name, email;
+	var name, email, resp;
 
 	useEffect(() => {
 		getUserDetails();
@@ -23,32 +34,53 @@ const Rooms_Payment = () => {
 		const params = {
 			email: email_loc,
 		};
+		$(".loading").css("display", "block");
 		await axios
-			.get("http://localhost:5000/users/show", { params })
+			.get("http://localhost:5500/users/show", { params })
 			.then((response) => {
+				$(".loading").css("display", "none");
 				setUser(response.data);
 			})
 			.catch((error) => {
+				$(".loading").css("display", "none");
 				console.log(error);
 			});
 	};
 
-	const handleSubmit = () => {
+	async function check() {
 		const room = {
-			email: email_loc,
+			email: localStorage.getItem("email"),
 			checkindate: cid,
 			checkoutdate: cod,
 			roomtype: roomtype,
 			numberofpeople: numberofpeople,
+			token: localStorage.getItem("token"),
 		};
-		axios
-			.post("http://localhost:5000/rooms/add/", room)
-			.then(() => {
-				console.log("Room added");
+		$(".loading").css("display", "block");
+		await axios
+			.post("http://localhost:5500/rooms/add/", room)
+			.then((response) => {
+				$(".loading").css("display", "none");
+				resp = response.data;
 			})
 			.catch((error) => {
+				$(".loading").css("display", "none");
 				console.log(error);
 			});
+	}
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		await check().then(() => {
+			if (resp.done == 1) {
+				localStorage.removeItem("cid");
+				localStorage.removeItem("cod");
+				localStorage.removeItem("amt");
+				localStorage.removeItem("roomtype");
+				localStorage.removeItem("numberofpeople");
+				history.push("/rooms/booked");
+			} else alert("Error");
+		});
 	};
 
 	if (typeof user[0] == "undefined") {
@@ -61,10 +93,14 @@ const Rooms_Payment = () => {
 
 	return (
 		<div>
+			<div class="loading" id="loading">
+				<img class="load" src={load} />
+			</div>
 			<Helmet>
 				<link rel="stylesheet" href="css/rooms.css" />
 				<link rel="stylesheet" href="css/welcome.css" />
 			</Helmet>
+
 			<div
 				align="center"
 				style={{

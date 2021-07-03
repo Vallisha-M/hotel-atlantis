@@ -1,6 +1,5 @@
 import React from "react";
 import "./css/contact.css";
-
 export default function Contact() {
 	return (
 		<div>
@@ -24,7 +23,21 @@ export default function Contact() {
 					<br />
 					Phone : +91 22-27782183 <br />
 					<br />
-					Mail : support@hotel_atlantis.com
+					Mail :{" "}
+					<a
+						style={{
+							textDecoration: "none",
+							color: "black",
+							backgroundColor: "#ffc800",
+							paddingLeft: "2px",
+							paddingRight: "2px",
+							paddingTop: "2px",
+							paddingBottom: "2px",
+						}}
+						href="mailto:hotelatlantisproject@gmail.com"
+					>
+						hotelatlantisproject@gmail.com
+					</a>
 					<br />
 					<br />
 				</div>

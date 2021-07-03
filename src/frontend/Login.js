@@ -1,14 +1,14 @@
 import "./css/login.css";
-
+import "./css/loading.css";
 import { Helmet } from "react-helmet";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import $ from "jquery";
-
+import load from "./img/loading.gif";
 const Login = () => {
-	var pass, email;
-
+	const [pass, setPass] = useState();
+	const [email, setEmail] = useState();
 	var res = { isAllowed: false };
 
 	let history = useHistory();
@@ -19,23 +19,30 @@ const Login = () => {
 			password: pass,
 		};
 		console.log(params);
+
 		var flag = false;
+		$(".loading").css("display", "block");
 		await axios
-			.post("http://localhost:4000/login", params)
+
+			.post("http://localhost:5500/users/login", params)
 			.then((response) => {
+				$(".loading").css("display", "none");
 				res = response.data;
 				flag = Boolean(res.isAllowed);
 			})
 			.catch((error) => {
+				$(".loading").css("display", "none");
+				alert(error);
 				console.log(error);
 			});
+		console.log(flag);
 	}
 
 	async function handleSubmit(e) {
 		e.preventDefault();
 		await check().then(() => {
 			var url_var = "/";
-			alert(url_var);
+
 			var patt =
 				/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i;
 			var result = email.match(patt);
@@ -91,15 +98,20 @@ const Login = () => {
 				}
 			}
 			if (url_var === "/") {
-				localStorage.setItem("accessToken", res.accessToken);
-				localStorage.setItem("refreshToken", res.refreshToken);
 				localStorage.setItem("loggedIn", res.isAllowed);
 				e.preventDefault();
 			}
 
 			if (url_var == "/") {
 				localStorage.setItem("email", email);
-				history.push(url_var);
+				localStorage.setItem("token", res.token);
+				var proceed = localStorage.getItem("proceed");
+				if (proceed != null && proceed != "null") {
+					history.push(proceed);
+					localStorage.removeItem("proceed");
+				} else {
+					history.push("/");
+				}
 			}
 		});
 	}
@@ -143,6 +155,9 @@ const Login = () => {
 					<br />
 					<br />
 					<br />
+					<div class="loading" id="loading">
+						<img class="load" src={load} />
+					</div>
 					<div className="lmain">
 						<div style={{ fontSize: "30px", paddingTop: "8px" }}>
 							Login
@@ -162,7 +177,9 @@ const Login = () => {
 									id="email"
 									name="email"
 									placeholder="username@example.domain"
-									onChange={(e) => (email = e.target.value)}
+									onChange={(e) =>
+										setEmail(e.target.value.toLowerCase())
+									}
 									required
 								/>
 							</div>
@@ -175,7 +192,7 @@ const Login = () => {
 									id="password"
 									name="password"
 									placeholder="Password"
-									onChange={(e) => (pass = e.target.value)}
+									onChange={(e) => setPass(e.target.value)}
 									required
 								/>
 							</div>
@@ -191,6 +208,10 @@ const Login = () => {
 								<div id="signup">
 									Don't have an account?&nbsp;
 									<a href="signup">Sign Up</a>
+								</div>
+								<br />
+								<div id="signup">
+									<a href="forgot">Forgot Password</a>
 								</div>
 							</div>
 						</form>

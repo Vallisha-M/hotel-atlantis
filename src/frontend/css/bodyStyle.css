@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
 
 .heading
@@ -17,4 +18,25 @@
 	text-align:center;
 	font-size:20px;
 	color:#525354;
+=======
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+
+.heading
+{
+	text-align:center;
+	font-family: 'Oxygen', sans-serif;
+	font-size:50px;
+}
+#mainContent
+{
+	padding:15px 15px 2500px;
+	margin-top:30px;
+}
+.intro
+{
+	line-height:26px;
+	text-align:center;
+	font-size:20px;
+	color:#525354;
+>>>>>>> 3870144afadefd69750864ddc2e3b827cae6d3d8
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap');
 .sbody {
   padding-left: 3px;
@@ -86,3 +87,93 @@ input[type='submit']:hover {
 #login {
   font-size: 14px;
 }
+=======
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap');
+.sbody {
+  padding-left: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-family: 'Oxygen', sans-serif;
+  background-image: url(img/bg-signup1.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom;
+  height: 700px;
+}
+.mains {
+  text-align: center;
+  width: 450px;
+  height: 530px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 2px solid #ffc800;
+  border-radius: 6px;
+}
+.overlays {
+  top: 80px;
+  padding-left: 500px;
+  position: relative;
+  font-size: 25px;
+  font-family: 'Oxygen', sans-serif;
+  text-align: center;
+}
+#sfail1,
+#sfail2,
+#sfail3,
+#sfail4,
+#sfail5,
+#sfail6 {
+  padding-bottom: 5px;
+  font-size: 16px;
+  color: red;
+}
+
+#confirm,
+#email,
+#password,
+#lname,
+#fname,
+#pno {
+  background-color: aliceblue;
+  border: 1px solid #ffc800;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  text-align: center;
+  outline: none;
+  border-color: #ffc800;
+  border-radius: 30px;
+  font-family: 'Oxygen', sans-serif;
+  width: 200px;
+  height: 30px;
+}
+input[type='submit'] {
+  outline: none;
+  transition: 0.5s;
+  padding: 5px 15px;
+  background: white;
+  border: 0 none;
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-border-radius: 5px;
+  border-radius: 20px;
+}
+input[type='submit']:hover {
+  border-radius: 35px;
+  font-size: 18px;
+  width: 90px;
+  height: 40px;
+  color: white;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
+  background-color: #ffc800;
+  transition: 0.4s;
+}
+#login a {
+  font-size: 14px;
+  padding: 3px 5px;
+  text-decoration: none;
+  color: black;
+  background-color: #ffc800;
+}
+#login {
+  font-size: 14px;
+}
+>>>>>>> 3870144afadefd69750864ddc2e3b827cae6d3d8

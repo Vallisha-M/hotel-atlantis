@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-
+import { Helmet } from "react-helmet";
 import { filterSelection } from "./js/gallery_filter";
 import "./css/gallery.css";
 import standard1 from "./Images/standard1.jfif";
@@ -41,6 +41,9 @@ const Gallery = () => {
 
 	return (
 		<div>
+			<Helmet>
+				<title>Hotel Atlantis | Gallery</title>
+			</Helmet>
 			<div style={{ margin: "10px", fontFamily: "oxygen" }}>
 				<h2>GALLERY</h2>
 				<br />

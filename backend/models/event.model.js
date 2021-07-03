@@ -1,7 +1,8 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const eventSchema = new Schema(
+<<<<<<< HEAD
   {
     uniqueid : {
       type : String,
@@ -40,3 +41,36 @@ const eventSchema = new Schema(
 )
 const Event = mongoose.model('Event', eventSchema)
 module.exports = Event
+=======
+	{
+		type: {
+			type: String,
+			required: true,
+			unique: false,
+			trim: true,
+			minlength: 1,
+		},
+		performer: {
+			type: String,
+			required: true,
+			unique: false,
+			trim: true,
+			minlength: 1,
+		},
+		date: {
+			type: String,
+			unique: false,
+			required: true,
+		},
+		time: {
+			type: String,
+			required: true,
+		},
+	},
+	{
+		timestamps: true,
+	}
+);
+const Event = mongoose.model("Event", eventSchema);
+module.exports = Event;
+>>>>>>> 3870144afadefd69750864ddc2e3b827cae6d3d8

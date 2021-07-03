@@ -9,8 +9,8 @@ export default function Footer() {
 			<div className="footer-left">
 				<img src={logo} />
 				<p className="footer-links">
-					<a>Home</a>|<a href="contact.html">Contact</a>|
-					<a>About Us</a>
+					<a href="/">Home</a>|<a href="contact">Contact</a>|
+					<a href="/#hotelAtlantis">About Us</a>
 				</p>
 				<p className="footer-company-name">
 					ATLANTIS GROUP OF HOTELS Pvt. Ltd.
@@ -26,8 +26,8 @@ export default function Footer() {
 					<br />
 					<i className="fa fa-envelope" />
 					<p>
-						<a href="mailto:support@eduonix.com">
-							support@hotel_atlantis.com
+						<a href="mailto:hotelatlantisproject@gmail.com">
+							hotelatlantisproject@gmail.com
 						</a>
 					</p>
 				</div>

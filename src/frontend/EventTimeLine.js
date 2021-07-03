@@ -1,11 +1,10 @@
 import React from "react";
 import "./css/events.css";
-
 export default function EventTimeLine(props) {
 	const displayEvents = (props) => {
 		const { events } = props;
 		if (events.length > 1) {
-			return events.map((event, index) => {
+			return events.map((event) => {
 				return (
 					<tr>
 						<td>{event.type}</td>

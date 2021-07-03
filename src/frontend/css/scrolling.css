@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .scroll {
 	z-index:10;
 	top:540px;
@@ -27,4 +28,35 @@
   color: white;
 }
 .slide a:after{
+=======
+.scroll {
+	z-index:10;
+	top:540px;
+	position:absolute;
+	left:50%;
+	align:center;
+  background-color: #ffc800; /* Green */
+  border: 2px solid #ffc800;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+   background-color: #0000; 
+  color: black; 
+  border: 2px solid #ffc800;
+}
+
+
+
+.scroll:hover {
+  background-color: #ffc800;
+  color: white;
+}
+.slide a:after{
+>>>>>>> 3870144afadefd69750864ddc2e3b827cae6d3d8
 visibility:hidden;}

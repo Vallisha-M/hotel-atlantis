@@ -1,10 +1,13 @@
 import React from "react";
 import EventList from "./EventList";
 import "./css/events.css";
-
+import { Helmet } from "react-helmet";
 export default function Event() {
 	return (
 		<div>
+			<Helmet>
+				<title>Hotel Atlantis | Events</title>
+			</Helmet>
 			<div class="parallax1-event">
 				<div class="overlayText-event">
 					<div class="justText-event">Events</div>
@@ -24,7 +27,7 @@ export default function Event() {
 					<br />
 					<br />
 				</div>
-				<table>
+				<table className="eventTable">
 					<EventList />
 				</table>
 			</div>

@@ -16,6 +16,13 @@ export default function AlertDialogSlide() {
 	const [open, setOpen] = React.useState(true);
 
 	let history = useHistory();
+	if (
+		localStorage.getItem("loggedIn") == null ||
+		localStorage.getItem("loggedIn") == "false"
+	) {
+		localStorage.setItem("proceed", "/rooms/unavailable");
+		history.push("/login");
+	}
 
 	const handleClose = () => {
 		setOpen(false);

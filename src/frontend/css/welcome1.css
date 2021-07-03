@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
 
 /* width */
@@ -153,3 +154,148 @@ navbar .button1:hover{
 .navbar .button2:hover{    box-shadow: 10 px 10px 10px 8px #888888;
 	
 }
+=======
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(0, 0%, 95%);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #ffc800;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+body {
+  margin: 0;
+  background-color: #ffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  font-family: 'Oxygen', sans-serif;
+  z-index: 30;
+  background-color: rgba(255, 255, 255, 0);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: block;
+  transition: top 0.6s;
+  background-color: white;
+}
+
+.navbar .button1 {
+  vertical-align: middle;
+  float: right;
+  border-radius: 4px;
+  background-color: #ffc800;
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button1 span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button1 span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button1:hover span {
+  color: white;
+  border-bottom: 2px solid #ffff;
+  -webkit-transition: 0.3s linear;
+  padding-right: 25px;
+}
+
+.button1:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.navbar .button2 {
+  vertical-align: middle;
+  border: black;
+  float: left;
+  border-radius: 4px;
+  background-color: #0a080800;
+  border: none;
+  color: #ffc800;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button2 span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button2 span:after {
+  color: #ffc800;
+  font-size: 15px;
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button2:hover span {
+  padding-right: 25px;
+  border-bottom: 2px solid #ffc800;
+  -webkit-transition: 0.3s linear;
+}
+
+.button2:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.button1:hover {
+  background-color: #ffc800;
+  border: 2px solid #ffc800;
+  vertical-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.button2:hover {
+  background-color: #ffc800;
+  color: white;
+  border: 2px solid #ffc800;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+navbar .button1:hover {
+  box-shadow: 1px 2px 5px 6px rgba(156, 152, 145, 0.6);
+}
+.navbar .button2:hover {
+  box-shadow: 10 px 10px 10px 8px #888888;
+}
+>>>>>>> 3870144afadefd69750864ddc2e3b827cae6d3d8
