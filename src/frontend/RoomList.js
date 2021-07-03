@@ -30,6 +30,7 @@ const RoomList = () => {
   const getRooms = async () => {
     var params = {
       email: email_loc,
+      token: localStorage.getItem("token"),
     }
     $(".loading").css("display", "block")
     await axios

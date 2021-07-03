@@ -99,14 +99,14 @@ router.post("/cancel", async (req, res) => {
   const time = req.body.time
   const checkin = req.body.checkin
   const token = req.body.token
-  // const order = req.body.order
+  const order = req.body.order
 
   var flag1 = false
 
   var ans = `\n`
-  // for (const [key, value] of Object.entries(order)) {
-  //   ans = ans.concat(`${key}: ${value}` + `<br/>`)
-  // }
+  for (const [key, value] of Object.entries(order)) {
+    ans = ans.concat(`${key}: ${value}` + `<br/>`)
+  }
   await Token.find({ email: email }, { _id: 0 }).then((ress) => {
     if (ress[0].token == token) {
       flag1 = true
@@ -123,13 +123,13 @@ router.post("/cancel", async (req, res) => {
           to: email,
           subject: "Hotel Atlantis - Table and Pre-Order Cancellation",
           html:
-            "<div style='font-size:20px'>A Pre-order has been done at Indian Palace with your account with the following details.<table><td>Seats</td><td>" +
+            "<div style='font-size:20px'>A Pre-order has been cancelled at Indian Palace with your account with the following details.<table><td>Seats</td><td>" +
             seats +
             "</td></tr><tr><td>Time</td><td>" +
             time +
             "</td></tr><tr><td>Items</td><td><hr/>" +
-            // ans +
-            // "<hr/></td></tr><tr><td>Date(YYYY/MM/DD)</td><td>" +
+            ans +
+            "<hr/></td></tr><tr><td>Date(YYYY/MM/DD)</td><td>" +
             checkin +
             "</td></tr></table></div>",
         }

@@ -13,7 +13,7 @@ const ChangePassword = () => {
     localStorage.getItem("loggedIn") == null ||
     localStorage.getItem("loggedIn") == "false"
   ) {
-    localStorage.setItem("proceed", "/private/informal")
+    localStorage.setItem("proceed", "/changepassword")
     history.push("/protect")
   }
 

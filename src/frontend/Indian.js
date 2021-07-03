@@ -26,6 +26,14 @@ import { Helmet } from "react-helmet"
 const Indian = () => {
   ready()
   let history = useHistory()
+
+  if (
+    localStorage.getItem("loggedIn") == null ||
+    localStorage.getItem("loggedIn") == "false"
+  ) {
+    localStorage.setItem("proceed", "/indian")
+    history.push("/protect")
+  }
   var order
 
   /* async function check() {

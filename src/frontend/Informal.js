@@ -164,7 +164,19 @@ const Informal = () => {
               </select>
             </div>
             <br />
-            <a href='gallery'>Click Here</a> to view our Gallery.
+            <a
+              style={{
+                color: "blue",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                window.location.replace("http://localhost:3000/gallery")
+              }}
+            >
+              Click Here
+            </a>{" "}
+            to view our Gallery.
             <br />
           </div>
           <br />
@@ -216,7 +228,6 @@ const Informal = () => {
               className='guests'
               onChange={(e) => {
                 guests = e.target.value
-                alert(guests)
               }}
             >
               <option value='0-10'>0 - 10</option>

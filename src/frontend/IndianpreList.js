@@ -95,6 +95,7 @@ const IndianpreList = () => {
                             checkin: devent.checkin,
                             seats: devent.seats,
                             time: devent.time,
+                            order: devent.order,
                             token: localStorage.getItem("token"),
                           })
                           .then((res) => {

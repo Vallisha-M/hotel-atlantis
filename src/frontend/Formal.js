@@ -141,7 +141,6 @@ const Formal = () => {
               className='guests'
               onChange={(e) => {
                 guests = e.target.value
-                alert(guests)
               }}
             >
               <option value='0-10'>0 - 10</option>

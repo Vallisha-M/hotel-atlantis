@@ -16,7 +16,7 @@ export default function Dining() {
     localStorage.getItem("loggedIn") == "false"
   ) {
     localStorage.setItem("proceed", "/dining")
-    history.push("/login")
+    history.push("/protect")
   }
   var today = new Date()
   var email = localStorage.getItem("email")

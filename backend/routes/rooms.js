@@ -24,26 +24,26 @@ function switchfunc(roomtype) {
   }
 }
 
-// GET
-// router.route("/show").get(async (req, res) => {
-//   var checkindate = req.query.checkindate
-//   var checkoutdate = req.query.checkoutdate
-//   var roomtype = req.query.roomtype
-//   await Rooms.find({
-//     roomtype: roomtype,
-//     checkindate: { $lte: checkindate },
-//     checkoutdate: { $gte: checkoutdate },
-//   })
-//     .then((rooms) => {
-//       res.json(rooms)
-//     })
-//     .catch((err) => res.status(400).json("Error: " + err))
-// })
+router.route("/show").get(async (req, res) => {
+  var checkindate = req.query.checkindate
+  var checkoutdate = req.query.checkoutdate
+  var roomtype = req.query.roomtype
+  await Rooms.find({
+    roomtype: roomtype,
+    checkindate: { $lte: checkindate },
+    checkoutdate: { $gte: checkoutdate },
+  })
+    .then((rooms) => {
+      res.json(rooms)
+    })
+    .catch((err) => res.status(400).json("Error: " + err))
+})
 
 router.route("/show_email").get(async (req, res) => {
-  var email = req.query.email
+  const email = req.query.email
+  const token = req.query.token
   var flag1 = false
-  await Token.find({ email: req.body.email }, { _id: 0 }).then((ress) => {
+  await Token.find({ email: req.query.email }, { _id: 0 }).then((ress) => {
     if (ress[0].token == token) {
       flag1 = true
     } else {

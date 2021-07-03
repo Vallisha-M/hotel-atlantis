@@ -1,5 +1,5 @@
 import "./css/informal.css"
-import meme from "./img/meme1.jpg"
+
 import { Helmet } from "react-helmet"
 import { useState } from "react"
 import { useHistory } from "react-router-dom"
@@ -85,7 +85,6 @@ const Forgot = () => {
         <div style={{ overflowY: "hidden", textAlign: "center" }}>
           <h1>Forgot Password</h1>
           <h3>Dont't worry. We all forget at times</h3>
-          <img src={meme} style={{ width: "200px", height: "200px" }} />
         </div>
         <br />
         <br />

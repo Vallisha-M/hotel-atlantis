@@ -9,6 +9,14 @@ import "./css/loading.css"
 import $ from "jquery"
 import load from "./img/loading.gif"
 const Rooms_Booking = () => {
+  let history = useHistory()
+  // if (
+  //   localStorage.getItem("loggedIn") == null ||
+  //   localStorage.getItem("loggedIn") == "false"
+  // ) {
+  //   localStorage.setItem("proceed", "/rooms")
+  //   history.push("/protect")
+  // }
   const [price, setPrice] = useState("")
   const [checkindate, setCheckindate] = useState("")
   const [checkoutdate, setCheckoutdate] = useState("")
@@ -16,7 +24,6 @@ const Rooms_Booking = () => {
   const [numberofpeople, setNumberofpeople] = useState("1")
   var rooms,
     url_var = ""
-  let history = useHistory()
 
   useEffect(() => {
     showPrice()
