@@ -1,7 +1,6 @@
 const router = require("express").Router();
 let User = require("../models/user.model");
 const { json } = require("body-parser");
-const cookieParser = require("cookie-parser");
 const { route } = require("./rooms");
 
 router.route("/show").get(async (req, res) => {
