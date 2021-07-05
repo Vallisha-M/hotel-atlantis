@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap');
+#lbody {
+  padding-left: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-family: 'Oxygen', sans-serif;
+  background-image: url(img/bg-login.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  height: 620px;
+  top: 55px;
+  position: relative;
+}
+.lmain {
+  text-align: center;
+  width: 400px;
+  height: 285px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 2px solid #ffc800;
+  border-radius: 6px;
+}
+.loverlay {
+  padding-left: 500px;
+  position: relative;
+  font-size: 25px;
+  font-family: 'Oxygen', sans-serif;
+  text-align: center;
+}
+#lfail1,
+#lfail2 {
+  padding-top: 5px;
+  font-size: 16px;
+  color: red;
+}
+#email,
+#password {
+  border-bottom: 3px;
+  border-top: 3px;
+  border: 2px solid #ffc800;
+  text-align: center;
+  outline: none;
+  border-color: #ffc800;
+  border-radius: 30px;
+  font-family: 'Oxygen', sans-serif;
+  width: 200px;
+  height: 30px;
+}
+input[type='submit'] {
+  outline: none;
+  transition: 0.5s;
+  padding: 5px 15px;
+  background: white;
+  border: 0 none;
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-border-radius: 5px;
+  border-radius: 20px;
+}
+input[type='submit']:hover {
+  border-radius: 35px;
+  font-size: 18px;
+  width: 80px;
+  height: 35px;
+  color: white;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4);
+  background-color: #ffc800;
+  transition: 0.4s;
+}
+#signup a {
+  font-size: 14px;
+  padding: 3px 5px;
+  text-decoration: none;
+  color: black;
+  background-color: #ffc800;
+}
+#signup {
+  font-size: 14px;
+}

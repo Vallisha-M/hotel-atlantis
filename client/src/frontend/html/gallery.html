@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<style>
+    * {
+        scroll-behavior: smooth;
+    }
+</style>
+<html>
+    <head>
+        <title>Gallery | Hotel Atlantis</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="keywords" content="footer, address, phone, icons" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<link rel="stylesheet" href="CSS\style.css">
+		<link rel="stylesheet" href="CSS\welcome.css">
+		<link rel="stylesheet" href="CSS\scrolling.css">
+        <link rel="icon" href="Images\favicon.ico" type="image/icon type">
+        <link rel="stylesheet" href="CSS\rooms.css">
+        <link rel="stylesheet" href="CSS\footer.css">
+        <link rel="stylesheet" href="CSS\gallery.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    </head>
+    <div id="navbar">
+        <a href="welcome.html", class = "img"><img src="Images\logo1.png" alt="Home", title="Home", style="width:118px; height:52px; float:left;"></a>
+        <a href="rooms.html" class = "button1" style="width : 150px;"><span>Book a Room</span></a>
+        <a href="contact.html" class = "button1" style="width : 130px;"><span>Contact Us</span></a>
+        <a href="dining_page.html" class = "button2" style="width : 90px;"><span>Dining</span></a>
+        <a href="events.html" class = "button2" style="width : 90px;"><span>Events</span></a>
+        <a href="index.html" class = "button1" style="width : 150px;"><span>Private Events</span></a>
+        <a href="gallery.html" class = "button2" style="width : 100px;"><span>Gallery</span></a>      
+    </div>
+    <body style="overflow-x: hidden;">
+        <script>
+            var prevScrollpos = window.pageYOffset;
+            window.onscroll = function() {
+            var currentScrollPos = window.pageYOffset;
+            if (prevScrollpos > currentScrollPos) {
+                document.getElementById("navbar").style.top = "0";
+            } else {
+                document.getElementById("navbar").style.top = "-50px";
+            }
+            prevScrollpos = currentScrollPos;
+            }
+        </script>
+        <br><br><br><br>
+        <div style="margin:10px; font-family: oxygen;">
+            <h2>GALLERY</h2><br>
+            <div id="myBtnContainer">
+                <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+                <button class="btn" onclick="filterSelection('standard')"> Standard</button>
+                <button class="btn" onclick="filterSelection('deluxe')"> Deluxe</button>
+                <button class="btn" onclick="filterSelection('suite')"> Suite</button>
+                <button class="btn" onclick="filterSelection('dining')"> Dining</button>
+                <button class="btn" onclick="filterSelection('events')"> Events</button>
+                <button class="btn" onclick="filterSelection('amenities')"> Ameneties</button>
+            </div>
+        <div class="row">
+            <!--Standard Rooms-->
+            <div class="column standard">
+                <div class="content">
+                    <img src="Images\standard1.jfif" style="width: 469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column standard">
+                <div class="content">
+                    <img src="Images\standard_room.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column standard">
+                <div class="content">
+                    <img src="Images\standard2.jfif" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <!--Deluxe Rooms-->
+            <div class="column deluxe">
+                <div class="content">
+                    <img src="Images\deluxe1.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column deluxe">
+                <div class="content">
+                    <img src="Images\deluxe_room.jpeg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column deluxe">
+                <div class="content">
+                    <img src="Images\deluxe2.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <!--Suites-->
+            <div class="column suite">
+                <div class="content">
+                    <img src="Images\suite1.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column suite">
+                <div class="content">
+                    <img src="Images\suite.webp" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column suite">
+                <div class="content">
+                    <img src="Images\suite2.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column suite">
+                <div class="content">
+                    <img src="Images\suite3.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column suite">
+                <div class="content">
+                    <img src="Images\suite4.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <!--Dining-->
+            <div class="column dining">
+                <div class="content">
+                    <img src="Images\dining1.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column dining">
+                <div class="content">
+                    <img src="Images\dining2.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column dining">
+                <div class="content">
+                    <img src="Images\dining3.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column dining">
+                <div class="content">
+                    <img src="Images\dining4.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <!--Events-->
+            <div class="column events">
+                <div class="content">
+                    <img src="Images\event1.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column events">
+                <div class="content">
+                    <img src="Images\event2.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column events">
+                <div class="content">
+                    <img src="Images\event3.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column events">
+                <div class="content">
+                    <img src="Images\event4.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column events">
+                <div class="content">
+                    <img src="Images\event5.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column events">
+                <div class="content">
+                    <img src="Images\event6.jpeg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column amenities">
+                <div class="content">
+                    <img src="Images\swimming_pool.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column amenities">
+                <div class="content">
+                    <img src="Images\tennis_court.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column amenities">
+                <div class="content">
+                    <img src="Images\badminton_court.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column amenities">
+                <div class="content">
+                    <img src="Images\dining_hall.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column amenities">
+                <div class="content">
+                    <img src="Images\billiards.png" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column amenities">
+                <div class="content">
+                    <img src="Images\gym.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+            <div class="column amenities">
+                <div class="content">
+                    <img src="Images\spa.jpg" style="width:469px; height: 300px;">
+                </div>
+            </div>
+        </div>
+        </div>
+        <script>
+            filterSelection("all") // Execute the function and show all columns
+            function filterSelection(c) {
+                var x, i;
+                x = document.getElementsByClassName("column");
+                if (c == "all") c = "";
+                // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
+                for (i = 0; i < x.length; i++) {
+                    w3RemoveClass(x[i], "show");
+                    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+                }
+                }
+
+                // Show filtered elements
+                function w3AddClass(element, name) {
+                var i, arr1, arr2;
+                arr1 = element.className.split(" ");
+                arr2 = name.split(" ");
+                for (i = 0; i < arr2.length; i++) {
+                    if (arr1.indexOf(arr2[i]) == -1) {
+                    element.className += " " + arr2[i];
+                    }
+                }
+                }
+                // Hide elements that are not selected
+                function w3RemoveClass(element, name) {
+                var i, arr1, arr2;
+                arr1 = element.className.split(" ");
+                arr2 = name.split(" ");
+                for (i = 0; i < arr2.length; i++) {
+                    while (arr1.indexOf(arr2[i]) > -1) {
+                    arr1.splice(arr1.indexOf(arr2[i]), 1);
+                    }
+                }
+                element.className = arr1.join(" ");
+                }
+                // Add active class to the current button (highlight it)
+                var btnContainer = document.getElementById("myBtnContainer");
+                var btns = btnContainer.getElementsByClassName("btn");
+                for (var i = 0; i < btns.length; i++) {
+                btns[i].addEventListener("click", function(){
+                    var current = document.getElementsByClassName("active");
+                    current[0].className = current[0].className.replace(" active", "");
+                    this.className += " active";
+            });
+            }
+        </script>
+        <footer class="footer-distributed">
+
+            <div class="footer-left">
+                <img src="img/logo1.png">
+                          <p class="footer-links">
+                <a href="welcome.html">Home</a>
+                |
+                <a href="contact.html">Contact</a>
+                |
+                <a href="welcome.html#hotelAtlantis">About Us</a>
+              </p>
+          
+              <p class="footer-company-name">ATLANTIS  GROUP OF HOTELS Pvt. Ltd.</p>
+          <br/>
+          
+          
+          
+            </div>
+          
+          
+          <div class="footer-right">
+          <br/>
+              
+          <p id="follow">CONTACT US</p>
+          
+          
+                <div class="c-icon"><i class="fa fa-phone"></i>
+                <p>+91 22-27782183</p>
+          <br/>
+              
+              
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:support@eduonix.com">support@hotel_atlantis.com</a></p></div>
+          
+              
+          
+          
+          
+          <p id="follow">FOLLOW US ON SOCIAL MEDIA</p>
+          
+          
+          
+              <div class="footer-icons">
+                <a href="https://m.facebook.com/hotelatlantis/"><i class="fa fa-facebook"></i></a>
+                <a href="https://mobile.twitter.com/ATLANTIS"><i class="fa fa-twitter"></i></a>
+                <a href="https://instagram.com/thehotelatlantis?igshid=17xyyfahe234d"><i class="fa fa-instagram"></i></a>
+                <a href="https://youtube.com/c/AtlantisthePalmTV"><i class="fa fa-youtube"></i></a>
+              </div>
+            </div>
+          <div class="mapside">
+          
+          
+          <div class = "mapDiv"  style="right:-50px;">
+          &nbsp;&nbsp;<iframe width="350" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=-122.25184679031373%2C37.861691632077644%2C-122.2436285018921%2C37.8667906114285&amp;layer=mapnik&amp;marker=37.86424116585334%2C-122.2477376461029" style="float:right;border: 1px solid #ffc800;box-shadow: -1px 6px 44px -2px rgba(0,0,0,0.75);"></iframe>
+          </div>
+          
+          <a href = "https://www.openstreetmap.org/way/109193723#map=17/37.86428/-122.24677"><button class="mapButton">Expand Map</button> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          
+          <div class = "mapText">
+          We serve at Berkeley, California&nbsp;<br/>
+          Hotels at Toronto, Vancouver and<br/> Munich comning soon...&nbsp;<br/>
+          </div>
+          </footer>
+          
+    </body>
+</html>
