@@ -33,7 +33,6 @@ export default function Dining() {
 		};
 		$(".loading").css("display", "block");
 		await axios
-
 			.post(
 				"https://hotel-atlantis-project.herokuapp.com/indian/add/",
 				params
@@ -102,11 +101,11 @@ export default function Dining() {
 					localStorage.setItem("timepre", time);
 					if (type == "pre order")
 						window.location.replace(
-							"http://localhost:3000/dining/indian"
+							"https://hotel-atlantis-project.netlify.app/dining/indian"
 						);
 					if (type == "reserve table")
 						window.location.replace(
-							"http://localhost:3000/dining/confirm"
+							"https://hotel-atlantis-project.netlify.app/dining/confirm"
 						);
 				}
 			});

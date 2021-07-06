@@ -66,7 +66,6 @@ router.route("/add").post(async (req, res) => {
 
 			await newIndian
 				.save()
-
 				.then(() => {
 					var mailOptions = {
 						from: nodemail,
@@ -155,11 +154,8 @@ router.post("/cancel", async (req, res) => {
 router.patch("/update/", async (req, res) => {
 	try {
 		const indian = Indian.findById({ _id: req.query.id });
-		indian.uniqueid = indian.uniqueid;
 		indian.seats = req.body.seats || indian.sendStatus;
-
 		indian.time = req.body.time || indian.time;
-
 		indian.checkin = req.body.checkin || indian.checkin;
 		await indian
 			.save()

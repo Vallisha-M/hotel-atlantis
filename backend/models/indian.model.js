@@ -1,41 +1,36 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const IndianSchema = new Schema(
-  {
-    uniqueid : {
-      type : String,
-      required : true,
-      unique : false
-    },
-    checkin: {
-      type: String,
-      unique: false,
-      required: true,
-    },
+	{
+		checkin: {
+			type: String,
+			unique: false,
+			required: true,
+		},
 
-    email: {
-      type: String,
-      required: true,
-      unique: false,
-      trim: true,
-      minlength: 5,
-    },
-    seats: {
-      type: String,
-      required: true,
-      unique: false,
-      trim: true,
-    },
-    time: {
-      type: String,
-      required: true,
-      minlength: 0,
-    },
-  },
-  {
-    timestamps: true,
-  }
-)
-const Indian = mongoose.model("Indian", IndianSchema)
-module.exports = Indian
+		email: {
+			type: String,
+			required: true,
+			unique: false,
+			trim: true,
+			minlength: 5,
+		},
+		seats: {
+			type: String,
+			required: true,
+			unique: false,
+			trim: true,
+		},
+		time: {
+			type: String,
+			required: true,
+			minlength: 0,
+		},
+	},
+	{
+		timestamps: true,
+	}
+);
+const Indian = mongoose.model("Indian", IndianSchema);
+module.exports = Indian;
