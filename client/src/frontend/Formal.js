@@ -33,7 +33,10 @@ const Formal = () => {
 		};
 		$(".loading").css("display", "block");
 		await axios
-			.post("http://localhost:5500/formal/add/", params)
+			.post(
+				"https://hotel-atlantis-project.herokuapp.com/formal/add/",
+				params
+			)
 			.then((response) => {
 				$(".loading").css("display", "none");
 				res = response.data;

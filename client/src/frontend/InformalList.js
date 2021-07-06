@@ -36,7 +36,10 @@ const InformalList = () => {
 		};
 		$(".loading").css("display", "block");
 		await axios
-			.get("http://localhost:5500/informal/show_email", { params })
+			.get(
+				"https://hotel-atlantis-project.herokuapp.com/informal/show_email",
+				{ params }
+			)
 			.then((response) => {
 				$(".loading").css("display", "none");
 				var r = response.data;
@@ -91,7 +94,7 @@ const InformalList = () => {
 												);
 												await axios
 													.post(
-														"http://localhost:5500/informal/cancel/",
+														"https://hotel-atlantis-project.herokuapp.com/informal/cancel/",
 														{
 															email: ievent.email,
 															date: ievent.date,

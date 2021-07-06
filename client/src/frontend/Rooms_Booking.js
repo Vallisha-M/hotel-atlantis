@@ -37,7 +37,9 @@ const Rooms_Booking = () => {
 		};
 		$(".loading").css("display", "block");
 		await axios
-			.get("http://localhost:5500/rooms/show", { params })
+			.get("https://hotel-atlantis-project.herokuapp.com/rooms/show", {
+				params,
+			})
 			.then((response) => {
 				$(".loading").css("display", "none");
 				rooms = response.data;

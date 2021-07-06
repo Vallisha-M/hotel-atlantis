@@ -15,7 +15,7 @@ export default function EventList() {
 		$(".loading").css("display", "block");
 		axios({
 			method: "get",
-			url: "http://localhost:5500/event/",
+			url: "https://hotel-atlantis-project.herokuapp.com/event/",
 		})
 			.then((response) => {
 				$(".loading").css("display", "none");

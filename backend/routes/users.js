@@ -342,7 +342,7 @@ router.route("/signup").post(async (req, res) => {
 							to: email,
 							subject: "Welcome to Hotel Atlantis!",
 							html:
-								"<div style='font-size:20px'>Account has been created!.<br/>To delete the account(<b style='color:red;'>irreversible</b>)  , click this <a href='http://localhost:5500/users/delete/email/?email=" +
+								"<div style='font-size:20px'>Account has been created!.<br/>To delete the account(<b style='color:red;'>irreversible</b>)  , click this <a href='https://hotel-atlantis-project.herokuapp.com/users/delete/email/?email=" +
 								email +
 								"&key=" +
 								id +

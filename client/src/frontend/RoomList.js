@@ -34,7 +34,10 @@ const RoomList = () => {
 		};
 		$(".loading").css("display", "block");
 		await axios
-			.get("http://localhost:5500/rooms/show_email", { params })
+			.get(
+				"https://hotel-atlantis-project.herokuapp.com/rooms/show_email",
+				{ params }
+			)
 			.then((response) => {
 				$(".loading").css("display", "none");
 				var r = response.data;
@@ -104,7 +107,7 @@ const RoomList = () => {
 												);
 												await axios
 													.post(
-														"http://localhost:5500/rooms/cancel",
+														"https://hotel-atlantis-project.herokuapp.com/rooms/cancel",
 														{
 															email: email_loc,
 															checkindate:

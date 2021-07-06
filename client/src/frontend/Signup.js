@@ -26,7 +26,10 @@ const Signup = () => {
 		};
 		$(".loading").css("display", "block");
 		await axios
-			.post("http://localhost:5500/users/check/duplicate", params)
+			.post(
+				"https://hotel-atlantis-project.herokuapp.com/users/check/duplicate",
+				params
+			)
 			.then((response) => {
 				$(".loading").css("display", "none");
 				res = response.data;

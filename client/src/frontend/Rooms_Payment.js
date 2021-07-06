@@ -36,7 +36,9 @@ const Rooms_Payment = () => {
 		};
 		$(".loading").css("display", "block");
 		await axios
-			.get("http://localhost:5500/users/show", { params })
+			.get("https://hotel-atlantis-project.herokuapp.com/users/show", {
+				params,
+			})
 			.then((response) => {
 				$(".loading").css("display", "none");
 				setUser(response.data);
@@ -58,7 +60,10 @@ const Rooms_Payment = () => {
 		};
 		$(".loading").css("display", "block");
 		await axios
-			.post("http://localhost:5500/rooms/add/", room)
+			.post(
+				"https://hotel-atlantis-project.herokuapp.com/rooms/add/",
+				room
+			)
 			.then((response) => {
 				$(".loading").css("display", "none");
 				resp = response.data;

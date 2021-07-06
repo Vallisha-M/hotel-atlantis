@@ -33,7 +33,10 @@ const FormalList = () => {
 		};
 		$(".loading").css("display", "block");
 		await axios
-			.get("http://localhost:5500/formal/show_email", { params })
+			.get(
+				"https://hotel-atlantis-project.herokuapp.com/formal/show_email",
+				{ params }
+			)
 			.then((response) => {
 				$(".loading").css("display", "none");
 				var r = response.data;
@@ -82,7 +85,7 @@ const FormalList = () => {
 												);
 												await axios
 													.post(
-														"http://localhost:5500/formal/cancel/",
+														"https://hotel-atlantis-project.herokuapp.com/formal/cancel/",
 														{
 															email: fevent.email,
 															date: fevent.date,

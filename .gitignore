@@ -3,7 +3,7 @@
 .env
 tests.http
 
-*
+
 !*/
 !*.*
 .vscode/launch.json
