@@ -30,11 +30,6 @@ router.route("/show_email").get(async (req, res) => {
 			.catch((err) => res.status(400).json("Error: " + err));
 	}
 });
-router.route("/").get((req, res) => {
-	Formal.find()
-		.then((formal) => res.json(formal))
-		.catch((err) => res.status(400).json("Error: " + err));
-});
 
 router.post("/cancel", async (req, res) => {
 	console.log("body = ");

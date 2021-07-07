@@ -27,11 +27,6 @@ const transporter = nodemailer.createTransport({
 		pass: nodePass,
 	},
 });
-router.route("/").get((req, res) => {
-	Indian_pre.find()
-		.then((indian_pre) => res.json(indian_pre))
-		.catch((err) => res.status(400).json("Error: " + err));
-});
 
 router.route("/add").post(async (req, res) => {
 	const checkin = req.body.checkin;

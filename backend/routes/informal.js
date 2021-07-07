@@ -20,11 +20,7 @@ router.route("/show_email").get(async (req, res) => {
 			.catch((err) => res.status(400).json("Error: " + err));
 	}
 });
-router.route("/").get((req, res) => {
-	Informal.find()
-		.then((informal) => res.json(informal))
-		.catch((err) => res.status(400).json("Error: " + err));
-});
+
 const transporter = nodemailer.createTransport({
 	service: "gmail",
 	auth: {
@@ -32,6 +28,7 @@ const transporter = nodemailer.createTransport({
 		pass: nodePass,
 	},
 });
+
 router.route("/add").post(async (req, res) => {
 	var flag1 = false;
 	const email = req.body.email;

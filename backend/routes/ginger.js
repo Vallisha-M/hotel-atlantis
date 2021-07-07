@@ -1,12 +1,6 @@
 const router = require("express").Router();
 let Ginger = require("../models/ginger.model");
 
-router.route("/").get((req, res) => {
-	Ginger.find()
-		.then((ginger) => res.json(ginger))
-		.catch((err) => res.status(400).json("Error: " + err));
-});
-
 router.route("/add").post((req, res) => {
 	const checkin = Date.parse(req.body.checkin);
 	const seats = req.body.seats;

@@ -1,12 +1,6 @@
 const router = require("express").Router();
 let Bake_pre = require("../models/bake.model");
 
-router.route("/").get((req, res) => {
-	Bake_pre.find()
-		.then((bake_pre) => res.json(bake_pre))
-		.catch((err) => res.status(400).json("Error: " + err));
-});
-
 router.route("/add").post((req, res) => {
 	const checkin = Date.parse(req.body.checkin);
 	const seats = req.body.seats;

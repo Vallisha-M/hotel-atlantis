@@ -21,6 +21,18 @@ import cf from "./img/cheese-fries.jfif";
 import sr from "./img/spring-roll.jfif";
 import fr from "./img/f-rice.jpg";
 import hb from "./img/h-biryani.jfif";
+import ag from "./img/aloo gobi1.jpg";
+import df from "./img/dal-fry.jfif";
+import mkc from "./img/MalaiKoftaCurry-1.jpg";
+import rspbm from "./img/Restaurant-Style-Paneer-Butter-Masala-3.jpg";
+import db from "./img/dumBIRYANI.JPG";
+import gr from "./img/Ghee-Rice2-1.jpg";
+import pb from "./img/pnrb.jpg";
+import sh from "./img/shahi.jpg";
+import mk from "./img/masala kulcha.jfif";
+import pu from "./img/puri.jpg";
+import ap from "./img/alooparatha.jpg";
+import bn from "./img/butternan.jfif";
 
 import { Helmet } from "react-helmet";
 const Indian = () => {
@@ -280,7 +292,7 @@ const Indian = () => {
 						</div>
 					</div>
 					<div className="card">
-						<img className="item_image" src="img/aloo gobi1.jpg" />
+						<img className="item_image" src={ag} />
 						<h2 className="item_name">Aloo Gobi</h2>
 						<div className="item_details">
 							<span className="item_price">$7.75</span>
@@ -290,7 +302,7 @@ const Indian = () => {
 					<div className="card">
 						<img
 							className="item_image"
-							src="img/dal-fry.jfif"
+							src={df}
 							alt="loading"
 							style={{ width: "100%" }}
 						/>
@@ -303,7 +315,7 @@ const Indian = () => {
 					<div className="card">
 						<img
 							className="item_image"
-							src="img/MalaiKoftaCurry-1.jpg"
+							src={mkc}
 							alt="loading"
 							style={{ width: "100%" }}
 						/>
@@ -316,7 +328,7 @@ const Indian = () => {
 					<div className="card">
 						<img
 							className="item_image"
-							src="img/Restaurant-Style-Paneer-Butter-Masala-3.jpg"
+							src={rspbm}
 							alt="loading"
 							style={{ width: "100%" }}
 						/>
@@ -329,7 +341,7 @@ const Indian = () => {
 					<div className="card">
 						<img
 							className="item_image"
-							src="img/dumBIRYANI.JPG"
+							src={db}
 							alt="loading"
 							style={{ width: "100%" }}
 						/>
@@ -342,7 +354,7 @@ const Indian = () => {
 					<div className="card">
 						<img
 							className="item_image"
-							src="img/Ghee-Rice2-1.jpg"
+							src={gr}
 							alt="loading"
 							style={{ width: "100%" }}
 						/>
@@ -355,7 +367,7 @@ const Indian = () => {
 					<div className="card">
 						<img
 							className="item_image"
-							src="img/pnrb.jpg"
+							src={pb}
 							alt="loading"
 							style={{ width: "100%" }}
 						/>
@@ -368,7 +380,7 @@ const Indian = () => {
 					<div className="card">
 						<img
 							className="item_image"
-							src="img/shahi.jpg"
+							src={sh}
 							alt="loading"
 							style={{ width: "100%" }}
 						/>
@@ -382,10 +394,7 @@ const Indian = () => {
 				<h1 className="ih1">BREAD</h1>
 				<div className="cardlist">
 					<div className="card">
-						<img
-							className="item_image"
-							src="img/masala kulcha.jfif"
-						/>
+						<img className="item_image" src={mk} />
 						<h2 className="item_name">Masala Kulcha</h2>
 						<div className="item_details">
 							<span className="item_price">$3.00</span>
@@ -393,7 +402,7 @@ const Indian = () => {
 						</div>
 					</div>
 					<div className="card">
-						<img className="item_image" src="img/puri.jpg" />
+						<img className="item_image" src={pu} />
 						<h2 className="item_name">Puri</h2>
 						<div className="item_details">
 							<span className="item_price">$1.70</span>
@@ -401,7 +410,7 @@ const Indian = () => {
 						</div>
 					</div>
 					<div className="card">
-						<img className="item_image" src="img/alooparatha.jpg" />
+						<img className="item_image" src={ap} />
 						<h2 className="item_name">Aloo Paratha</h2>
 						<div className="item_details">
 							<span className="item_price">$2.75</span>
@@ -409,7 +418,7 @@ const Indian = () => {
 						</div>
 					</div>
 					<div className="card">
-						<img className="item_image" src="img/butternan.jfif" />
+						<img className="item_image" src={bn} />
 						<h2 className="item_name">Butter Nan</h2>
 						<div className="item_details">
 							<span className="item_price">$3.00</span>

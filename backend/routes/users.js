@@ -29,11 +29,7 @@ router.route("/show").get(async (req, res) => {
 		.then((users) => res.json(users))
 		.catch((err) => res.status(400).json("Error: " + err));
 });
-router.route("/").get((req, res) => {
-	User.find()
-		.then((users) => res.json(users))
-		.catch((err) => res.status(400).json("Error: " + err));
-});
+
 router.route("/check/duplicate").post(async (req, res) => {
 	const email = req.body.email;
 	const phone = req.body.phone;
@@ -174,7 +170,8 @@ router.route("/pass/change/").post(async (req, res) => {
 	}
 });
 router.route("/delete/email/").get((req, res) => {
-	const adr = "http://localhost:4000" + req.url.toString();
+	const adr =
+		"https://hotel-atlantis-project.herokuapp.com/" + req.url.toString();
 	const q = url.parse(adr, true);
 	const key = q.query.key;
 	const email = q.query.email;
