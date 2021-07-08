@@ -63,30 +63,38 @@ router.route("/check/duplicate").post(async (req, res) => {
 		const hashedPassword = await bcrypt.hash(rand, 10);
 		const newOTP = new OTP({ email: email, password: hashedPassword });
 		console.log(newOTP);
-		await newOTP
-			.save()
-			.then(() => {
-				var mailOptions = {
-					from: nodemail,
-					to: email,
-					subject: "Hotel Atlantis - OTP",
-					html:
-						"This is your OTP : " +
-						rand +
-						"<br/><br/>Regards,<br/>Hotel Atlantis",
-				};
-				transporter.sendMail(mailOptions, function (error, info) {
-					if (error) {
-						console.log(error);
-					} else {
-						console.log("Email sent: " + info.response);
-					}
-				});
-				res.json({ done: 1 });
+		await OTP.deleteMany({ email: email })
+			.then(async () => {
+				await newOTP
+					.save()
+					.then(() => {
+						var mailOptions = {
+							from: nodemail,
+							to: email,
+							subject: "Hotel Atlantis - OTP",
+							html:
+								"This is your OTP : " +
+								rand +
+								"<br/><br/>Regards,<br/>Hotel Atlantis",
+						};
+						transporter.sendMail(
+							mailOptions,
+							function (error, info) {
+								if (error) {
+									console.log(error);
+								} else {
+									console.log("Email sent: " + info.response);
+								}
+							}
+						);
+						res.json({ done: 1 });
+					})
+					.catch((err) => res.json({ done: 0, error: err }));
 			})
-			.catch((err) => res.json({ done: 0, error: err }));
+			.catch(() => res.json({ done: 0, error: 0 }));
 	}
 });
+
 router.route("/pass/forgot").post(async (req, res) => {
 	const email = req.body.email;
 	const randomPassword = crypto.randomBytes(5).toString("hex");
@@ -133,6 +141,7 @@ router.route("/pass/forgot").post(async (req, res) => {
 			res.json({ error: 1, done: 0 });
 		});
 });
+
 router.route("/pass/change/").post(async (req, res) => {
 	const email = req.body.email;
 	const token = req.body.token;
@@ -169,46 +178,50 @@ router.route("/pass/change/").post(async (req, res) => {
 			.catch(() => res.json({ done: 0 }));
 	}
 });
-router.route("/delete/email/").get((req, res) => {
+
+router.route("/delete/email/").get(async (req, res) => {
 	const adr =
-		"https://hotel-atlantis-project.herokuapp.com/" + req.url.toString();
+		"https://hotel-atlantis-project.herokuapp.com" + req.url.toString();
 	const q = url.parse(adr, true);
 	const key = q.query.key;
 	const email = q.query.email;
-
-	var flag = true;
-	DeleteUser.find({ email: email }, { _id: 0 })
+	console.log(key);
+	console.log(email);
+	var flag = false;
+	await DeleteUser.find({ email: email, delKey: key }, { _id: 0 })
 		.then((ress) => {
-			if (ress.length > 0 && ress[0].key != key) {
-				flag = false;
+			if (ress.length > 0) {
+				flag = true;
+			} else {
+				console.log(ress);
+				res.sendFile(process.cwd() + "/Failure.html");
 			}
 		})
 		.catch((err) => {
 			console.log(err);
-			alert(err);
-			flag = false;
+			res.sendFile(process.cwd() + "/Failure.html");
 		});
+	if (flag)
+		await User.deleteOne({ email: email })
+			.then(async (ress) => {
+				await DeleteUser.deleteOne({ email: email }).then(() => {
+					Token.deleteMany({ email: email })
+						.then(() => {
+							res.sendFile(process.cwd() + "/Success.html");
+						})
+						.catch((err) => {
+							console.log(err);
+							res.sendFile(process.cwd() + "/Failure.html");
+						});
+				});
 
-	User.deleteOne({ email: email })
-		.then((ress) => {
-			DeleteUser.deleteOne({ email: email }).then(() => {
-				Token.deleteMany({ email: email })
-					.then(() => {
-						res.sendFile(process.cwd() + "/Success.html");
-					})
-					.catch(() => {
-						res.sendFile(process.cwd() + "/Failure.html");
-					});
+				console.log("done");
+			})
+			.catch((err) => {
+				console.log(err);
+
+				res.sendFile(process.cwd() + "/Failure.html");
 			});
-
-			console.log("done");
-		})
-		.catch((err) => {
-			console.log(err);
-			alert(err);
-			flag = false;
-		});
-	if (!flag) res.sendFile(process.cwd() + "/Failure.html");
 });
 /*
 app.post("/verify/refresh/", (req, res) => {
@@ -287,85 +300,87 @@ router.route("/signup").post(async (req, res) => {
 	const otp = req.body.otp;
 	console.log(email);
 	console.log(otp);
-	var f = true;
+	var f = false;
 	OTP.find({ email: email })
 		.then(async (ress) => {
 			if (ress.length == 0) {
 				res.json({ done: 0, invalid: 1 });
-				f = false;
 			} else {
 				const hashedPassword = ress[0].password;
 				if (await bcrypt.compare(otp, hashedPassword))
 					await OTP.deleteMany({ email: email })
-						.then(() => {
-							console.log("done");
+						.then(async () => {
+							{
+								const hashedPassword = await bcrypt.hash(
+									password,
+									10
+								);
+								const newUser = new User({
+									email: email,
+									firstName: firstName,
+									lastName: lastName,
+									password: hashedPassword,
+									phone: phone,
+								});
+
+								await newUser.save().then(async () => {
+									const id = crypto
+										.randomBytes(20)
+										.toString("hex");
+									const newDeleteUser = new DeleteUser({
+										email: email,
+										delKey: id,
+									});
+									console.log("saved the user");
+									await newDeleteUser
+										.save()
+										.then(() => {
+											console.log("here");
+											var mailOptions = {
+												from: nodemail,
+												to: email,
+												subject:
+													"Welcome to Hotel Atlantis!",
+												html:
+													"<div style='font-size:20px'>Account has been created!.<br/>To delete the account(<b style='color:red;'>irreversible</b>)  , click this <a href='https://hotel-atlantis-project.herokuapp.com/users/delete/email/?email=" +
+													email +
+													"&key=" +
+													id +
+													"'>link</a>.</div>",
+											};
+											transporter.sendMail(
+												mailOptions,
+												function (error, info) {
+													if (error) {
+														console.log(error);
+													} else {
+														console.log(
+															"Email sent: " +
+																info.response
+														);
+													}
+												}
+											);
+											res.json({ done: 1 });
+										})
+										.catch(() => {
+											res.json({ done: 0 });
+										});
+								});
+							}
 						})
-						.catch(() => (f = false));
+						.catch(() => res.json({ done: 0, error: 1 }));
 				else {
-					f = false;
-					res.json({ done: 0, error: 1 });
+					res.json({ done: 0, invalid: 1 });
 				}
 			}
 		})
 		.catch(() => {
-			f = false;
+			res.json({ done: 0, error: 1 });
 		});
-	console.log(true);
-	if (f) {
-		const hashedPassword = await bcrypt.hash(password, 10);
-		const newUser = new User({
-			email: email,
-			firstName: firstName,
-			lastName: lastName,
-			password: hashedPassword,
-			phone: phone,
-		});
-
-		await newUser
-			.save()
-			.then(async () => {
-				const id = crypto.randomBytes(20).toString("hex");
-				const newDeleteUser = new DeleteUser({
-					email: email,
-					delKey: id,
-				});
-				console.log("saved the user");
-				await newDeleteUser
-					.save()
-					.then(() => {
-						console.log("here");
-						var mailOptions = {
-							from: nodemail,
-							to: email,
-							subject: "Welcome to Hotel Atlantis!",
-							html:
-								"<div style='font-size:20px'>Account has been created!.<br/>To delete the account(<b style='color:red;'>irreversible</b>)  , click this <a href='https://hotel-atlantis-project.herokuapp.com/users/delete/email/?email=" +
-								email +
-								"&key=" +
-								id +
-								"'>link</a>.</div>",
-						};
-						transporter.sendMail(
-							mailOptions,
-							function (error, info) {
-								if (error) {
-									console.log(error);
-								} else {
-									console.log("Email sent: " + info.response);
-								}
-							}
-						);
-						res.json({ done: 1 });
-					})
-					.catch(() => {
-						res.json({ done: 0 });
-					});
-			})
-			.catch(() => {
-				res.json({ done: 0 });
-			});
-	}
+	console.log(f);
 });
+
 router.route("/logout").post(async (req, res) => {
 	var email = req.body.email;
 	console.log("made it here");
