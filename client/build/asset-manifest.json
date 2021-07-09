@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.4226d59d.chunk.css",
-    "main.js": "/static/js/main.b27868ae.chunk.js",
-    "main.js.map": "/static/js/main.b27868ae.chunk.js.map",
+    "main.js": "/static/js/main.a6148261.chunk.js",
+    "main.js.map": "/static/js/main.a6148261.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.9dd2424c.js",
     "runtime-main.js.map": "/static/js/runtime-main.9dd2424c.js.map",
-    "static/js/2.91206361.chunk.js": "/static/js/2.91206361.chunk.js",
-    "static/js/2.91206361.chunk.js.map": "/static/js/2.91206361.chunk.js.map",
+    "static/js/2.047f1f86.chunk.js": "/static/js/2.047f1f86.chunk.js",
+    "static/js/2.047f1f86.chunk.js.map": "/static/js/2.047f1f86.chunk.js.map",
     "static/js/3.5af4f07b.chunk.js": "/static/js/3.5af4f07b.chunk.js",
     "static/js/3.5af4f07b.chunk.js.map": "/static/js/3.5af4f07b.chunk.js.map",
     "index.html": "/index.html",
     "static/css/main.4226d59d.chunk.css.map": "/static/css/main.4226d59d.chunk.css.map",
-    "static/js/2.91206361.chunk.js.LICENSE.txt": "/static/js/2.91206361.chunk.js.LICENSE.txt",
+    "static/js/2.047f1f86.chunk.js.LICENSE.txt": "/static/js/2.047f1f86.chunk.js.LICENSE.txt",
     "static/media/Ghee-Rice2-1.9e556783.jpg": "/static/media/Ghee-Rice2-1.9e556783.jpg",
     "static/media/MalaiKoftaCurry-1.a33b305e.jpg": "/static/media/MalaiKoftaCurry-1.a33b305e.jpg",
     "static/media/Paneer-Tikka.2d5076d1.jpg": "/static/media/Paneer-Tikka.2d5076d1.jpg",
@@ -87,8 +87,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.9dd2424c.js",
-    "static/js/2.91206361.chunk.js",
+    "static/js/2.047f1f86.chunk.js",
     "static/css/main.4226d59d.chunk.css",
-    "static/js/main.b27868ae.chunk.js"
+    "static/js/main.a6148261.chunk.js"
   ]
 }

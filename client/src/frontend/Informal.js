@@ -180,7 +180,7 @@ const Informal = () => {
 							}}
 							onClick={() => {
 								window.location.replace(
-									"http://localhost:3000/gallery"
+									"https://hotel-atlantis-project.netlify.app/gallery"
 								);
 							}}
 						>
