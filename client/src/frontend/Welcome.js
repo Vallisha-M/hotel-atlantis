@@ -41,16 +41,16 @@ function Welcome() {
 
 				<link
 					rel="stylesheet"
-					href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+					href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
 				/>
 
 				<link
-					href="http://fonts.googleapis.com/css?family=Cookie"
+					href="https://fonts.googleapis.com/css?family=Cookie"
 					rel="stylesheet"
 					type="text/css"
 				></link>
 
-				<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+				<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 				<script src="./js/scrolling.js"></script>
 			</Helmet>
 

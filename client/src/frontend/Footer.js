@@ -10,7 +10,7 @@ export default function Footer() {
 			<Helmet>
 				<link
 					rel="stylesheet"
-					href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+					href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
 				/>
 			</Helmet>
 			<footer className="footer-distributed">
