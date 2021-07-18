@@ -124,6 +124,7 @@ const Indian = () => {
 				/>
 				<meta charset="UTF-8" />
 				<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+				<title>Hotel Atlantis | Indian Palace</title>
 			</Helmet>
 			<div id="hide">
 				<div className="banner">

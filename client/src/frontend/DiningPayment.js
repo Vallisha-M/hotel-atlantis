@@ -6,6 +6,7 @@ import axios from "axios";
 import { Helmet } from "react-helmet";
 import $ from "jquery";
 import load from "./img/loading.gif";
+
 export default function DiningPayment() {
 	let history = useHistory();
 	var checkin = localStorage.getItem("checkinpre");
@@ -73,6 +74,7 @@ export default function DiningPayment() {
 			<Helmet>
 				<link rel="stylesheet" href="css/rooms.css" />
 				<link rel="stylesheet" href="css/welcome.css" />
+				<title>Hotel Atlantis | Payment</title>
 			</Helmet>
 			<div
 				align="center"

@@ -104,6 +104,7 @@ const Rooms_Payment = () => {
 			<Helmet>
 				<link rel="stylesheet" href="css/rooms.css" />
 				<link rel="stylesheet" href="css/welcome.css" />
+				<title>Hotel Atlantis | Payment</title>
 			</Helmet>
 
 			<div

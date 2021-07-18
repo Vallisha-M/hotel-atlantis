@@ -64,6 +64,9 @@ const ChangePassword = () => {
 
 	return (
 		<div>
+			<Helmet>
+				<title>Hotel Atlantis | Change Password</title>
+			</Helmet>
 			<div class="loading" id="loading">
 				<img class="load" src={load} />
 			</div>

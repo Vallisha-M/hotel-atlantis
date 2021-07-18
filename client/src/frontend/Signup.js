@@ -382,7 +382,7 @@ const Signup = () => {
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password
 								:
 								<input
-									type="password"
+									type="text"
 									id="password"
 									name="pass"
 									placeholder="Password"
@@ -400,7 +400,7 @@ const Signup = () => {
 							>
 								Confirm Password :
 								<input
-									type="password"
+									type="text"
 									id="confirm"
 									name="confirm"
 									placeholder="Confirm Password"

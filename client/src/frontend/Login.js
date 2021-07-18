@@ -191,7 +191,7 @@ const Login = () => {
 							<div style={{ fontSize: "18px" }}>
 								Password :
 								<input
-									type="password"
+									type="text"
 									id="password"
 									name="password"
 									placeholder="Password"

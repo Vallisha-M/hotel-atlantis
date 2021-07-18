@@ -13,7 +13,7 @@ const Rooms = () => {
 		<div>
 			<Helmet>
 				<script src="js/scrolling.js"></script>
-				<title>Rooms | Hotel Atlantis</title>
+				<title>Hotel Atlantis | Rooms</title>
 				<meta
 					name="viewport"
 					content="width=device-width, initial-scale=1.0"

@@ -1,8 +1,12 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import "./css/contact.css";
 export default function Contact() {
 	return (
 		<div>
+			<Helmet>
+				<title>Hotel Atlantis | Contact</title>
+			</Helmet>
 			<div className="parallax1-contact">
 				<div className="overlayText-contact">
 					<div className="justText-contact">Contact Us</div>

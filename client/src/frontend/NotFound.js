@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 import "./css/notFound.css";
 export default function example() {
@@ -9,17 +10,22 @@ export default function example() {
 	// localStorage.setItem('loggedIn', true)
 	// localStorage.setItem('loginChanged', false)
 	return (
-		<div className="notFound">
-			<div className="wrap">
-				<div className="text">
-					<div className="four">404 </div>
-					<br />
-					We couldn't find what you were looking for.
-					<br />
-					<br />
-					<a className="a" href="/">
-						back to home
-					</a>
+		<div>
+			<Helmet>
+				<title>Hotel Atlantis | Error 404</title>
+			</Helmet>
+			<div className="notFound">
+				<div className="wrap">
+					<div className="text">
+						<div className="four">404 </div>
+						<br />
+						We couldn't find what you were looking for.
+						<br />
+						<br />
+						<a className="a" href="/">
+							back to home
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>

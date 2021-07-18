@@ -87,21 +87,17 @@ const Formal = () => {
 		<div>
 			<Helmet>
 				<title>Hotel Atlantis | Formal</title>
-
 				<meta charset="utf-8" />
 				<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 				<meta
 					name="viewport"
 					content="width=device-width, initial-scale=1"
 				/>
-
 				<link
 					href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap"
 					rel="stylesheet"
 				/>
-
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 				<link
 					rel="stylesheet"
 					href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"

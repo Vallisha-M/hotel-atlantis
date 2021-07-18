@@ -10,6 +10,8 @@ import IndianpreList from "./IndianpreList";
 import $ from "jquery";
 import "./css/loading.css";
 import load from "./img/loading.gif";
+import { Helmet } from "react-helmet";
+
 const Profile = () => {
 	let history = useHistory();
 	if (
@@ -79,6 +81,9 @@ const Profile = () => {
 
 	return (
 		<div align="center">
+			<Helmet>
+				<title>Hotel Atlantis | Profile</title>
+			</Helmet>
 			<div class="loading" id="loading">
 				<img class="load" src={load} />
 			</div>
