@@ -23,6 +23,18 @@ const transporter = nodemailer.createTransport({
 	},
 });
 
+async function sendSMS(msg, phone) {
+	await fast2sms
+		.sendMessage({
+			authorization: smsapi,
+			message: msg,
+			numbers: [phone],
+		})
+		.then(() => {
+			return;
+		});
+}
+
 router.route("/show").get(async (req, res) => {
 	var email = req.query.email;
 	await User.find({ email: email })
