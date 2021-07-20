@@ -109,7 +109,8 @@ const ChangePassword = () => {
 					<div>
 						<label htmlFor="guests">
 							<div style={{ fontSize: "25px" }}>
-								Enter OTP sent to your email&nbsp;&nbsp;&nbsp;
+								Enter OTP sent to your email / mobile
+								number&nbsp;&nbsp;&nbsp;
 							</div>
 						</label>
 						<br />
