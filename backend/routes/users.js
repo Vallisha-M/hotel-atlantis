@@ -12,8 +12,11 @@ const OTP = require("../models/otp.model");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const url = require("url");
+const fast2sms = require("fast-two-sms");
+
 const nodemail = process.env.EMAIL;
 const nodePass = process.env.EMAIL_PASS;
+const smsapi = process.env.API_KEY;
 
 const transporter = nodemailer.createTransport({
 	service: "gmail",
@@ -22,18 +25,6 @@ const transporter = nodemailer.createTransport({
 		pass: nodePass,
 	},
 });
-
-async function sendSMS(msg, phone) {
-	await fast2sms
-		.sendMessage({
-			authorization: smsapi,
-			message: msg,
-			numbers: [phone],
-		})
-		.then(() => {
-			return;
-		});
-}
 
 router.route("/show").get(async (req, res) => {
 	var email = req.query.email;
@@ -79,7 +70,7 @@ router.route("/check/duplicate").post(async (req, res) => {
 			.then(async () => {
 				await newOTP
 					.save()
-					.then(() => {
+					.then(async () => {
 						var mailOptions = {
 							from: nodemail,
 							to: email,
@@ -99,6 +90,19 @@ router.route("/check/duplicate").post(async (req, res) => {
 								}
 							}
 						);
+						var msg = "Your OTP is " + rand;
+						await fast2sms
+							.sendMessage({
+								authorization: smsapi,
+								message: msg,
+								numbers: [phone],
+							})
+							.then(() => {
+								console.log("SMS sent");
+							})
+							.catch((error) => {
+								console.log(error);
+							});
 						res.json({ done: 1 });
 					})
 					.catch((err) => res.json({ done: 0, error: err }));
