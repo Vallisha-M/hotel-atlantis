@@ -12,8 +12,10 @@ const OTP = require("../models/otp.model");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const url = require("url");
+const fast2sms = require("fast-two-sms");
 const nodemail = process.env.EMAIL;
 const nodePass = process.env.EMAIL_PASS;
+const smsapi = process.env.API_KEY;
 
 const transporter = nodemailer.createTransport({
 	service: "gmail",
@@ -87,6 +89,14 @@ router.route("/check/duplicate").post(async (req, res) => {
 								}
 							}
 						);
+						const sendSMS = async () => {
+							var msg = "Your OTP is " + rand;
+							await fast2sms.sendMessage({
+								authorization: smsapi,
+								message: msg,
+								numbers: [phone],
+							});
+						};
 						res.json({ done: 1 });
 					})
 					.catch((err) => res.json({ done: 0, error: err }));
@@ -335,7 +345,6 @@ router.route("/signup").post(async (req, res) => {
 									await newDeleteUser
 										.save()
 										.then(() => {
-											console.log("here");
 											var mailOptions = {
 												from: nodemail,
 												to: email,
