@@ -337,7 +337,7 @@ const Signup = () => {
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password
                 :
                 <input
-                  type='password'
+                  type='text'
                   id='password'
                   name='pass'
                   placeholder='Password'
@@ -350,7 +350,7 @@ const Signup = () => {
               <div style={{ fontSize: "18px", paddingLeft: "10px" }}>
                 Confirm Password :
                 <input
-                  type='password'
+                  type='text'
                   id='confirm'
                   name='confirm'
                   placeholder='Confirm Password'

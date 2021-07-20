@@ -40,8 +40,10 @@ const Forgot = () => {
 
     if (flag)
       await check().then(() => {
-        if (res.notExist == 1) alert("email not registered\nSignup")
-        else if (res.done == 0) alert("ERROR\nTry Relogin")
+        if (res.notExist == 1) {
+          alert("email not registered\nSignup")
+          history.push("/signup")
+        } else if (res.done == 0) alert("ERROR\nTry Relogin")
         if (res.done == 1) {
           history.push("/forgot/success")
         }

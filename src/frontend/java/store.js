@@ -137,7 +137,7 @@ function view() {
     var quantity = quantityElement.value
     console.log(quantity + cartItemNames[i].innerHTML)
     var ress = cartItemNames[i].innerHTML
-    let omg = { ress: quantity }
+
     object[ress] = parseInt(quantity)
   }
   return object
