@@ -11,7 +11,7 @@ export default function FeedbackList(props) {
         const star = "🌟"
         const counter = parseInt(event.star)
         var i = 0
-        while (i <= counter) {
+        while (i < counter) {
           stars = stars + star
           i = i + 1
         }
