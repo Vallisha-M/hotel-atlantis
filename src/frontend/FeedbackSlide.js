@@ -46,7 +46,7 @@ export default function FeedbackSlide() {
           className='halfStar'
           style={{ marginLeft: "10px", marginTop: "5px" }}
         >
-          ☆ &nbsp;- Half Star{" "}
+          ☆ &nbsp;- Half Star
         </div>
       </div>
     </div>

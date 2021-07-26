@@ -43,9 +43,9 @@ function Welcome() {
         <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
         <script src='./js/scrolling.js'></script>
       </Helmet>
-
-      <SlideShow />
-
+      <div id='top'>
+        <SlideShow />
+      </div>
       <hr style={{ height: "60px" }} />
       <div id='mainContent'>
         <div id='hotelAtlantis' className='hotelAtlantis'>
@@ -82,6 +82,11 @@ function Welcome() {
         </div>
       </div>
       <FeedbackSlide />
+      <div style={{ marginLeft: "1200px" }}>
+        <a href='#top'>
+          <button className='changepass'>Back to Top</button>
+        </a>
+      </div>
     </div>
   )
 }
