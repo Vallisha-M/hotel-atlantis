@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
     pass: nodePass,
   },
 })
-router.route("/getlimit").get(async (req, res) => {
+router.route("/get").get(async (req, res) => {
   await Feedback.find({}, { _id: 0, star: 1, email: 1, describe: 1 })
     .sort({ star: -1 })
     .limit(5)

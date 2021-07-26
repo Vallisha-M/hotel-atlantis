@@ -1,9 +1,9 @@
-import './css/style.css'
-import './css/welcome.css'
+import "./css/style.css"
+import "./css/welcome.css"
 
-import { Helmet } from 'react-helmet'
-import SlideShow from './SlideShow'
-
+import { Helmet } from "react-helmet"
+import SlideShow from "./SlideShow"
+import FeedbackSlide from "./FeedbackSlide"
 function Welcome() {
   return (
     <div id='welcomeID'>
@@ -46,15 +46,15 @@ function Welcome() {
 
       <SlideShow />
 
-      <hr style={{ height: '60px' }} />
+      <hr style={{ height: "60px" }} />
       <div id='mainContent'>
         <div id='hotelAtlantis' className='hotelAtlantis'>
           &nbsp;
-          <div style={{ height: '10px', backgroundColor: '#f5f5f5' }} />
+          <div style={{ height: "10px", backgroundColor: "#f5f5f5" }} />
           HOTEL ATLANTIS
         </div>
-        <hr style={{ width: '45%' }} />
-        <div style={{ height: '10px', backgroundColor: '#f5f5f5' }} />
+        <hr style={{ width: "45%" }} />
+        <div style={{ height: "10px", backgroundColor: "#f5f5f5" }} />
         <div id='aboutUs'>
           Glorious views of the crystal-clear waters of the Adriatic Sea come as
           standard in all of our five-star hotels and luxury villas. Alongside
@@ -63,9 +63,9 @@ function Welcome() {
           concierges – you can look forward to a stylish selection of
           destination bars and restaurants, luxury spas, boutiques, and even a
           PADI dive centre.
-          <div style={{ height: '10px', backgroundColor: '#f5f5f5' }} />
-          <div style={{ height: '10px', backgroundColor: '#f5f5f5' }} />
-          <div style={{ height: '10px', backgroundColor: '#f5f5f5' }} />
+          <div style={{ height: "10px", backgroundColor: "#f5f5f5" }} />
+          <div style={{ height: "10px", backgroundColor: "#f5f5f5" }} />
+          <div style={{ height: "10px", backgroundColor: "#f5f5f5" }} />
           Our suites of contemporary conference centres are both impressive and
           flexible. Plush interior design, swathes of natural sunlight and
           picture – perfect panoramas of the sea make them just as popular a
@@ -81,6 +81,7 @@ function Welcome() {
           standout event in beautiful Dubrovnik is here, ready for you.
         </div>
       </div>
+      <FeedbackSlide />
     </div>
   )
 }
