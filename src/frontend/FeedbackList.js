@@ -1,13 +1,27 @@
 import React from "react"
 import "./css/events.css"
-import halfstar from "./css/img/halfstar.png"
+
+import "font-awesome/css/font-awesome.min.css"
 export default function FeedbackList(props) {
   const displayFeedback = (props) => {
     const { events } = props
-    const hello = (a, b) => {
-      if (a - b != 0) return "☆"
-      return ""
+    const halfStar = (a, b) => {
+      var prop = "none"
+      if (a != b)
+        return (
+          <i
+            className='fa fa-star-half-o'
+            id='half'
+            style={{
+              fontSize: "25px",
+              color: "#ffc800",
+              display: { prop },
+            }}
+          ></i>
+        )
+      else return ""
     }
+
     if (events.length > 0) {
       return events.map((event) => {
         var des = event.describe
@@ -25,7 +39,10 @@ export default function FeedbackList(props) {
         return (
           <tr>
             <td>{event.name}</td>
-            <td>{stars + hello(counter1, counter)}</td>
+            <td>
+              {stars}
+              {halfStar(counter1, counter)}
+            </td>
             <td>{des}</td>
           </tr>
         )
