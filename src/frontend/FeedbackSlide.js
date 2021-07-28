@@ -35,20 +35,6 @@ export default function FeedbackSlide() {
 
         <FeedbackList events={reviews} />
       </table>
-      <div
-        classname='feedback-legend'
-        style={{ fontSize: "20px", marginTop: "20px" }}
-      >
-        <div className='fullStar' style={{ marginLeft: "8px" }}>
-          🌟 - Full Star{" "}
-        </div>
-        <div
-          className='halfStar'
-          style={{ marginLeft: "10px", marginTop: "5px" }}
-        >
-          ☆ &nbsp;- Half Star
-        </div>
-      </div>
     </div>
   )
 }
