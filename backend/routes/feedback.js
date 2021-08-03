@@ -36,7 +36,7 @@ router.route("/get").get(async (req, res) => {
 							userResponse[0].lastName;
 					})
 					.catch(() => {
-						res.json({ done: 0, error: 1 });
+						name = "";
 					});
 				delete newObject["email"];
 				newObject.name = name;
