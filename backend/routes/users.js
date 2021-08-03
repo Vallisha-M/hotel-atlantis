@@ -105,7 +105,7 @@ router.route("/check/duplicate").post(async (req, res) => {
 							});
 						res.json({ done: 1 });
 					})
-					.catch((err) => res.json({ done: 0, error: err }));
+					.catch(() => res.json({ done: 0, error: 0 }));
 			})
 			.catch(() => res.json({ done: 0, error: 0 }));
 	}
@@ -201,8 +201,6 @@ router.route("/delete/email/").get(async (req, res) => {
 	const q = url.parse(adr, true);
 	const key = q.query.key;
 	const email = q.query.email;
-	console.log(key);
-	console.log(email);
 	var flag = false;
 	await DeleteUser.find({ email: email, delKey: key }, { _id: 0 })
 		.then((ress) => {
