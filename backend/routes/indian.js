@@ -21,8 +21,10 @@ router.route("/show_email").get(async (req, res) => {
 			.catch((err) => res.status(400).json("Error: " + err));
 	}
 });
-const transporter = nodemailer.createTransport({
-	service: "gmail",
+let transporter = nodemailer.createTransport({
+	host: "smtp.gmail.com",
+	port: 465,
+	secure: true,
 	auth: {
 		user: nodemail,
 		pass: nodePass,

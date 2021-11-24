@@ -18,8 +18,10 @@ const nodemail = process.env.EMAIL;
 const nodePass = process.env.EMAIL_PASS;
 const smsapi = process.env.API_KEY;
 
-const transporter = nodemailer.createTransport({
-	service: "gmail",
+let transporter = nodemailer.createTransport({
+	host: "smtp.gmail.com",
+	port: 465,
+	secure: true,
 	auth: {
 		user: nodemail,
 		pass: nodePass,
